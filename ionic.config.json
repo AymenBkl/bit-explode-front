@@ -1,0 +1,7 @@
+{
+  "name": "mines",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

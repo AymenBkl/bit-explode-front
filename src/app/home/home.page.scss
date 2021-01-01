@@ -25,3 +25,39 @@
 #container a {
   text-decoration: none;
 }
+
+
+
+.red {
+  --background: red !important;
+  --color: white;
+}
+
+.green {
+  --background: green !important;
+  --color: white;
+}
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+}
+
+.flip-card {
+  --background:white;
+  width: 50px;
+  height: 50px;
+  perspective: 1000px;
+  position: relative;
+  text-align: center;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transform: rotateY(180deg);
+}
+
+.flip-card-clicked {
+  transform: rotate(360deg);
+  transition: transform 0.5s linear;
+}
+

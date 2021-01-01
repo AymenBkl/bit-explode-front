@@ -1,32 +1,3 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
-
 
 .red {
   --background: red !important;
@@ -38,14 +9,11 @@
   --color: white;
 }
 
-.ripple-parent {
-  position: relative;
-  overflow: hidden;
-}
+
 
 .flip-card {
   --background:white;
-  width: 50px;
+  --border-radius:15px;
   height: 50px;
   perspective: 1000px;
   position: relative;
@@ -54,10 +22,91 @@
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transform: rotateY(180deg);
+  display: inline-block;
+  width: 15%;
+  --border-color:gray;
+  --border-style:solid;
+  --border-width:1px;
+  margin-left: 5px;
 }
 
 .flip-card-clicked {
   transform: rotate(360deg);
   transition: transform 0.5s linear;
+  display: inline-block;
+  width: 15%;
+  --border-radius:15px;
+  margin-left: 5px;
+
 }
+
+.header-item {
+  --border-radius:15px;
+  --background:gray;
+  --inner-padding-bottom:15px;
+  --inner-padding-end:15px;
+  --inner-padding-start:15px;
+  --inner-padding-top	:15px;
+}
+
+.mines-number {
+  padding: 5px;
+  text-align: center;
+}
+
+.segment {
+  border-radius:15px;
+  --background:gray;
+  width: 100%;
+  --background:gray;
+}
+.segment-button {
+  min-width: 25%;
+  --background:gray;
+    --background-checked: transparent;
+    --background-focused: transparent;
+    --background-focused-opacity: 0;
+    text-align: center;
+  --color-checked:white;
+  --color-focused	:white;
+  --color-hover:red;
+  --color:white;
+  --indicator-box-shadow:none;
+  --indicator-color	:transparent;
+}
+
+.segment-button-checked .mines-number {
+  background-color: red;
+  border-radius: 50%;
+  width: 25px;
+}
+
+.segment-header {
+  color:white;
+  margin-left: 15px;
+  font-size: 15px;
+}
+
+.first-col {
+  background-color: gray;
+  border-radius: 15px;
+}
+
+.balance {
+  --background:gray;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.balance ion-text {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  font-size: 20px;
+}
+
+
+
 

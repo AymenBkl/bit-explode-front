@@ -1,7 +1,8 @@
 {
   "name": "mines",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

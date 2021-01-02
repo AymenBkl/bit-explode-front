@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
+  <ion-grid *ngIf="validRoute && game">
     <ion-row>
       <ion-col size-lg="6"  size-md="8" offset-lg="3">
         <ion-grid>
@@ -24,18 +24,18 @@
               <ion-row>
                 <ion-col size="12" size-md="7" size-lg="3" offset-lg="2" class="first-col" >
                   <ion-text class="segment-header">Bombs</ion-text>
-                  <ion-segment class="segment">
-                    <ion-segment-button class="segment-button">
-                      <ion-text class="mines-number">1</ion-text>
+                  <ion-segment class="segment" value="1" (ionChange)="segmentChanged($event)" [disabled]='game.playing'>
+                    <ion-segment-button class="segment-button" value="1">
+                      <ion-text class="mines-number" >1</ion-text>
                     </ion-segment-button>
-                    <ion-segment-button class="segment-button">
-                      <ion-text class="mines-number">3</ion-text>
+                    <ion-segment-button class="segment-button" value="3">
+                      <ion-text class="mines-number" >3</ion-text>
                     </ion-segment-button>
-                    <ion-segment-button class="segment-button">
-                      <ion-text class="mines-number">5</ion-text>
+                    <ion-segment-button class="segment-button" value="5">
+                      <ion-text class="mines-number" >5</ion-text>
                     </ion-segment-button>
-                    <ion-segment-button class="segment-button">
-                      <ion-text class="mines-number">24</ion-text>
+                    <ion-segment-button class="segment-button" value="24">
+                      <ion-text class="mines-number" >24</ion-text>
                     </ion-segment-button>
                   </ion-segment>
                 </ion-col>
@@ -60,21 +60,24 @@
                 <ion-row *ngFor="let row of map;let indexRow = index"  >
                   <ion-col  size="18" size-lg="12" offset-lg="4" >
                     <ion-item class="square flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(col)">
-                          <ion-text *ngIf="col.clicked" class="mine-value">{{col.value}}</ion-text>
+                          <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
+                          <ion-icon *ngIf="col.clicked && col.value == 0" src="../../assets/imgs/bombe.svg"></ion-icon>
                     </ion-item>
                   </ion-col>
                   </ion-row>
                   <ion-row>
                     <ion-col size-md="6"  size-lg="4" size="6" offset-lg="4">
-                      <ion-input value="12"></ion-input>
+                      <ion-input [(ngModel)]='game.stake' type="number"  [min]="100" (input)='stakValidation($event.target.value)' [disabled]='game.playing'
+
+                      ></ion-input>
                     </ion-col>
                     <ion-col size-md="3"  size-lg="2" size="3">
-                      <ion-button  class="button-operation" expand="full">
+                      <ion-button  class="button-operation" expand="full" (click)="addOne()" [disabled]='game.playing'>
                         <ion-icon name="add-circle-outline"></ion-icon>                    
                       </ion-button>
                     </ion-col>
                     <ion-col size-md="3" size-lg="2" size="3" offset-sm="3" offset-md="0">
-                      <ion-button  class="button-operation" expand="full">
+                      <ion-button  class="button-operation" expand="full" (click)="multiply()" [disabled]='game.playing'>
                         <ion-icon src="../../assets/imgs/unchecked.svg"></ion-icon>
                         <ion-text>2</ion-text>
                       </ion-button>
@@ -82,12 +85,12 @@
                   </ion-row>
                   <ion-row>
                     <ion-col size="6"  size-lg="4" offset-lg="4">
-                      <ion-button class="button-play" expand="full">
+                      <ion-button class="button-play" expand="full" [disabled]="!valid" (click)="play()">
                         Play
                       </ion-button>
                     </ion-col>
                     <ion-col size="6"  size-lg="4" >
-                      <ion-button class="button-play1" expand="full">
+                      <ion-button class="button-play1" expand="full" [disabled]="!valid">
                         Cashout
                       </ion-button>
                     </ion-col>
@@ -98,8 +101,8 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="4">
-                  <ion-button shape="round" expand="full" fill="outline" color="light" size="medium" class="button">
-                    Withdraw
+                  <ion-button shape="round" expand="full"  color="light" size="medium" class="button" *ngIf="game.playing && next">
+                    Next {{next}}
                   </ion-button>
                 </ion-col>
                 <ion-col size="4" >
@@ -113,6 +116,16 @@
           </ion-row>
           
       </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="!validRoute">
+    <ion-row>
+      <ion-col size="4" offset="3">
+        <ion-button shape="round" expand="full"  size="large" color="success" class="button" (click)="generateHash()">
+          Generate A hash
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

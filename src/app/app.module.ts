@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { CustomFormsModule } from 'ng2-validation'
 import { StorageServiceService } from './services/storage-service.service';
+import { ShareModule } from './components/share/share.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { StorageServiceService } from './services/storage-service.service';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    CustomFormsModule
+    CustomFormsModule,
+    ShareModule
   ],
   providers: [
     StatusBar,

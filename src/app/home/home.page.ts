@@ -22,6 +22,8 @@ export class HomePage implements OnInit {
   validRoute: boolean = false;
   gameHash: string;
   games: any;
+  historyGames: Game[];
+  balance:number;
   constructor(private activatedRouter: ActivatedRoute,
               private storage: StorageServiceService,
               private router: Router) { }
@@ -30,8 +32,8 @@ export class HomePage implements OnInit {
   }
 
 
-  createMatrix() {
-    this.map =  Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => Object.assign({ color: "green", value: 0, clicked: false })));
+  async createMatrix() {
+    this.map = await Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => Object.assign({ color: "green", value: 0, clicked: false })));
   }
 
 
@@ -55,11 +57,11 @@ export class HomePage implements OnInit {
 
   async createMine() {
     if (this.validRoute){
-      this.createMatrix();
+      await this.createMatrix();
         let i = 0;
         while (i < this.game.numberMines) {
-          let rowIndex = Math.floor(Math.random() * 6);
-          let colIndex = Math.floor(Math.random() * 6);
+          let rowIndex = Math.floor(Math.random() * 5);
+          let colIndex = Math.floor(Math.random() * 5);
           if (this.map[rowIndex][colIndex].color != "red") {
             this.map[rowIndex][colIndex] = { color: "red", value: 0, clicked: false }
             i++;
@@ -174,6 +176,7 @@ export class HomePage implements OnInit {
         if (games && games != false){
           this.validRoute = true;
           this.games = JSON.parse(games);
+          this.historyGames = Object.values(this.games);
           this.checkIfAllGamesAreCompelted();
         }
         else {
@@ -228,5 +231,16 @@ export class HomePage implements OnInit {
       this.createMine();
     }
     
+  }
+
+  goToHistoryPage(game:Game){
+    this.router.navigate(['/history'], {
+      relativeTo: this.activatedRouter,
+      queryParams: {
+        url: this.gameHash,
+        playingame: JSON.stringify(game)
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }

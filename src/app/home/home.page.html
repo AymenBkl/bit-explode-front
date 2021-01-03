@@ -56,7 +56,7 @@
           </ion-row>
           <ion-row>
             <ion-col size="12" size-md="8" size-lg="6" >
-            <ion-grid>
+            <ion-grid *ngIf="this.map && this.map.length == 5">
                 <ion-row *ngFor="let row of map;let indexRow = index"  >
                   <ion-col  size="18" size-lg="12" offset-lg="4" >
                     <ion-item class="square flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(col)">
@@ -129,5 +129,10 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-col size="12" *ngIf="validRoute && games != null">
+    <ion-item *ngFor="let gameHistory of historyGames" (click)="goToHistoryPage(gameHistory)">
+      <ion-text>{{gameHistory.gameId}}</ion-text>
+    </ion-item>
+  </ion-col>
   
 </ion-content>

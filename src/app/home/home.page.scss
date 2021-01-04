@@ -1,9 +1,4 @@
 
-.red {
-  --background: red !important;
-  --color: white;
-  font-size: 15px;
-}
 
 ion-buttons {
   margin-right: 15%;
@@ -26,42 +21,13 @@ ion-content {
 }
 
 
-.green {
-  --background: green !important;
-  --color: white;
-  font-size: 15px;
-}
 
 
 
-.flip-card {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  --background: white;
-  position: relative;
-  text-align: center;
-  transition: transform 0.5s;
-  transform-style: preserve-3d;
-  transform: rotateY(180deg);
-  display: inline-block;
-  margin-left: 5px;
-  border-radius: 8px;
-  width: 12%;
-}
 
 
 
-.flip-card-clicked {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  transform: rotate(360deg);
-  transition: transform 0.5s linear;
-  position: relative;
-  display: inline-block;
-  margin-left: 5px;
-  border-radius: 8px;
-  text-align: center;
-  width: 12%;
 
-}
 
 
 
@@ -74,14 +40,7 @@ ion-content {
   --inner-padding-top	:15px;
 }
 
-.mine-value {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+
 
 .mines-number {
   padding: 5px;
@@ -163,44 +122,7 @@ ion-content {
   text-emphasis: center;
 }
 
-ion-input {
-  --background: gray;
-  --color: white;
-  text-align: center;
-  --padding-bottom: 12px;
-  --padding-end: 12px;
-  --padding-start: 12px;
-  --padding-top: 12px;
-  border-radius: 5px;
-  vertical-align: middle;
-  margin-top: 4px;
-}
 
-.button-operation{
-  --padding-bottom:20px;
-  --padding-end	:20px;
-  --padding-start	:20px;
-  --padding-top	:20px;
-  border-radius: 5px;
-  font-size: 15px;
-  --background:white;
-  --color:black;
-}
-
-.button-operation:last-child {
-  --padding-bottom:15px;
-  --padding-end	:15px;
-  --padding-start	:15px;
-  --padding-top	:15px;
-  border-radius: 5px;
-  font-size: 15px;
-  --background:white;
-  --color:black;
-}
-
-.button-operation:last-child ion-icon {
-  font-size: 10px;
-}
 
 .button-play{
   --background: green;
@@ -224,13 +146,7 @@ ion-input {
   border-radius: 10px;
 }
 
-ion-input[type=number]::-webkit-inner-spin-button,
-ion-input[type=number]::-webkit-outer-spin-button {
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-margin: 0;
-}
+
 
 
 

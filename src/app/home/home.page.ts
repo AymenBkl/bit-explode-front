@@ -17,7 +17,6 @@ export class HomePage implements OnInit {
   incrementBy: number = 2;
   game: Game;
   valid: boolean = true;
-  lose: boolean = false;
   next: number;
   validRoute: boolean = false;
   gameHash: string;
@@ -39,14 +38,14 @@ export class HomePage implements OnInit {
 
 
 
-  initGame() {
+  initGame(minesNumber: number = 1, gamePlaying: boolean = false, stake: number = 100, matrix: Col[][] = null) {
     if (this.validRoute){
       this.game = {
         gameId:this.gameHash + new Date().toISOString(),
-        stake: 100,
-        numberMines: 1,
+        stake: stake,
+        numberMines: minesNumber,
         userClick: 0,
-        playing: false,
+        playing: gamePlaying,
         matrix:null,
         completed:false,
       }
@@ -67,89 +66,36 @@ export class HomePage implements OnInit {
             i++;
           }}
         };
-    
+        this.game.matrix = this.map;
   }
 
-  clickCol(cel: Col) {
-    if (!cel.clicked && !this.lose && this.game.playing && this.validRoute) {
-      cel.clicked = true;
-      if (cel.color == 'red') {
-        this.loseGame();
-      }
-      else {
-        cel.value = this.next;
-        this.next = this.algorith();
-        this.game.matrix = this.map;
-        this.storage.saveGame(this.gameHash,this.game,this.games);
-      }
-    }
-  }
+ 
 
   segmentChanged($event) {
     this.game.numberMines = Number($event.detail.value);
   }
 
-  stakValidation(input: string) {
-    if (input.match(/^[0-9]+$/) != null) {
-      if (Number(input) < 100) {
-        this.valid = false;
-        this.game.stake = 100;
-      }
-      else {
-        this.valid = true;
-      }
-
-    }
-    else {
-      this.valid = false;
-    }
+  isValid(valid){
+    this.valid = valid;
   }
 
-  multiply() {
-    this.valid = true;
-    if (this.game.stake < 100) {
-      this.game.stake = 100 * 2;
-    }
-
-    else {
-      this.game.stake *= 2;
-    }
-  }
-
-  addOne() {
-    this.valid = true;
-    if (this.game.stake < 100) {
-      this.game.stake = 100 + 1;
-    }
-
-    else {
-      this.game.stake += 1;
-    }
-  }
+  
 
   play() {
-    this.storage.saveGame(this.gameHash,this.game,this.games)
-    this.createMine();
-    this.gameIsPlaying();
+    if (!this.game.playing){
+      this.storage.saveGame(this.game)
+      this.createMine();
+      this.gameIsPlaying();
+    }
+    
   }
 
   gameIsPlaying(){
-    this.lose = false;
     this.valid = false;
-    this.game.playing = true;
-    this.next = this.algorith();
+    this.initGame(this.game.numberMines,true,this.game.stake,this.game.matrix);
   }
 
-  algorith() {
-    if (this.game.playing) {
-      const A = this.game.stake;
-      const X = this.game.numberMines + this.game.userClick;
-      const Y = 25 - this.game.userClick;
-      const Z = 0.97;
-      this.game.userClick += 1;
-      return Math.round(A * ((1 / ((25 - X) / Y) - 1) * Z));
-    }
-  }
+  
 
   createLink(lengthOfCode: number, possible: string) {
     let text = "";
@@ -186,27 +132,17 @@ export class HomePage implements OnInit {
     })
   }
 
+  nextValue(next){
+    this.next = next;
+  }
+
   generateHash(){
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     const lengthOfCode = 128;
     this.createLink(lengthOfCode, possible);
   }
 
-  loseGame(){
-    this.lose = true;
-    this.valid = true;
-    this.game.playing = false;
-    this.map.map(row => {
-      row.map(col => {
-        if (col.color == 'red'){
-          col.clicked = true;
-        }
-      });
-    })
-    this.game.completed = true;
-    this.game.matrix = this.map;
-    this.storage.saveGame(this.gameHash,this.game,this.games)
-  }
+  
 
 
 

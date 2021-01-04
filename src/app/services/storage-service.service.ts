@@ -6,26 +6,33 @@ import { Game } from '../interfaces/game';
 })
 export class StorageServiceService {
 
+  currentHash:string;
+  games: any;
   constructor() { }
 
 
    checkHash(hash: string) : any{
     const gameHash =  localStorage.getItem(hash);
     if (gameHash != null && gameHash != undefined){
+      this.currentHash = hash;
+      this.games = JSON.parse(gameHash);
       return gameHash
     }
 
     else {
+      this.currentHash = '';
+      this.games = null;
       return false
     }
   }
 
   async saveHash(hash: string){
+    this.currentHash = hash;
     await localStorage.setItem(hash,JSON.stringify({}));
   }
 
-  async saveGame(gameHash:string ,game: Game,games: any) {
-    games[game.gameId] = game;
-    await localStorage.setItem(gameHash,JSON.stringify(games));
+  async saveGame(game: Game) {
+    this.games[game.gameId] = game;
+    await localStorage.setItem(this.currentHash,JSON.stringify(this.games));
   }
 }

@@ -7,6 +7,7 @@ import { CashComponent } from '../mines/cash/cash.component';
 
 import { MatrixComponent } from '../mines/matrix/matrix.component';
 import { HistoryGamesComponent } from '../history-games/history-games.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,19 +15,20 @@ import { HistoryGamesComponent } from '../history-games/history-games.component'
     MatrixComponent,
     CashComponent,
     HistoryGamesComponent,
-    
+    FooterComponent
   ],
   exports: [
     AppHeaderComponent,
     MatrixComponent,
     CashComponent,
     HistoryGamesComponent,
+    FooterComponent
   ],
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class ShareModule { }

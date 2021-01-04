@@ -61,7 +61,6 @@ export class MatrixComponent implements OnInit,OnChanges {
 
   algorith() {
     if (this.game && this.game.playing) {
-      console.log(this.game);
       const A = this.game.stake;
       const X = this.game.numberMines + this.game.userClick;
       const Y = 25 - this.game.userClick;

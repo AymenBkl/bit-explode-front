@@ -1,18 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>history</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
   <ion-grid *ngIf="game">
-    <ion-row *ngFor="let row of this.game.matrix;let indexRow = index"  >
-      <ion-col  size="18" size-lg="12" offset-lg="4" >
-        <ion-item class="square flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color'>
-              <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
-              <ion-icon *ngIf="col.clicked && col.value == 0" src="../../assets/imgs/bombe.svg"></ion-icon>
-        </ion-item>
-      </ion-col>
-      </ion-row>
+    <app-matrix [matrix]="game.matrix"></app-matrix>
   </ion-grid>
 </ion-content>

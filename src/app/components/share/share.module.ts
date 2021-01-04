@@ -13,13 +13,14 @@ import { HistoryGamesComponent } from '../history-games/history-games.component'
     AppHeaderComponent,
     MatrixComponent,
     CashComponent,
-    HistoryGamesComponent
+    HistoryGamesComponent,
+    
   ],
   exports: [
     AppHeaderComponent,
     MatrixComponent,
     CashComponent,
-    HistoryGamesComponent
+    HistoryGamesComponent,
   ],
   imports: [
     IonicModule,

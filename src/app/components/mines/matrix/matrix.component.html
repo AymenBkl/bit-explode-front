@@ -6,7 +6,7 @@
     </ion-item>
   </ion-col>
   </ion-row>
-  <ion-row>
+  <ion-row *ngIf="game">
     <ion-col size-md="6"  size-lg="4" size="6" offset-lg="4">
       <ion-input [(ngModel)]='game.stake' type="number"  [min]="100" (input)='stakValidation($event.target.value)' [disabled]='game.playing'
 

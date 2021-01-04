@@ -1,27 +1,25 @@
-
-
 <ion-content [fullscreen]="true">
   <ion-grid *ngIf="validRoute && game">
     <ion-row>
-      <ion-col size-lg="6"  size-md="8" offset-lg="3">
+      <ion-col size-lg="6" size-md="8" offset-lg="3">
         <ion-grid>
           <ion-row>
             <ion-grid>
               <ion-row>
-                <ion-col size="12" size-md="7" size-lg="3" offset-lg="2" class="first-col" >
+                <ion-col size="12" size-md="7" size-lg="3" offset-lg="2" class="first-col">
                   <ion-text class="segment-header">Bombs</ion-text>
                   <ion-segment class="segment" value="1" (ionChange)="segmentChanged($event)" [disabled]='game.playing'>
                     <ion-segment-button class="segment-button" value="1">
-                      <ion-text class="mines-number" >1</ion-text>
+                      <ion-text class="mines-number">1</ion-text>
                     </ion-segment-button>
                     <ion-segment-button class="segment-button" value="3">
-                      <ion-text class="mines-number" >3</ion-text>
+                      <ion-text class="mines-number">3</ion-text>
                     </ion-segment-button>
                     <ion-segment-button class="segment-button" value="5">
-                      <ion-text class="mines-number" >5</ion-text>
+                      <ion-text class="mines-number">5</ion-text>
                     </ion-segment-button>
                     <ion-segment-button class="segment-button" value="24">
-                      <ion-text class="mines-number" >24</ion-text>
+                      <ion-text class="mines-number">24</ion-text>
                     </ion-segment-button>
                   </ion-segment>
                 </ion-col>
@@ -32,51 +30,53 @@
                 </ion-col>
                 <ion-col size="12" size-lg="4" class="first-col">
                   <ion-text class="segment-header">Balance</ion-text>
-                  <ion-item lines="none" class="balance" >
+                  <ion-item lines="none" class="balance">
                     <ion-text>12354</ion-text>
                   </ion-item>
                 </ion-col>
               </ion-row>
             </ion-grid>
-            
+
           </ion-row>
           <ion-row>
-            <ion-col size="12" size-md="8" size-lg="6" >
-            <ion-grid>
-              <app-matrix  [matrix]='map' [game]='game' [validRoute]='validRoute' (nextValue)='nextValue($event)' (isValid)="isValid($event)"></app-matrix>
-              <ion-row>
-                    <ion-col size="6"  size-lg="4" offset-lg="4">
-                      <ion-button class="button-play" expand="full" [disabled]="!valid" (click)="play()">
-                        Play
-                      </ion-button>
-                    </ion-col>
-                    <ion-col size="6"  size-lg="4" >
-                      <ion-button class="button-play1" expand="full" [disabled]="!valid">
-                        Cashout
-                      </ion-button>
-                    </ion-col>
-                  </ion-row>
-            </ion-grid>
-          </ion-col>
-          <ion-col size="12" size-md="6">
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4">
-                  <ion-button shape="round" expand="full"  color="light" size="medium" class="button" *ngIf="game.playing && next">
-                    Next {{next}}
-                  </ion-button>
-                </ion-col>
-                <ion-col size="4" >
-                  <ion-button shape="round" expand="full"  size="medium" color="light" class="button">
-                    Deposit
-                  </ion-button>
-                </ion-col>
+            <ion-col size="12" size-md="8" size-lg="6">
+              <ion-grid>
+                <app-matrix [matrix]='map' [game]='game' [validRoute]='validRoute' (nextValue)='nextValue($event)'
+                  (isValid)="isValid($event)"></app-matrix>
+                <ion-row>
+                  <ion-col size="6" size-lg="4" offset-lg="4">
+                    <ion-button class="button-play" expand="full" [disabled]="!valid" (click)="play()">
+                      Play
+                    </ion-button>
+                  </ion-col>
+                  <ion-col size="6" size-lg="4">
+                    <ion-button class="button-play1" expand="full" [disabled]="!valid">
+                      Cashout
+                    </ion-button>
+                  </ion-col>
                 </ion-row>
-          </ion-grid>
-          </ion-col>
+              </ion-grid>
+            </ion-col>
+            <ion-col size="12" size-md="6">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="4">
+                    <ion-button shape="round" expand="full" color="light" size="medium" class="button"
+                      *ngIf="game.playing && next">
+                      Next {{next}}
+                    </ion-button>
+                  </ion-col>
+                  <ion-col size="4">
+                    <ion-button shape="round" expand="full" size="medium" color="light" class="button">
+                      Deposit
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
           </ion-row>
-          
-      </ion-grid>
+
+        </ion-grid>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -84,16 +84,14 @@
   <ion-grid *ngIf="!validRoute">
     <ion-row>
       <ion-col size="4" offset="3">
-        <ion-button shape="round" expand="full"  size="large" color="success" class="button" (click)="generateHash()">
+        <ion-button shape="round" expand="full" size="large" color="success" class="button" (click)="generateHash()">
           Generate A hash
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-col size="12" *ngIf="validRoute && games != null">
-    <ion-item *ngFor="let gameHistory of historyGames" (click)="goToHistoryPage(gameHistory)">
-      <ion-text>{{gameHistory.gameId}}</ion-text>
-    </ion-item>
+    <app-history-games [historyGames]='historyGames' [gameHash]='gameHash'></app-history-games>
   </ion-col>
-  
+
 </ion-content>

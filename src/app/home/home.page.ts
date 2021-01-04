@@ -114,9 +114,7 @@ export class HomePage implements OnInit {
 
   checkRouter(){
     this.activatedRouter.queryParams.subscribe(params => {
-      console.log(params);
       this.gameHash = params["url"];
-      console.log(this.gameHash);
       if (this.gameHash != null){
         let games = this.storage.checkHash(this.gameHash);
         if (games && games != false){
@@ -169,14 +167,5 @@ export class HomePage implements OnInit {
     
   }
 
-  goToHistoryPage(game:Game){
-    this.router.navigate(['/history'], {
-      relativeTo: this.activatedRouter,
-      queryParams: {
-        url: this.gameHash,
-        playingame: JSON.stringify(game)
-      },
-      queryParamsHandling: 'merge',
-    });
-  }
+  
 }

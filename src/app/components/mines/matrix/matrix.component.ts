@@ -104,8 +104,6 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes) {
-    console.log(changes);
-    console.log(changes['map'].currentValue)
     this.algorith();
   }
 }

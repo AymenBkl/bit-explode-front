@@ -6,18 +6,20 @@ import { AppHeaderComponent } from '../app-header/app-header.component';
 import { CashComponent } from '../mines/cash/cash.component';
 
 import { MatrixComponent } from '../mines/matrix/matrix.component';
-
+import { HistoryGamesComponent } from '../history-games/history-games.component';
 
 @NgModule({
   declarations: [
     AppHeaderComponent,
     MatrixComponent,
     CashComponent,
+    HistoryGamesComponent
   ],
   exports: [
     AppHeaderComponent,
     MatrixComponent,
     CashComponent,
+    HistoryGamesComponent
   ],
   imports: [
     IonicModule,

@@ -1,0 +1,3 @@
+  <ion-item *ngFor="let gameHistory of historyGames" (click)="goToHistoryPage(gameHistory)">
+    <ion-text>{{gameHistory.gameId}}</ion-text>
+  </ion-item>

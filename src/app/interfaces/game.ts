@@ -6,6 +6,5 @@ export interface Game {
     numberMines:number;
     userClick:number;
     playing:boolean;
-    matrix: Col[][];
     completed:boolean;
 }

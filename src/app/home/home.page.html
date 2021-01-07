@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <ion-grid *ngIf="validRoute && game">
+  <ion-grid *ngIf="validRoute">
     <ion-row>
       <ion-col size-lg="6" size-md="8" offset-lg="3">
         <ion-grid>
@@ -41,7 +41,7 @@
           <ion-row>
             <ion-col size="12" size-md="8" size-lg="6">
               <ion-grid>
-                <app-matrix [matrix]='map' [game]='game' [validRoute]='validRoute' (nextValue)='nextValue($event)'
+                <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
                   (isValid)="isValid($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" size-lg="4" offset-lg="4">

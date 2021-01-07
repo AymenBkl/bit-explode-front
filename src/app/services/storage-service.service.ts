@@ -35,4 +35,14 @@ export class StorageServiceService {
     this.games[game.gameId] = game;
     await localStorage.setItem(this.currentHash,JSON.stringify(this.games));
   }
+
+  async saveActiveHash(hash: string){
+    this.currentHash = hash;
+    await localStorage.setItem('currentHash',hash);
+  }
+
+  getCurrentHash(hash: string){
+    this.currentHash = localStorage.getItem('currentHash');
+    return this.currentHash;
+  }
 }

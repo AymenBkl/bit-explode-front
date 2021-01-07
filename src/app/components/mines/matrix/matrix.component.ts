@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { Col } from 'src/app/interfaces/col';
 import { Game } from 'src/app/interfaces/game';
+import { GameService } from 'src/app/services/game.service';
 import { StorageServiceService } from 'src/app/services/storage-service.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<boolean> = new EventEmitter<boolean>();
   next: number;
-  constructor(private storage: StorageServiceService,) { }
+  constructor(private storage: StorageServiceService,
+              private gameService: GameService) { }
 
   ngOnInit() {
   }
@@ -28,8 +30,9 @@ export class MatrixComponent implements OnInit,OnChanges {
         this.loseGame();
       }
       else {
+        console.log(this.game.gameId)
         cel.value = this.next;
-        this.game.matrix = this.map;
+        this.game.userClick += 1;
         this.algorith();
         this.storage.saveGame(this.game);
       }
@@ -60,12 +63,12 @@ export class MatrixComponent implements OnInit,OnChanges {
 
 
   algorith() {
+    console.log(this.game);
     if (this.game && this.game.playing) {
       const A = this.game.stake;
       const X = this.game.numberMines + this.game.userClick;
       const Y = 25 - this.game.userClick;
       const Z = 0.97;
-      this.game.userClick += 1;
       this.next = Math.round(A * ((1 / ((25 - X) / Y) - 1) * Z))
       this.nextValue.emit(this.next);
     }
@@ -82,7 +85,6 @@ export class MatrixComponent implements OnInit,OnChanges {
         }
       });
     })
-    this.game.matrix = this.map;
     this.storage.saveGame(this.game)
   }
   
@@ -103,6 +105,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes) {
+    console.log(this.game);
     this.algorith();
   }
 }

@@ -12,6 +12,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CustomFormsModule } from 'ng2-validation'
 import { StorageServiceService } from './services/storage-service.service';
 import { ShareModule } from './components/share/share.module';
+import { GameService } from './services/game.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,12 +23,14 @@ import { ShareModule } from './components/share/share.module';
     IonicModule.forRoot(), 
     AppRoutingModule,
     CustomFormsModule,
-    ShareModule
+    ShareModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     StorageServiceService,
+    GameService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

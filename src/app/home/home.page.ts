@@ -4,6 +4,7 @@ import { Game } from '../interfaces/game';
 import crypto from 'crypto-js';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageServiceService } from '../services/storage-service.service';
+import { GameService } from '../services/game.service';
 
 @Component({
   selector: 'app-home',
@@ -25,49 +26,41 @@ export class HomePage implements OnInit {
   balance:number;
   constructor(private activatedRouter: ActivatedRoute,
               private storage: StorageServiceService,
-              private router: Router) { }
+              private router: Router,
+              private gameService: GameService) { }
   async ngOnInit() {
     this.checkRouter();
   }
 
-
-  async createMatrix() {
-    this.map = await Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => Object.assign({ color: "green", value: 0, clicked: false })));
+  createGame() {
+    if (this.validRoute && this.valid){
+      this.gameService.createGame(this.gameHash,this.game)
+        .then((result: any) => {
+          console.log(result);
+          if (result && result != false && result == 1){
+            this.game = result;
+          }
+        });
+    }
   }
 
 
-
-
-  initGame(minesNumber: number = 1, gamePlaying: boolean = false, stake: number = 100, matrix: Col[][] = null) {
+  initGame() {
     if (this.validRoute){
       this.game = {
-        gameId:this.gameHash + new Date().toISOString(),
-        stake: stake,
-        numberMines: minesNumber,
+        gameId:'gameId',
+        stake: 100,
+        numberMines:1,
         userClick: 0,
-        playing: gamePlaying,
-        matrix:null,
+        playing: false,
         completed:false,
       }
     }
-    
   }
 
 
-  async createMine() {
-    if (this.validRoute){
-      await this.createMatrix();
-        let i = 0;
-        while (i < this.game.numberMines) {
-          let rowIndex = Math.floor(Math.random() * 5);
-          let colIndex = Math.floor(Math.random() * 5);
-          if (this.map[rowIndex][colIndex].color != "red") {
-            this.map[rowIndex][colIndex] = { color: "red", value: 0, clicked: false }
-            i++;
-          }}
-        };
-        this.game.matrix = this.map;
-  }
+
+
 
  
 
@@ -81,18 +74,12 @@ export class HomePage implements OnInit {
 
   
 
-  play() {
-    if (!this.game.playing){
-      this.storage.saveGame(this.game)
-      this.createMine();
-      this.gameIsPlaying();
-    }
-    
+  async play() {
+    this.createGame();
   }
 
   gameIsPlaying(){
     this.valid = false;
-    this.initGame(this.game.numberMines,true,this.game.stake,this.game.matrix);
   }
 
   
@@ -103,6 +90,7 @@ export class HomePage implements OnInit {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     this.storage.saveHash(text);
+    this.storage.saveActiveHash(text);
     this.router.navigate([], {
       relativeTo: this.activatedRouter,
       queryParams: {
@@ -115,17 +103,12 @@ export class HomePage implements OnInit {
   checkRouter(){
     this.activatedRouter.queryParams.subscribe(params => {
       this.gameHash = params["url"];
-      if (this.gameHash != null){
-        let games = this.storage.checkHash(this.gameHash);
-        if (games && games != false){
-          this.validRoute = true;
-          this.games = JSON.parse(games);
-          this.historyGames = Object.values(this.games);
-          this.checkIfAllGamesAreCompelted();
-        }
-        else {
-          this.validRoute = false;
-        }
+      if (this.gameHash != null){  
+        this.validRoute = true; 
+        this.initGame();
+      }
+      else {
+        this.validRoute = false;
       }
     })
   }
@@ -149,20 +132,19 @@ export class HomePage implements OnInit {
       let check = false;
       await Object.values(this.games).map((game:Game) => {
         if (!game.completed){
+          console.log(game);
           this.game = game;
-          this.map = game.matrix;
           this.gameIsPlaying();
           check = true;
         }
       })
+      console.log(check);
       if (!check){
-        this.initGame();
-        this.createMine();
+        console.log("here1");
       }
     }
     else {
-      this.initGame();
-      this.createMine();
+      console.log("here");
     }
     
   }

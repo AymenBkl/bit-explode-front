@@ -46,7 +46,6 @@ export class HomePage implements OnInit {
     }
   }
 
-
   initGame() {
     if (this.validRoute){
       this.game = {
@@ -60,11 +59,6 @@ export class HomePage implements OnInit {
     }
   }
 
-
-
-
-
- 
 
   segmentChanged($event) {
     this.game.numberMines = Number($event.detail.value);
@@ -119,39 +113,17 @@ export class HomePage implements OnInit {
     this.next = next;
   }
 
+  newGame(game) {
+    this.game = game;
+  } 
+
   generateHash(){
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     const lengthOfCode = 128;
     this.createLink(lengthOfCode, possible);
   }
 
- 
 
-  
-
-
-
-  async checkIfAllGamesAreCompelted(){
-    if (Object.values(this.games).length > 0){
-      let check = false;
-      await Object.values(this.games).map((game:Game) => {
-        if (!game.completed){
-          console.log(game);
-          this.game = game;
-          this.gameIsPlaying();
-          check = true;
-        }
-      })
-      console.log(check);
-      if (!check){
-        console.log("here1");
-      }
-    }
-    else {
-      console.log("here");
-    }
-    
-  }
 
   
 }

@@ -16,13 +16,15 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Input('game') game: Game;
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
   next: number;
   map: Array<Array<Col>> = [];
+  activeGame: boolean = false;
   constructor(private storage: StorageServiceService,
               private gameService: GameService) { }
 
-  ngOnInit() {
-    this.initMap();
+  async ngOnInit() {
+    await this.initMap();
     this.checkGame();
   }
 
@@ -79,6 +81,7 @@ export class MatrixComponent implements OnInit,OnChanges {
 
   loseGame(indexMines : [{ indexRow: number, indexCol: number }]){
     this.isValid.emit(true);
+    this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
     this.storage.removeActiveGame();
@@ -104,7 +107,9 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes) {
-    this.initMap();
+    if (!this.activeGame){
+      this.initMap();
+    }
     this.algorith();
   }
 
@@ -128,6 +133,8 @@ export class MatrixComponent implements OnInit,OnChanges {
         if (result && result != null){
           this.game = result.game;
           this.affectValues(result.activeIndex);
+          this.activeGame = true;
+          this.newGame.emit(this.game);
         }
       })
     }

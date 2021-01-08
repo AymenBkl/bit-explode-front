@@ -23,6 +23,7 @@ export class HomePage implements OnInit {
   games: any;
   historyGames: Game[];
   balance:number;
+  submmited: boolean = false;
   constructor(private activatedRouter: ActivatedRoute,
               private storage: StorageServiceService,
               private router: Router,
@@ -33,11 +34,13 @@ export class HomePage implements OnInit {
 
   createGame() {
     if (this.validRoute && this.valid){
+      this.submmited = true;
       this.gameService.createGame(this.gameHash,this.game)
         .then((result: any) => {
-          console.log(result && result != false);
+          this.submmited = false;
           if (result && result != false){
             this.game = result;
+            this.storage.saveCurrentGame(this.game.gameId);
           }
         });
     }
@@ -105,6 +108,7 @@ export class HomePage implements OnInit {
       if (this.gameHash != null){  
         this.validRoute = true; 
         this.initGame();
+        this.checkGame();
       }
       else {
         this.validRoute = false;
@@ -120,6 +124,13 @@ export class HomePage implements OnInit {
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
     const lengthOfCode = 128;
     this.createLink(lengthOfCode, possible);
+  }
+
+  checkGame(){
+    this.gameService.checkGame(this.gameHash,this.storage.getCurrentGame())
+      .then(result => {
+        console.log(result);
+      })
   }
 
   

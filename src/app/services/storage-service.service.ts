@@ -7,7 +7,7 @@ import { Game } from '../interfaces/game';
 export class StorageServiceService {
 
   currentHash:string;
-  games: any;
+  currentGame: any;
   constructor() { }
 
 
@@ -15,13 +15,11 @@ export class StorageServiceService {
     const gameHash =  localStorage.getItem(hash);
     if (gameHash != null && gameHash != undefined){
       this.currentHash = hash;
-      this.games = JSON.parse(gameHash);
       return gameHash
     }
 
     else {
       this.currentHash = '';
-      this.games = null;
       return false
     }
   }
@@ -31,10 +29,7 @@ export class StorageServiceService {
     await localStorage.setItem(hash,JSON.stringify({}));
   }
 
-  async saveGame(game: Game) {
-    this.games[game.gameId] = game;
-    await localStorage.setItem(this.currentHash,JSON.stringify(this.games));
-  }
+
 
   async saveActiveHash(hash: string){
     this.currentHash = hash;
@@ -44,5 +39,15 @@ export class StorageServiceService {
   getCurrentHash(){
     this.currentHash = localStorage.getItem('currentHash');
     return this.currentHash;
+  }
+
+  async saveCurrentGame(gameId: string) {
+    this.currentGame = localStorage.setItem('currentGame',gameId);
+    return this.currentGame;
+  }
+
+  getCurrentGame() {
+    this.currentGame = localStorage.getItem('currentGame');
+    return this.currentGame;
   }
 }

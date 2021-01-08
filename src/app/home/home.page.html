@@ -45,13 +45,14 @@
                   (isValid)="isValid($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" size-lg="4" offset-lg="4">
-                    <ion-button class="button-play" expand="full" [disabled]="game.playing" (click)="play()">
-                      Play
+                    <ion-button class="button-play" expand="full" [disabled]="game.playing" (click)="play()" [disabled]='submmited'>
+                      <ion-text *ngIf="!submmited">Play</ion-text>
+                      <ion-spinner name="bubbles" *ngIf="submmited"></ion-spinner>
                     </ion-button>
                   </ion-col>
                   <ion-col size="6" size-lg="4">
-                    <ion-button class="button-play1" expand="full" [disabled]="game.playing">
-                      Cashout
+                    <ion-button class="button-play1" expand="full" [disabled]="game.playing" [disabled]='submmited'>
+                      <ion-text *ngIf="!submmited">Cashout</ion-text>
                     </ion-button>
                   </ion-col>
                 </ion-row>

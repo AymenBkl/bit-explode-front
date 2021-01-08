@@ -30,7 +30,6 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   clickCol(col: Col, rowIndex: number, colIndex: number) {
-
     if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute) {
       col.submitted = true;
       this.gameService.clickCol(this.storage.getCurrentHash(),this.game.gameId,rowIndex,colIndex)
@@ -67,7 +66,6 @@ export class MatrixComponent implements OnInit,OnChanges {
 
 
   algorith() {
-    console.log(this.game);
     if (this.game && this.game.playing) {
       const A = this.game.stake;
       const X = this.game.numberMines + this.game.userClick;

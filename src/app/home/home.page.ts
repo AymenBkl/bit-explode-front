@@ -13,7 +13,6 @@ import { GameService } from '../services/game.service';
 })
 export class HomePage implements OnInit {
 
-  col: Col = { color: "green", value: 1, clicked: false }
   map: Array<Array<Col>>;
   incrementBy: number = 2;
   game: Game;

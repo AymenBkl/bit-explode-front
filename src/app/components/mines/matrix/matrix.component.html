@@ -4,6 +4,7 @@
     <ion-item class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(col,indexRow,indexCol)">
           <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
           <ion-icon *ngIf="col.clicked && col.value == 0" src="../../../../assets/imgs/bombe.svg"></ion-icon>
+          <ion-spinner name="bubbles" *ngIf="col.submitted"></ion-spinner>
     </ion-item>
   </ion-col>
   </ion-row>

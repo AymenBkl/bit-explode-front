@@ -1,6 +1,7 @@
-<ion-row *ngFor="let row of [0,1,2,3,4];let indexRow = index"  >
+<div *ngIf="map">
+<ion-row *ngFor="let row of map;let indexRow = index"  >
   <ion-col  size="18" size-lg="12" offset-lg="4" >
-    <ion-item class="flip-card" lines="none"  *ngFor="let col of [0,1,2,3,4];let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(indexRow,indexCol)">
+    <ion-item class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(col,indexRow,indexCol)">
           <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
           <ion-icon *ngIf="col.clicked && col.value == 0" src="../../../../assets/imgs/bombe.svg"></ion-icon>
     </ion-item>
@@ -24,5 +25,6 @@
       </ion-button>
     </ion-col>
   </ion-row>
+</div>
 
   

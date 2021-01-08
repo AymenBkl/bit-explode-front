@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { GameResponse } from '../interfaces/gameResponse';
 import { Game } from '../interfaces/game';
 import { ColClickResponse } from '../interfaces/colClickResponse';
+import { ClickCel } from '../interfaces/clickCel';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,31 +27,29 @@ export class GameService {
   clickCol(gameHash: string, gameId: string, indexRow: number, indexCol: number) {
     return new Promise((resolve,reject) => {
       this.httpClient.post<ColClickResponse>(environment.url + 'game/clickcel', {gameHash: gameHash, gameId: gameId, rowIndex: indexRow,colIndex: indexCol})
-      .subscribe(gameResponse => {
-        if (gameResponse.status == 200 && gameResponse.success){
-          resolve(this.proceccGameResponseSuccess(gameResponse.msg,null));
+      .subscribe(colResponse => {
+        console.log(colResponse);
+        if (colResponse.status == 200 && colResponse.success){
+          resolve(this.proccesClickCelResponseSuccess(colResponse.msg,colResponse.response));
         }
       })
     })
   }
 
   proceccGameResponseSuccess(msg: string,game: Game) {
-    if (game == null) {
-      if (msg == 'YOU HAVE CLICK RIGHT CELL'){
-        console.log('cel');
-      }
-  
-      else if (msg == 'YOU HAVE CLICK MINE CELL') {
-        console.log('mine');
-      }
+    if (msg == 'YOUR GAME HAS BEEN CREATED') {
+      console.log("create");
+      return game;
     }
-    else {
-      if (msg == 'YOUR GAME HAS BEEN CREATED') {
-        console.log("create");
-        return game;
-      }
+  }
+
+  proccesClickCelResponseSuccess(msg: string, response: ClickCel) {
+    if (msg == 'YOU HAVE CLICK RIGHT CELL'){
+      return {color: response.color,userClick: response.userClick};
     }
-    
-    
+
+    else if (msg == 'YOU HAVE CLICK MINE CELL') {
+      return {color: response.color,userClick: response.userClick,indexMines: response.indexMines};
+    }
   }
 }

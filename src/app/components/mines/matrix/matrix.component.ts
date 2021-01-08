@@ -1,4 +1,5 @@
 import { Component, OnInit,Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
+import { ClickCel } from 'src/app/interfaces/clickCel';
 import { Col } from 'src/app/interfaces/col';
 import { Game } from 'src/app/interfaces/game';
 import { GameService } from 'src/app/services/game.service';
@@ -11,24 +12,32 @@ import { StorageServiceService } from 'src/app/services/storage-service.service'
 })
 export class MatrixComponent implements OnInit,OnChanges {
 
-  @Input('matrix') map: Array<Array<Col>>;
   @Input('validRoute') validRoute:boolean;
   @Input('game') game: Game;
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<boolean> = new EventEmitter<boolean>();
   next: number;
+  map: Array<Array<Col>> = [];
   constructor(private storage: StorageServiceService,
               private gameService: GameService) { }
 
   ngOnInit() {
+    this.initMap();
   }
 
-  clickCol(rowIndex: number, colIndex: number) {
+  async initMap() {
+    this.map =  await Array.from({ length: 5 }, () => Array.from({ length: 5 }, () => Object.assign({ color: "green", value: 0, clicked: false })));
+  }
+
+  clickCol(col: Col, rowIndex: number, colIndex: number) {
     console.log(rowIndex,colIndex);
-    if (!this.game.completed && this.game.playing && this.validRoute) {
+    if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute) {
       this.gameService.clickCol(this.storage.getCurrentHash(),this.game.gameId,rowIndex,colIndex)
-        .then((result) => {
+        .then((result: any) => {
           console.log(result);
+          if (result && result != false ) {
+            this.affectValueToMap(col,result);
+          }
         })
     }
   }
@@ -68,18 +77,13 @@ export class MatrixComponent implements OnInit,OnChanges {
     }
   }
 
-  loseGame(){
+  loseGame(indexMines : [{ indexRow: number, indexCol: number }]){
     this.isValid.emit(true);
     this.game.completed = true;
     this.game.playing = false;
-    this.map.map(row => {
-      row.map(col => {
-        if (col.color == 'red'){
-          col.clicked = true;
-        }
-      });
+    indexMines.map(col => {
+      this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true};
     })
-    this.storage.saveGame(this.game)
   }
   
   stakValidation(input: string) {
@@ -99,7 +103,20 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes) {
-    console.log(this.game);
+    this.initMap();
     this.algorith();
+  }
+
+  affectValueToMap(col: Col,response: ClickCel){
+    col.clicked = true;
+    col.color = response.color;
+    if (response.color != 'red'){
+      this.game.userClick = response.userClick;
+      col.value = this.next;
+      this.algorith();
+    }
+    else {
+      this.loseGame(response.indexMines)
+    }
   }
 }

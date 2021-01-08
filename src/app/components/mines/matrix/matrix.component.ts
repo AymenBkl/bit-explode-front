@@ -23,19 +23,13 @@ export class MatrixComponent implements OnInit,OnChanges {
   ngOnInit() {
   }
 
-  clickCol(cel: Col) {
-    if (!cel.clicked && !this.game.completed && this.game.playing && this.validRoute) {
-      cel.clicked = true;
-      if (cel.color == 'red') {
-        this.loseGame();
-      }
-      else {
-        console.log(this.game.gameId)
-        cel.value = this.next;
-        this.game.userClick += 1;
-        this.algorith();
-        this.storage.saveGame(this.game);
-      }
+  clickCol(rowIndex: number, colIndex: number) {
+    console.log(rowIndex,colIndex);
+    if (!this.game.completed && this.game.playing && this.validRoute) {
+      this.gameService.clickCol(this.storage.getCurrentHash(),this.game.gameId,rowIndex,colIndex)
+        .then((result) => {
+          console.log(result);
+        })
     }
   }
 

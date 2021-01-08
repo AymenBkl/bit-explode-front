@@ -36,8 +36,8 @@ export class HomePage implements OnInit {
     if (this.validRoute && this.valid){
       this.gameService.createGame(this.gameHash,this.game)
         .then((result: any) => {
-          console.log(result);
-          if (result && result != false && result == 1){
+          console.log(result && result != false);
+          if (result && result != false){
             this.game = result;
           }
         });

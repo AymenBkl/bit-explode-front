@@ -45,12 +45,12 @@
                   (isValid)="isValid($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" size-lg="4" offset-lg="4">
-                    <ion-button class="button-play" expand="full" [disabled]="!valid" (click)="play()">
+                    <ion-button class="button-play" expand="full" [disabled]="game.playing" (click)="play()">
                       Play
                     </ion-button>
                   </ion-col>
                   <ion-col size="6" size-lg="4">
-                    <ion-button class="button-play1" expand="full" [disabled]="!valid">
+                    <ion-button class="button-play1" expand="full" [disabled]="game.playing">
                       Cashout
                     </ion-button>
                   </ion-col>

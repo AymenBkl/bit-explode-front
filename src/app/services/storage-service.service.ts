@@ -41,7 +41,7 @@ export class StorageServiceService {
     await localStorage.setItem('currentHash',hash);
   }
 
-  getCurrentHash(hash: string){
+  getCurrentHash(){
     this.currentHash = localStorage.getItem('currentHash');
     return this.currentHash;
   }

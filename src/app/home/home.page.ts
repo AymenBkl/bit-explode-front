@@ -108,7 +108,6 @@ export class HomePage implements OnInit {
       if (this.gameHash != null){  
         this.validRoute = true; 
         this.initGame();
-        this.checkGame();
       }
       else {
         this.validRoute = false;
@@ -126,12 +125,7 @@ export class HomePage implements OnInit {
     this.createLink(lengthOfCode, possible);
   }
 
-  checkGame(){
-    this.gameService.checkGame(this.gameHash,this.storage.getCurrentGame())
-      .then(result => {
-        console.log(result);
-      })
-  }
+ 
 
   
 

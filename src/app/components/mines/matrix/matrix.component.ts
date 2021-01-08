@@ -23,6 +23,7 @@ export class MatrixComponent implements OnInit,OnChanges {
 
   ngOnInit() {
     this.initMap();
+    this.checkGame();
   }
 
   async initMap() {
@@ -80,6 +81,7 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.isValid.emit(true);
     this.game.completed = true;
     this.game.playing = false;
+    this.storage.removeActiveGame();
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
     })
@@ -117,5 +119,26 @@ export class MatrixComponent implements OnInit,OnChanges {
     else {
       this.loseGame(response.indexMines)
     }
+  }
+
+  checkGame(){
+    if (this.storage.getCurrentHash() != null && this.storage.getCurrentGame() != null){
+      this.gameService.checkGame(this.storage.getCurrentHash(),this.storage.getCurrentGame())
+      .then((result: any) => {
+        if (result && result != null){
+          this.game = result.game;
+          this.affectValues(result.activeIndex);
+        }
+      })
+    }
+    
+  }
+
+  affectValues(activeIndex:[{col:Col,indexRow: number, indexCol: number }]){
+    activeIndex.map(value => {
+      this.algorith();
+      this.map[value.indexRow][value.indexCol] = value.col;
+      this.map[value.indexRow][value.indexCol].value = this.next;
+    }) 
   }
 }

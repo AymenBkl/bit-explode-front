@@ -50,4 +50,9 @@ export class StorageServiceService {
     this.currentGame = localStorage.getItem('currentGame');
     return this.currentGame;
   }
+
+  removeActiveGame() {
+    this.currentGame = null;
+    return localStorage.removeItem('currentGame');
+  }
 }

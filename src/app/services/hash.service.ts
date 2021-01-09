@@ -14,17 +14,15 @@ export class HashService {
     return new Promise((resolve,reject) => {
       this.httpClient.get<HashResponse>(environment.url + 'hash/checkHash?hashId=' + hashId)
       .subscribe(hashResponse => {
+        console.log(hashResponse);
         if (hashResponse.status == 200 && hashResponse.success){
-          resolve(this.proccessHashResponse(hashResponse.msg,hashResponse.hash));
+          resolve(hashResponse.hash);
+        }
+        else if (hashResponse.status == 404 && !hashResponse.success){
+          resolve(false);
         }
       })
     })
   }
 
-  proccessHashResponse(msg: string,hash: Hash){
-    if (msg == 'YOUR CURRENT HASH'){
-      console.log("true");
-      console.log(hash);
-    }
-  }
 }

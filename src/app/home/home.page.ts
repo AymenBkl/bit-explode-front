@@ -5,6 +5,7 @@ import crypto from 'crypto-js';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageServiceService } from '../services/storage-service.service';
 import { GameService } from '../services/game.service';
+import { HashService } from '../services/hash.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomePage implements OnInit {
   constructor(private activatedRouter: ActivatedRoute,
               private storage: StorageServiceService,
               private router: Router,
-              private gameService: GameService) { }
+              private gameService: GameService,
+              private hashService: HashService) { }
   async ngOnInit() {
     this.checkRouter();
   }
@@ -100,6 +102,10 @@ export class HomePage implements OnInit {
     this.activatedRouter.queryParams.subscribe(params => {
       this.gameHash = params["url"];
       if (this.gameHash != null){  
+        this.hashService.checkHash(this.gameHash)
+          .then((result) => {
+            console.log(result);
+          })
         this.validRoute = true; 
         this.initGame();
       }

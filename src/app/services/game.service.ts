@@ -23,7 +23,6 @@ export class GameService {
         }
       })
     })
-    
   }
 
   clickCol(gameHash: string, gameId: string, indexRow: number, indexCol: number) {

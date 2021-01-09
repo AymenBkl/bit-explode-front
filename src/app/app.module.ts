@@ -14,6 +14,7 @@ import { StorageServiceService } from './services/storage-service.service';
 import { ShareModule } from './components/share/share.module';
 import { GameService } from './services/game.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HashService } from './services/hash.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     StorageServiceService,
     GameService,
+    HashService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

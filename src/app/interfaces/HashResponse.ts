@@ -1,8 +1,9 @@
+import { Hash } from "crypto";
 import { Game } from "./game";
 
-export interface GameResponse{
+export interface HashResponse{
     status: number;
     msg: string;
     success: boolean;
-    game: Game;
+    hash: Hash;
 }

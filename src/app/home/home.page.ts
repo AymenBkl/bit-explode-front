@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StorageServiceService } from '../services/storage-service.service';
 import { GameService } from '../services/game.service';
 import { HashService } from '../services/hash.service';
+import { Hash } from 'crypto';
 
 @Component({
   selector: 'app-home',
@@ -23,24 +24,24 @@ export class HomePage implements OnInit {
   gameHash: string;
   games: any;
   historyGames: Game[];
-  balance:number;
+  balance: number;
   submmited: boolean = false;
   constructor(private activatedRouter: ActivatedRoute,
-              private storage: StorageServiceService,
-              private router: Router,
-              private gameService: GameService,
-              private hashService: HashService) { }
+    private storage: StorageServiceService,
+    private router: Router,
+    private gameService: GameService,
+    private hashService: HashService) { }
   async ngOnInit() {
     this.checkRouter();
   }
 
   createGame() {
-    if (this.validRoute && this.valid){
+    if (this.validRoute && this.valid) {
       this.submmited = true;
-      this.gameService.createGame(this.gameHash,this.game)
+      this.gameService.createGame(this.gameHash, this.game)
         .then((result: any) => {
           this.submmited = false;
-          if (result && result != false){
+          if (result && result != false) {
             this.game = result;
             this.storage.saveCurrentGame(this.game.gameId);
           }
@@ -49,14 +50,14 @@ export class HomePage implements OnInit {
   }
 
   initGame() {
-    if (this.validRoute){
+    if (this.validRoute) {
       this.game = {
-        gameId:'gameId',
+        gameId: 'gameId',
         stake: 100,
-        numberMines:1,
+        numberMines: 1,
         userClick: 0,
         playing: false,
-        completed:false,
+        completed: false,
       }
     }
   }
@@ -66,48 +67,34 @@ export class HomePage implements OnInit {
     this.game.numberMines = Number($event.detail.value);
   }
 
-  isValid(valid){
+  isValid(valid) {
     this.valid = valid;
   }
 
-  
+
 
   async play() {
     this.createGame();
   }
 
-  gameIsPlaying(){
+  gameIsPlaying() {
     this.valid = false;
   }
 
-  
-
-  createLink(lengthOfCode: number, possible: string) {
-    let text = "";
-    for (let i = 0; i < lengthOfCode; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    this.storage.saveHash(text);
-    this.storage.saveActiveHash(text);
-    this.router.navigate([], {
-      relativeTo: this.activatedRouter,
-      queryParams: {
-        url: text
-      },
-      queryParamsHandling: 'merge',
-    });
-     }
-
-  checkRouter(){
+  checkRouter() {
     this.activatedRouter.queryParams.subscribe(params => {
       this.gameHash = params["url"];
-      if (this.gameHash != null){  
+      if (this.gameHash != null) {
         this.hashService.checkHash(this.gameHash)
-          .then((result) => {
-            console.log(result);
+          .then((result: any) => {
+            if (result && result != false) {
+              this.validRoute = true;
+              this.initGame();
+            }
+            else {
+              this.validRoute = false;
+            }
           })
-        this.validRoute = true; 
-        this.initGame();
       }
       else {
         this.validRoute = false;
@@ -115,21 +102,32 @@ export class HomePage implements OnInit {
     })
   }
 
-  nextValue(next){
+  nextValue(next) {
     this.next = next;
   }
 
   newGame(game) {
     this.game = game;
-  } 
-
-  generateHash(){
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-    const lengthOfCode = 128;
-    this.createLink(lengthOfCode, possible);
   }
 
+  async generateHash() {
 
+    this.hashService.createHash()
+      .then((result: any | Hash) => {
+        if (result && result != false) {
+          console.log(result.hashId);
+          this.storage.saveActiveHash(result.hashId);
+          this.router.navigate([], {
+            relativeTo: this.activatedRouter,
+            queryParams: {
+              url: result.hashId
+            },
+            queryParamsHandling: 'merge',
+          });
+        }
+      })
+
+        }
 
   
 }

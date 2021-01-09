@@ -25,4 +25,19 @@ export class HashService {
     })
   }
 
+  createHash() {
+    return new Promise((resolve,reject) => {
+      this.httpClient.post<HashResponse>(environment.url + 'hash/createHash',{})
+      .subscribe(hashResponse => {
+        console.log(hashResponse);
+        if (hashResponse.status == 200 && hashResponse.success){
+          resolve(hashResponse.hash);
+        }
+        else if (hashResponse.status == 404 && !hashResponse.success){
+          resolve(false);
+        }
+      })
+    })
+  }
+
 }

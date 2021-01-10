@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   valid: boolean = true;
   next: number;
   validRoute: boolean = false;
-  gameHash: string;
+  gameHash: Hash;
   games: any;
   historyGames: Game[];
   balance: number;
@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
   createGame() {
     if (this.validRoute && this.valid) {
       this.submmited = true;
-      this.gameService.createGame(this.gameHash, this.game)
+      this.gameService.createGame(this.storage.currentHash._id, this.game)
         .then((result: any) => {
           this.submmited = false;
           if (result && result != false) {
@@ -52,6 +52,7 @@ export class HomePage implements OnInit {
   initGame() {
     if (this.validRoute) {
       this.game = {
+        _id: 'id',
         gameId: 'gameId',
         stake: 100,
         numberMines: 1,
@@ -83,17 +84,18 @@ export class HomePage implements OnInit {
 
   checkHash() {
     const hash = this.storage.getCurrentHash();
-    if (hash && hash != null && hash != '') {
-      this.navigateHome(hash);
+    if (hash.hashId && hash.hashId != null && hash.hashId != '') {
+      this.navigateHome(hash.hashId);
     }
   }
 
   checkRouter() {
     this.activatedRouter.queryParams.subscribe(params => {
-      this.gameHash = params["url"];
-      if (this.gameHash != null) {
-        this.hashService.checkHash(this.gameHash)
+      const gameHash = params["url"];
+      if (gameHash != null) {
+        this.hashService.checkHash(gameHash)
           .then((result: any) => {
+            
             if (result && result != false) {
               this.validRoute = true;
               this.initGame();
@@ -122,7 +124,8 @@ export class HomePage implements OnInit {
     this.hashService.createHash()
       .then((result: any | Hash) => {
         if (result && result != false) {
-          this.storage.saveActiveHash(result.hashId);
+          delete result.games;
+          this.storage.saveActiveHash(result);
           this.navigateHome(result.hashId);
         }
       })

@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../interfaces/game';
+import { Hash } from '../interfaces/hash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageServiceService {
 
-  currentHash:string;
+  currentHash: Hash;
   currentGame: any;
   constructor() { }
 
-  async saveActiveHash(hash: string){
+  async saveActiveHash(hash: Hash){
     this.currentHash = hash;
-    await localStorage.setItem('currentHash',hash);
+    await localStorage.setItem('currentHash',JSON.stringify(hash));
   }
 
   getCurrentHash(){
-    this.currentHash = localStorage.getItem('currentHash');
+    this.currentHash = JSON.parse(localStorage.getItem('currentHash'));
     return this.currentHash;
   }
 

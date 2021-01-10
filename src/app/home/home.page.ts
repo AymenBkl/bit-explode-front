@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
           this.submmited = false;
           if (result && result != false) {
             this.game = result;
-            this.storage.saveCurrentGame(this.game.gameId);
+            this.storage.saveCurrentGame(this.game._id);
           }
         });
     }

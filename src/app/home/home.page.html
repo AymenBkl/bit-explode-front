@@ -91,8 +91,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-col size="12" *ngIf="validRoute && games != null">
-    <app-history-games [historyGames]='historyGames' [gameHash]='gameHash'></app-history-games>
+  <ion-col size="12" *ngIf="validRoute">
+    <app-history-games ></app-history-games>
   </ion-col>
 
 </ion-content>

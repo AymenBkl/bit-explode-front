@@ -15,7 +15,7 @@ import { ShareModule } from './components/share/share.module';
 import { GameService } from './services/game.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HashService } from './services/hash.service';
-
+import { HistoryService } from './services/history.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,6 +33,7 @@ import { HashService } from './services/hash.service';
     StorageServiceService,
     GameService,
     HashService,
+    HistoryService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

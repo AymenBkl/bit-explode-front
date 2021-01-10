@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Col } from '../interfaces/col';
 import { Game } from '../interfaces/game';
-import crypto from 'crypto-js';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageServiceService } from '../services/storage-service.service';
 import { GameService } from '../services/game.service';
 import { HashService } from '../services/hash.service';
-import { Hash } from 'crypto';
+import { Hash } from '../interfaces/hash';
 
 @Component({
   selector: 'app-home',
@@ -32,6 +31,7 @@ export class HomePage implements OnInit {
     private gameService: GameService,
     private hashService: HashService) { }
   async ngOnInit() {
+    this.checkHash();
     this.checkRouter();
   }
 
@@ -81,6 +81,13 @@ export class HomePage implements OnInit {
     this.valid = false;
   }
 
+  checkHash() {
+    const hash = this.storage.getCurrentHash();
+    if (hash && hash != null && hash != '') {
+      this.navigateHome(hash);
+    }
+  }
+
   checkRouter() {
     this.activatedRouter.queryParams.subscribe(params => {
       this.gameHash = params["url"];
@@ -115,19 +122,22 @@ export class HomePage implements OnInit {
     this.hashService.createHash()
       .then((result: any | Hash) => {
         if (result && result != false) {
-          console.log(result.hashId);
           this.storage.saveActiveHash(result.hashId);
-          this.router.navigate([], {
-            relativeTo: this.activatedRouter,
-            queryParams: {
-              url: result.hashId
-            },
-            queryParamsHandling: 'merge',
-          });
+          this.navigateHome(result.hashId);
         }
       })
 
-        }
+  }
 
-  
+  navigateHome(hashId: string) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRouter,
+      queryParams: {
+        url: hashId
+      },
+      queryParamsHandling: 'merge',
+    });
+
+  }
+
 }

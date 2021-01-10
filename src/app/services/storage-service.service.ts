@@ -10,27 +10,6 @@ export class StorageServiceService {
   currentGame: any;
   constructor() { }
 
-
-   checkHash(hash: string) : any{
-    const gameHash =  localStorage.getItem(hash);
-    if (gameHash != null && gameHash != undefined){
-      this.currentHash = hash;
-      return gameHash
-    }
-
-    else {
-      this.currentHash = '';
-      return false
-    }
-  }
-
-  async saveHash(hash: string){
-    this.currentHash = hash;
-    await localStorage.setItem(hash,JSON.stringify({}));
-  }
-
-
-
   async saveActiveHash(hash: string){
     this.currentHash = hash;
     await localStorage.setItem('currentHash',hash);

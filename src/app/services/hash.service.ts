@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Hash } from 'crypto';
+import { Hash } from '../interfaces/hash';
 import { environment } from 'src/environments/environment';
 import { HashResponse } from '../interfaces/HashResponse';
 

@@ -1,5 +1,4 @@
-import { Hash } from "crypto";
-import { Game } from "./game";
+import { Hash } from "./hash";
 
 export interface HashResponse{
     status: number;

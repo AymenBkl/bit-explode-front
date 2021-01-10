@@ -25,6 +25,7 @@ export class HistoryPage implements OnInit {
   checkRouter(){
     this.activatedRouter.queryParams.subscribe(params => {
       this.game = JSON.parse(params['playingame']);
+      console.log(this.game);
     })
   }
 }

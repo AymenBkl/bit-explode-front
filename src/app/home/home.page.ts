@@ -53,12 +53,12 @@ export class HomePage implements OnInit {
     if (this.validRoute) {
       this.game = {
         _id: 'id',
-        gameId: 'gameId',
         stake: 100,
         numberMines: 1,
         userClick: 0,
         playing: false,
         completed: false,
+        matrix:null
       }
     }
   }

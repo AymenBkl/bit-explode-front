@@ -1,0 +1,72 @@
+.flip-card-clicked {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transform: rotate(180deg);
+    transition: transform 0.5s linear;
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    border-radius: 8px;
+    text-align: center;
+    width: 12%;
+  
+  }
+
+  .flip-card {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    --background: white;
+    position: relative;
+    text-align: center;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    display: inline-block;
+    margin-left: 5px;
+    border-radius: 8px;
+    width: 12%;
+  }
+
+
+  .red {
+    --background: red !important;
+    --color: white;
+    font-size: 15px;
+  }
+
+  
+.green {
+    --background: green !important;
+    --color: white;
+    font-size: 15px;
+  }
+
+  ion-input {
+    --background: gray;
+    --color: white;
+    text-align: center;
+    --padding-bottom: 12px;
+    --padding-end: 12px;
+    --padding-start: 12px;
+    --padding-top: 12px;
+    border-radius: 5px;
+    vertical-align: middle;
+    margin-top: 4px;
+    width: 100%;
+  }
+
+
+  .mine-value {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+ion-input[type=number]::-webkit-inner-spin-button,
+ion-input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+margin: 0;
+}

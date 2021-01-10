@@ -35,7 +35,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   clickCol(col: Col, rowIndex: number, colIndex: number) {
     if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute) {
       col.submitted = true;
-      this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,rowIndex,colIndex)
+      this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,rowIndex,colIndex,this.next)
         .then((result: any) => {
           col.submitted = false;
           if (result && result != false ) {

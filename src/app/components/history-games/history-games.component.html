@@ -1,3 +1,13 @@
-  <ion-item *ngFor="let gameHistory of historyGames" (click)="goToHistoryPage(gameHistory)">
-    <ion-text>{{gameHistory._id}}</ion-text>
-  </ion-item>
+
+<ion-text class="header"> History Games</ion-text>
+  <div *ngFor="let gameHistory of historyGames">
+    <ion-row *ngFor="let row of gameHistory.matrix;let indexRow = index"  >
+      <ion-col  size="18" size-lg="12" offset-lg="4" >
+        <ion-item class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color'>
+              <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
+              <ion-icon *ngIf="col.clicked && col.value == 0" src="../../../../assets/imgs/bombe.svg"></ion-icon>
+              <ion-spinner name="bubbles" *ngIf="col.submitted"></ion-spinner>
+        </ion-item>
+      </ion-col>
+      </ion-row>
+    </div>

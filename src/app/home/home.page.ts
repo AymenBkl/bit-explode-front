@@ -95,7 +95,6 @@ export class HomePage implements OnInit {
       if (gameHash != null) {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
-            
             if (result && result != false) {
               this.validRoute = true;
               this.initGame();
@@ -120,7 +119,6 @@ export class HomePage implements OnInit {
   }
 
   async generateHash() {
-
     this.hashService.createHash()
       .then((result: any | Hash) => {
         if (result && result != false) {

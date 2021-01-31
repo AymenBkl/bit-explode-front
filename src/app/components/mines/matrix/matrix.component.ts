@@ -143,9 +143,7 @@ export class MatrixComponent implements OnInit,OnChanges {
 
   affectValues(activeIndex:[{col:Col,indexRow: number, indexCol: number }]){
     activeIndex.map(value => {
-      this.algorith();
       this.map[value.indexRow][value.indexCol] = value.col;
-      this.map[value.indexRow][value.indexCol].value = this.next;
     }) 
   }
 }

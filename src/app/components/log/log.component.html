@@ -16,8 +16,11 @@
     </div>
     <div class="main-div">
       <div class="click" *ngFor="let col of colClick">
-        <ion-text>
+        <ion-text *ngIf="col.col">
           You found {{col.col.value}} in {{col.indexRow}}-{{col.indexCol}}
+        </ion-text>
+        <ion-text *ngIf="!col.col">
+          You found Mine in {{col.indexRow}}-{{col.indexCol}}
         </ion-text>
       </div>
     </div>

@@ -17,6 +17,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
+  @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number }> = new EventEmitter<{col:Col,indexRow: number, indexCol: number }>();
   next: number;
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
@@ -39,7 +40,7 @@ export class MatrixComponent implements OnInit,OnChanges {
         .then((result: any) => {
           col.submitted = false;
           if (result && result != false ) {
-            this.affectValueToMap(col,result);
+            this.affectValueToMap(col,result,rowIndex,colIndex);
           }
         })
     }
@@ -113,16 +114,18 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.algorith();
   }
 
-  affectValueToMap(col: Col,response: ClickCel){
+  affectValueToMap(col: Col,response: ClickCel,indexRow:number,indexCol:number){
     col.clicked = true;
     col.color = response.color;
     if (response.color != 'red'){
       this.game.userClick = response.userClick;
       col.value = this.next;
       this.algorith();
+      this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol});
     }
     else {
       this.loseGame(response.indexMines)
+      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol});
     }
   }
 

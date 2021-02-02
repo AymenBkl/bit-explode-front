@@ -34,7 +34,7 @@
           <ion-row>
             <ion-col size="12" size-md="8" size-lg="3" offset-lg="3" >
                 <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
-                  (isValid)="isValid($event)" (newGame)="newGame($event)"></app-matrix>
+                  (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" >
                     <ion-button class="button-play" expand="full" [disabled]="game.playing || submmited" (click)="play()" >

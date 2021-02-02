@@ -20,7 +20,6 @@ export class LogComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    console.log("here");        
     this.scrollToBottom();        
 } 
 

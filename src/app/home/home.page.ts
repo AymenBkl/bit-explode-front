@@ -122,6 +122,10 @@ export class HomePage implements OnInit {
     this.colClick = game.activeIndex;
   }
 
+  colClicked(col){
+    this.colClick.push(col);
+  }
+
   async generateHash() {
     this.hashService.createHash()
       .then((result: any | Hash) => {

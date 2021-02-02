@@ -126,8 +126,8 @@ ion-content {
 }
 
 .row-games{
-  min-height: 400px;
-  max-height: 400px;;
+  min-height: 150px;
+  max-height: 150px;;
 }
 
 .row-log {
@@ -136,8 +136,9 @@ ion-content {
 }
 
 .row-matrix {
-  min-height: 700px;
-  max-height: 700px;
+  max-height: 30%;
+    min-height: 30%;
+    height: 30%;
 }
 
 

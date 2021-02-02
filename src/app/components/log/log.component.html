@@ -1,12 +1,17 @@
-<div class="container">
+<div class="container" >
   <div class="header">
       Bit-Explode
   </div>
-  <div class="flow" *ngIf="game">
+  <div class="flow" *ngIf="game" #container>
     <div class="content">
+      <ion-text *ngIf="game.data && game.data.encryptedData">
+        gameHash : {{game.data.encryptedData}}
+      </ion-text>
       <ion-text>
-        You have a an existing game with hash : {{game.data.encryptedData}}, stake: {{game.stake}}, clicks:
-        {{game.userClick}}
+        Stake : {{game.stake}}
+      </ion-text>
+      <ion-text>
+        clicks : {{game.userClick}}
       </ion-text>
     </div>
     <div class="main-div">

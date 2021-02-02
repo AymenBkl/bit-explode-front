@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Col } from 'src/app/interfaces/col';
 import { Game } from 'src/app/interfaces/game';
 
@@ -11,11 +11,23 @@ export class LogComponent implements OnInit {
 
   @Input('game') game: Game;
   @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number }];
+  @ViewChild('container') private container: ElementRef;
   constructor() { }
 
   ngOnInit() {
-    console.log(this.game);
-    console.log(this.colClick);
+    this.scrollToBottom();        
+
   }
+
+  ngAfterViewChecked() {
+    console.log("here");        
+    this.scrollToBottom();        
+} 
+
+  scrollToBottom(): void {
+    try {
+        this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
+    } catch(err) { }                 
+}
 
 }

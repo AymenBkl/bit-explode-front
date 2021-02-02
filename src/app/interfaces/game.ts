@@ -1,5 +1,5 @@
 import { Col } from "./col";
-
+import { EncryptedData } from './encryptedData';
 export interface Game {
     _id: string;
     stake:number;
@@ -8,4 +8,5 @@ export interface Game {
     playing:boolean;
     completed:boolean;
     matrix:Col[][];
+    data: EncryptedData; 
 }

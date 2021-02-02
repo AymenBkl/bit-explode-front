@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Col } from 'src/app/interfaces/col';
 
 @Component({
   selector: 'app-log',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogComponent implements OnInit {
 
-  gameHash:string;
+  @Input('encryptedGame') encryptedGame: string;
+  @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number }];
   constructor() { }
 
   ngOnInit() {}

@@ -25,6 +25,7 @@ export class HomePage implements OnInit {
   historyGames: Game[];
   balance: number;
   submmited: boolean = false;
+  encryptedData: string;
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -58,8 +59,10 @@ export class HomePage implements OnInit {
         userClick: 0,
         playing: false,
         completed: false,
-        matrix:null
+        matrix:null,
+        data:null,
       }
+      delete this.game.data;
     }
   }
 

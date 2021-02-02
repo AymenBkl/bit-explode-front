@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
   historyGames: Game[];
   balance: number;
   submmited: boolean = false;
-  colClick: [{col:Col,indexRow: number, indexCol: number }]
+  colClick: {col:Col,indexRow: number, indexCol: number }[] = [];
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -71,8 +71,9 @@ export class HomePage implements OnInit {
     this.game.numberMines = Number($event.detail.value);
   }
 
-  isValid(valid) {
-    this.valid = valid;
+  isValid(game) {
+    this.game = game;
+    this.valid = this.game.completed;
   }
 
 

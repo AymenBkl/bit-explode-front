@@ -15,7 +15,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Input('validRoute') validRoute:boolean;
   @Input('game') game: Game;
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
-  @Output() isValid: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() isValid: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number }> = new EventEmitter<{col:Col,indexRow: number, indexCol: number }>();
   next: number;
@@ -47,7 +47,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   multiply() {
-    this.isValid.emit(true);
+    this.isValid.emit(this.game);
     if (this.game.stake < 100) {
       this.game.stake = 100 * 2;
     }
@@ -58,7 +58,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   addOne() {
-    this.isValid.emit(true);
+    this.isValid.emit(this.game);
     if (this.game.stake < 100) {
       this.game.stake = 100 + 1;
     }
@@ -81,7 +81,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   loseGame(indexMines : [{ indexRow: number, indexCol: number }]){
-    this.isValid.emit(true);
+    this.isValid.emit(this.game);
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
@@ -94,16 +94,16 @@ export class MatrixComponent implements OnInit,OnChanges {
   stakValidation(input: string) {
     if (input.match(/^[0-9]+$/) != null) {
       if (Number(input) < 100) {
-        this.isValid.emit(false);
+        this.isValid.emit(this.game);
         this.game.stake = 100;
       }
       else {
-        this.isValid.emit(true);
+        this.isValid.emit(this.game);
       }
 
     }
     else {
-      this.isValid.emit(false);
+      this.isValid.emit(this.game);
     }
   }
 

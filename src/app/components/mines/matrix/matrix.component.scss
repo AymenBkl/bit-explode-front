@@ -24,7 +24,7 @@
     transition: transform 0.5s linear;
     position: relative;
     display: inline-block;
-    margin-left: 0px;
+    margin-left: 6px;
     border-radius: 8px;
     text-align: center;
     width: 18%;
@@ -44,7 +44,7 @@
 
   
 .green {
-    --background: green !important;
+  --background: linear-gradient(270deg,#0EFB3E, #1CC050) !important;
     --color: white;
     font-size: 15px;
   }

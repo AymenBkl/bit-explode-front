@@ -43,6 +43,7 @@ export class HomePage implements OnInit {
         .then((result: any) => {
           this.submmited = false;
           if (result && result != false) {
+            console.log(result);
             this.game = result;
             this.storage.saveCurrentGame(this.game._id);
           }
@@ -72,8 +73,10 @@ export class HomePage implements OnInit {
   }
 
   isValid(game) {
+    console.log(game);
     this.game = game;
-    this.valid = this.game.completed;
+    this.valid = game.completed == true ? true: false;
+    console.log(this.valid);
   }
 
 

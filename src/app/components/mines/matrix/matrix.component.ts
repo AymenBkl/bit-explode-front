@@ -81,11 +81,11 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   loseGame(indexMines : [{ indexRow: number, indexCol: number }]){
-    this.isValid.emit(this.game);
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
     this.storage.removeActiveGame();
+    this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
     })

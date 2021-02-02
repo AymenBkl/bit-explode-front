@@ -39,6 +39,7 @@ export class HomePage implements OnInit {
   createGame() {
     if (this.validRoute && this.valid) {
       this.submmited = true;
+      this.colClick = [];
       this.gameService.createGame(this.storage.currentHash._id, this.game)
         .then((result: any) => {
           this.submmited = false;

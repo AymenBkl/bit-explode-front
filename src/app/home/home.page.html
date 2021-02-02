@@ -31,8 +31,8 @@
                 </ion-col>
 
           </ion-row>
-          <ion-row>
-            <ion-col size="12" size-md="8" size-lg="3" offset-lg="3" >
+          <ion-row >
+            <ion-col size="12" size-md="8" size-lg="3" offset-lg="3"  class="row-matrix">
                 <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
                   (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)"></app-matrix>
                 <ion-row>

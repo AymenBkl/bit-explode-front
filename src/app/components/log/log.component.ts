@@ -20,10 +20,12 @@ export class LogComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
+    console.log("here");
     this.scrollToBottom();        
 } 
 
   scrollToBottom(): void {
+
     try {
         this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
     } catch(err) { }                 

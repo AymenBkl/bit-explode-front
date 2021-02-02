@@ -1,4 +1,4 @@
-<div *ngIf="map">
+<div *ngIf="map" class="container">
 <div *ngFor="let row of map;let indexRow = index"  class="row" >
   <div  class="col"  >
     <ion-item class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(col,indexRow,indexCol)">

@@ -1,11 +1,20 @@
 <div class="container">
-  <div class="header">Bit-Explode</div>
+  <div class="header">
+      Bit-Explode
+  </div>
   <div class="flow" *ngIf="game">
     <div class="content">
-      You have a an existing game with hash : {{game.data.encryptedData}}, stake: {{game.stake}}, clicks: {{game.userClick}}
+      <ion-text>
+        You have a an existing game with hash : {{game.data.encryptedData}}, stake: {{game.stake}}, clicks:
+        {{game.userClick}}
+      </ion-text>
     </div>
-    <div class="click" *ngFor="let row of game.matrix">
-      <div class="click" *ngFor="let col of game.matrix">
+    <div class="main-div">
+      <div class="click" *ngFor="let col of colClick">
+        <ion-text>
+          You found {{col.col.value}} in {{col.indexRow}}-{{col.indexCol}}
+        </ion-text>
       </div>
     </div>
+  </div>
   </div>

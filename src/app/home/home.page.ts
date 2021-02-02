@@ -25,7 +25,7 @@ export class HomePage implements OnInit {
   historyGames: Game[];
   balance: number;
   submmited: boolean = false;
-  encryptedData: string;
+  colClick: [{col:Col,indexRow: number, indexCol: number }]
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -118,7 +118,8 @@ export class HomePage implements OnInit {
   }
 
   newGame(game) {
-    this.game = game;
+    this.game = game.game;
+    this.colClick = game.activeIndex;
   }
 
   async generateHash() {

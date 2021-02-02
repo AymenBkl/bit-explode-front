@@ -134,7 +134,7 @@ export class MatrixComponent implements OnInit,OnChanges {
           this.game = result.game;
           this.affectValues(result.activeIndex);
           this.activeGame = true;
-          this.newGame.emit(this.game);
+          this.newGame.emit(result);
         }
       })
     }

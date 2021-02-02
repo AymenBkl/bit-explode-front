@@ -7,12 +7,16 @@
     transform-style: preserve-3d;
     transform: rotateY(180deg);
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 6px;
     border-radius: 8px;
-    width: 12%;
+    width: 18%;
+    padding-top: 18%;
   }
 
 
+  .flip-card:first-child {
+    margin-left: 0px;
+  }
   
 .flip-card-clicked {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -20,11 +24,15 @@
     transition: transform 0.5s linear;
     position: relative;
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 0px;
     border-radius: 8px;
     text-align: center;
-    width: 12%;
-  
+    width: 18%;
+    padding-top: 18%;
+  }
+
+  .flip-card-clicked:first-child {
+    margin-left: 0px;
   }
 
 

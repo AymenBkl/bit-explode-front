@@ -6,11 +6,26 @@
     background-color: #283136;
     text-align: center;
   }
+
+  .content {
+    margin-top: 10px;
+    color:white;
+    text-align: left;
+    font-weight: bold;
+    height: 100%;
+  }
+
+  .clicks {
+    color:white;
+    text-align: left;
+    font-weight: bold;
+  }
   
   .flow {
     overflow:auto;
-    height: 60%;
+    height: 100%;
     width: 100%;
+    color:white;
   }
   
   ::-webkit-scrollbar {

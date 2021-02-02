@@ -1,7 +1,11 @@
 <div class="container">
   <div class="header">Bit-Explode</div>
-  <div class="flow">
-  <div class="main-div">
-    You have a game {{encryptedGame}}
-  </div>
+  <div class="flow" *ngIf="game">
+    <div class="content">
+      You have a an existing game with hash : {{game.data.encryptedData}}, stake: {{game.stake}}, clicks: {{game.userClick}}
+    </div>
+    <div class="click" *ngFor="let row of game.matrix">
+      <div class="click" *ngFor="let col of game.matrix">
+      </div>
+    </div>
   </div>

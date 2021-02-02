@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Col } from 'src/app/interfaces/col';
+import { Game } from 'src/app/interfaces/game';
 
 @Component({
   selector: 'app-log',
@@ -8,10 +9,12 @@ import { Col } from 'src/app/interfaces/col';
 })
 export class LogComponent implements OnInit {
 
-  @Input('encryptedGame') encryptedGame: string;
+  @Input('game') game: Game;
   @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number }];
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.game);
+  }
 
 }

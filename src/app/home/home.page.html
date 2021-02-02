@@ -69,7 +69,7 @@
                 </ion-row>
                 <ion-row class="row-log" *ngIf='game && game.data && game.data.encryptedData'>
                   <ion-col size="12" size-md="6">
-                    <app-log [encryptedGame]='game.data.encryptedData'></app-log>
+                    <app-log [game]='game'></app-log>
                   </ion-col>
                 </ion-row>
             </ion-col>

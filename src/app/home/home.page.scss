@@ -3,10 +3,6 @@
 ion-buttons {
   margin-right: 15%;
 }
-
-
-
-
 .button {
   --padding-bottom:23px;
   --padding-top:23px;
@@ -20,23 +16,6 @@ ion-content {
   --background: linear-gradient(to right, #152620,#16201F,#151F20,#16201F,#141C1F,#161B1F,#151A1E);;
   position: relative;
 }
-
-.history-game {
-  background-color: #283136;
-  min-height: 300px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 .header-item {
   --border-radius:15px;
   --background:gray;
@@ -45,9 +24,6 @@ ion-content {
   --inner-padding-start:15px;
   --inner-padding-top	:15px;
 }
-
-
-
 .mines-number {
   padding: 5px;
   text-align: center;
@@ -147,6 +123,14 @@ ion-content {
 .cashout{
   --background: white;
   --color:black;
+}
+
+.row-games{
+  max-height: 25%;
+}
+
+.row-log {
+  max-height: 25%;
 }
 
 

@@ -7,19 +7,22 @@ import { AppHeaderComponent } from '../app-header/app-header.component';
 import { MatrixComponent } from '../mines/matrix/matrix.component';
 import { HistoryGamesComponent } from '../history-games/history-games.component';
 import { FooterComponent } from '../footer/footer.component';
+import { LogComponent } from '../log/log.component';
 
 @NgModule({
   declarations: [
     AppHeaderComponent,
     MatrixComponent,
     HistoryGamesComponent,
-    FooterComponent
+    FooterComponent,
+    LogComponent
   ],
   exports: [
     AppHeaderComponent,
     MatrixComponent,
     HistoryGamesComponent,
-    FooterComponent
+    FooterComponent,
+    LogComponent
   ],
   imports: [
     IonicModule,

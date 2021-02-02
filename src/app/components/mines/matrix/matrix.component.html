@@ -9,17 +9,16 @@
   </div>
 </div>
   <div *ngIf="game" class="row">
-    <div  class="col">
+    <div  id="stake">
       <ion-input [(ngModel)]='game.stake' type="number"  [min]="100" (input)='stakValidation($event.target.value)' [disabled]='game.playing'
-
       ></ion-input>
     </div>
-    <div class="col">
+    <div id='add'>
       <ion-button  class="button-operation" expand="full" (click)="addOne()" [disabled]='game.playing'>
         <ion-icon name="add-circle-outline"></ion-icon>                    
       </ion-button>
     </div>
-    <div class="col">
+    <div id='multiply'>
       <ion-button  class="button-operation" expand="full" (click)="multiply()" [disabled]='game.playing'>
         <ion-icon src="../../assets/imgs/unchecked.svg"></ion-icon>
         <ion-text>2</ion-text>

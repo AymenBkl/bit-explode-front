@@ -23,7 +23,7 @@
                     <ion-icon src="../../assets/imgs/bombe.svg"></ion-icon>
                   </ion-chip>
                 </ion-col>
-                <ion-col size="12" size-lg="3" class="first-col">
+                <ion-col size="12" size-lg="4" class="first-col">
                   <ion-text class="segment-header">Balance</ion-text>
                   <ion-item lines="none" class="balance">
                     <ion-text>12354</ion-text>
@@ -52,13 +52,12 @@
             <ion-col size="12" size-md="6">
                 <ion-row>
                   <ion-col size="4">
-                    <ion-button shape="round" expand="full" color="light" size="medium" class="button"
-                      *ngIf="game.playing && next">
-                      Next {{next}}
+                    <ion-button  expand="full" color="warning" size="medium" class="button">
+                      Withdraw
                     </ion-button>
                   </ion-col>
                   <ion-col size="4">
-                    <ion-button shape="round" expand="full" size="medium" color="light" class="button">
+                    <ion-button  expand="full" size="medium" color="light" class="button">
                       Deposit
                     </ion-button>
                   </ion-col>

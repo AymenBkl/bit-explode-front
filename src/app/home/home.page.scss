@@ -131,26 +131,23 @@ ion-content {
 
 
 .button-play{
-  --background: green;
-  --color:white;
   --padding-bottom:20px;
   --padding-end	:20px;
   --padding-start	:20px;
   --padding-top	:20px;
   font-size: 15px;
-  border-radius: 10px;
+  --border-radius: 10px;
   text-align: center;
+  width: 100%;
+  margin-left: -5px;
+  --background: linear-gradient(270deg,#0EFB3E, #1CC050);
+  --color:white;
 }
 
-.button-play1{
+.cashout{
   --background: white;
   --color:black;
-  --padding-bottom:20px;
-  --padding-end	:20px;
-  --padding-start	:20px;
-  --padding-top	:20px;
-  font-size: 15px;
-  border-radius: 10px;
+  margin-left: 4px !important;
 }
 
 

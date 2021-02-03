@@ -1,6 +1,21 @@
 ion-content {
   --background: linear-gradient(90deg,#152620, #151A1E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.my-grid {
+  height: 100% !important;
+}
+.parent-row {
+  height: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.matrix-container {
+  vertical-align: middle;
 }
 
 
@@ -64,19 +79,7 @@ ion-content {
     font-size: 15px;
   }
 
-  ion-input {
-    --background: gray;
-    --color: white;
-    text-align: center;
-    --padding-bottom: 12px;
-    --padding-end: 12px;
-    --padding-start: 12px;
-    --padding-top: 12px;
-    border-radius: 5px;
-    vertical-align: middle;
-    margin-top: 4px;
-    width: 100%;
-  }
+
 
 
   .mine-value {
@@ -94,33 +97,34 @@ ion-content {
   }
 
   @media only screen and (min-width: 600px) {
-    .row-log {
-
-      height: 550px;
-      min-height: 25%;
-      max-height: 25%;
-
+    .flip-card {
+    
+      width: 90px;
+      height: 90px;
+    }
+    .flip-card-clicked {
+      
+      width: 90px;
+      height: 90px;
     }
     
-  
   }
 
   @media only screen and (max-width: 600px) {
-    .row-log {
-      height: 250px;
-      min-height: 25%;
-      max-height: 25%;
-    }
+    
   }
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
-    .row-log {
 
-      height: 344px;
-    min-height: 76%;
-    max-height: 76%;
-
+    .flip-card {
+      width: 30px;
+      height: 30px;
+    }
+    .flip-card-clicked {
+      
+      width: 30px;
+      height: 30px;
     }
     
   
@@ -128,33 +132,40 @@ ion-content {
   
   /* Large devices (laptops/desktops, 992px and up) */
   @media only screen and (min-width: 992px) {
-    .row-log {
-
-      height: 550px;
-    min-height: 46%;
-    max-height: 46%;
-
+    .flip-card {
+    
+      width: 40px;
+      height:  40px;
+    }
+    .flip-card-clicked {
+      
+      width:  40px;
+      height:  40px;
     }
     
   }
   
   /* Extra large devices (large laptops and desktops, 1200px and up) */
   @media only screen and (min-width: 1200px) {
-    .row-log {
-
-      height: 580px;
-    min-height: 49%;
-    max-height: 49%;
-
+    .flip-card {
+      height: 60px;
     }
+    .flip-card-clicked {
+      height: 60px;
+    }
+}
 
-    @media only screen and (min-width: 1278px) {
-      .row-log {
-        height: 580px;
-        min-height: 44%;
-        max-height: 44%;
+@media only screen and (min-width: 1278px) {
   
-      }
+  .flip-card {
+    width: 55px;
+    height: 55px;
+  }
+  .flip-card-clicked {
+    width: 55px;
+    height: 55px;
   }
 }
+
+
 

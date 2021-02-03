@@ -93,3 +93,68 @@ ion-content {
     display: block;
   }
 
+  @media only screen and (min-width: 600px) {
+    .row-log {
+
+      height: 550px;
+      min-height: 25%;
+      max-height: 25%;
+
+    }
+    
+  
+  }
+
+  @media only screen and (max-width: 600px) {
+    .row-log {
+      height: 250px;
+      min-height: 25%;
+      max-height: 25%;
+    }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .row-log {
+
+      height: 344px;
+    min-height: 76%;
+    max-height: 76%;
+
+    }
+    
+  
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .row-log {
+
+      height: 550px;
+    min-height: 46%;
+    max-height: 46%;
+
+    }
+    
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .row-log {
+
+      height: 580px;
+    min-height: 49%;
+    max-height: 49%;
+
+    }
+
+    @media only screen and (min-width: 1278px) {
+      .row-log {
+        height: 580px;
+        min-height: 44%;
+        max-height: 44%;
+  
+      }
+  }
+}
+

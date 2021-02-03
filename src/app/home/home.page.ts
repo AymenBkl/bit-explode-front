@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
   map: Array<Array<Col>>;
   incrementBy: number = 2;
   game: Game;
-  valid: boolean = true;
+  valid: boolean = false;
   next: number;
   validRoute: boolean = false;
   gameHash: Hash;
@@ -68,6 +68,7 @@ export class HomePage implements OnInit {
         matrix:null,
         data:null,
       }
+      this.valid = true;
       delete this.game.data;
     }
   }

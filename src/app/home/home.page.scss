@@ -125,20 +125,82 @@ ion-content {
   --color:black;
 }
 
-.row-games{
-  min-height: 21%;
-  max-height: 21%;
-}
 
-.row-log {
-  min-height: 25%;
-  max-height: 25%;
-}
 
 .row-matrix {
   max-height: 30%;
   min-height: 30%;
   height: 30%;
+}
+
+@media only screen and (max-width: 600px) {
+  .row-games{
+    min-height: 21%;
+    max-height: 21%;
+    height: 21%;
+  }
+  
+  .row-log {
+    min-height: 25%;
+    max-height: 25%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .row-games{
+    min-height: 21%;
+    max-height: 21%;
+    height: 21%;
+  }
+  
+  .row-log {
+    min-height: 25%;
+    max-height: 25%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .row-games{
+    min-height: 21%;
+    max-height: 21%;
+    height: 21%;
+  }
+  
+  .row-log {
+    min-height: 25%;
+    max-height: 25%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .row-games{
+    min-height: 21%;
+    max-height: 21%;
+    height: 21%;
+  }
+  
+  .row-log {
+    min-height: 25%;
+    max-height: 25%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .row-games{
+    min-height: 30%;
+    max-height: 30%;
+    height: 30%;
+  }
+  
+  .row-log {
+    min-height: 20%;
+    max-height: 20%;
+    height: 20%;
+  }
 }
 
 

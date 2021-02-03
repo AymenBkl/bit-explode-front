@@ -1,9 +1,9 @@
 <ion-content [fullscreen]="true">
-  <ion-grid *ngIf="validRoute">
-          <ion-row>
+  <ion-grid>
+          <ion-row >
                 <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">
                   <ion-text class="segment-header">Bombs</ion-text>
-                  <ion-segment class="segment" value="1" (ionChange)="segmentChanged($event)" [disabled]='game.playing || submmited'>
+                  <ion-segment class="segment" value="1" (ionChange)="segmentChanged($event)" [disabled]='game && game.playing || submmited'>
                     <ion-segment-button class="segment-button" value="1">
                       <ion-text class="mines-number">1</ion-text>
                     </ion-segment-button>
@@ -37,50 +37,62 @@
                   (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" >
-                    <ion-button class="button-play" expand="full" [disabled]="game.playing || submmited" (click)="play()" >
+                    <ion-button class="button-play" expand="full" [disabled]="game && (game.playing || submmited)" (click)="play()" >
                       <ion-text *ngIf="!submmited">Play</ion-text>
                       <ion-spinner name="bubbles" *ngIf="submmited"></ion-spinner>
                     </ion-button>
                   </ion-col>
                   <ion-col size="6">
-                    <ion-button class="button-play cashout" expand="full" [disabled]="game.playing || submmited" >
+                    <ion-button class="button-play cashout" expand="full" [disabled]="game && (game.playing || submmited)" >
                       <ion-text *ngIf="!submmited">Cashout</ion-text>
                     </ion-button>
                   </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col size="12" size-md="12">
+            <ion-col size="12" size-md="12" size-lg="6">
                 <ion-row>
-                  <ion-col size="6" offset-md="3" size-md="3">
+                  <ion-col size="6" offset-md="3" size-md="3" offset-lg="0" size-lg="4">
                     <ion-button  expand="full" color="warning" size="medium" class="button">
                       Withdraw
                     </ion-button>
                   </ion-col>
-                  <ion-col size="6" size-md="3">
+                  <ion-col size="6" size-md="3" size-lg="4">
                     <ion-button  expand="full" size="medium" color="light" class="button">
                       Deposit
                     </ion-button>
                   </ion-col>
                 </ion-row>
+                <ion-row class="row-information ion-hide-md-down ion-hide-lg-up" >
+                  <ion-col size="6" offset-md="3" size-md="3">
+                    <div class="information-div">
+                      Next
+                    </div>
+                  </ion-col>
+                  <ion-col size="6" size-md="3">
+                    <div class="information-div">
+                      Stake
+                    </div>
+                  </ion-col>
+                </ion-row>
                 <ion-row class="row-games">
-                  <ion-col size="12" >
+                  <ion-col size="12" size-lg="8" >
                     <app-history-games></app-history-games>
                   </ion-col>
                 </ion-row>
                 <ion-row class="row-log" *ngIf='game'>
-                  <ion-col size="12" >
+                  <ion-col size="12" size-lg="8" >
                     <app-log [game]='game' [colClick]="colClick"></app-log>
                   </ion-col>
                 </ion-row>
-                <ion-row class="row-information">
+                <ion-row class="row-information ion-hide-lg-down" >
                   <ion-col size="6" size-md="4">
                     <div class="information-div">
-                      Withdraw
+                      Next
                     </div>
                   </ion-col>
                   <ion-col size="6" size-md="4">
                     <div class="information-div">
-                      Withdraw
+                      Stake
                     </div>
                   </ion-col>
                 </ion-row>

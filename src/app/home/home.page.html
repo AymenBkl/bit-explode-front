@@ -23,7 +23,7 @@
                     <ion-icon src="../../assets/imgs/bombe.svg"></ion-icon>
                   </ion-chip>
                 </ion-col>
-                <ion-col size="12" size-lg="4" class="first-col">
+                <ion-col size="12" size-md="5" size-lg="4" class="first-col">
                   <ion-text class="segment-header">Balance</ion-text>
                   <ion-item lines="none" class="balance">
                     <ion-text>12354</ion-text>
@@ -32,7 +32,7 @@
 
           </ion-row>
           <ion-row >
-            <ion-col size="12" size-md="8" size-lg="3" offset-lg="3"  class="row-matrix">
+            <ion-col size="12" offset-md="3" size-md="6" size-lg="3" offset-lg="3"  class="row-matrix">
                 <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
                   (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)"></app-matrix>
                 <ion-row>
@@ -49,26 +49,26 @@
                   </ion-col>
                 </ion-row>
             </ion-col>
-            <ion-col size="12" size-md="6">
+            <ion-col size="12" size-md="12">
                 <ion-row>
-                  <ion-col size="6" size-md="4">
+                  <ion-col size="6" offset-md="3" size-md="3">
                     <ion-button  expand="full" color="warning" size="medium" class="button">
                       Withdraw
                     </ion-button>
                   </ion-col>
-                  <ion-col size="6" size-md="4">
+                  <ion-col size="6" size-md="3">
                     <ion-button  expand="full" size="medium" color="light" class="button">
                       Deposit
                     </ion-button>
                   </ion-col>
                 </ion-row>
                 <ion-row class="row-games">
-                  <ion-col size="12" size-md="8">
+                  <ion-col size="12" >
                     <app-history-games></app-history-games>
                   </ion-col>
                 </ion-row>
                 <ion-row class="row-log" *ngIf='game'>
-                  <ion-col size="12" size-md="8">
+                  <ion-col size="12" >
                     <app-log [game]='game' [colClick]="colClick"></app-log>
                   </ion-col>
                 </ion-row>

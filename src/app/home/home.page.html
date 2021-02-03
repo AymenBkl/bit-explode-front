@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
-  <ion-grid>
-          <ion-row >
+  <ion-grid class="ion-align-items-center">
+          <ion-row class="ion-align-self-center" >
                 <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">
                   <ion-text class="segment-header">Bombs</ion-text>
                   <ion-segment class="segment" value="1" (ionChange)="segmentChanged($event)" [disabled]='game && game.playing || submmited'>

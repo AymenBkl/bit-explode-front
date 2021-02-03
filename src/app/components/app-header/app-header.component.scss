@@ -1,20 +1,27 @@
 ion-header {
     height: 150px;
+    color:white;
     background: linear-gradient(to right, #152620,#16201F,#151F20,#16201F,#141C1F,#161B1F,#151A1E);
   }
   ion-toolbar {
+    color:white;
     --background: linear-gradient(to right, #152620,#16201F,#151F20,#16201F,#141C1F,#161B1F,#151A1E);
 }
 
 #button-header-play {
-    color:green;
+    --color:green;
     font-size:18px;
     --background:white;
+    --background-color:white;
     --border-radius:15px;
     --padding-bottom:23px;
     --padding-top:23px;
     --padding-end:23px;
     --padding-start:23px;	
+    width: 200px;
+    height: 50px;
+    margin-top: 30px;
+    text-shadow: -2px -2px 12px rgba(0, 0, 0, 1);
   }
   
   #button-header-help {
@@ -26,4 +33,7 @@ ion-header {
     --padding-top:23px;
     --padding-end:23px;
     --padding-start:23px;
+    width: 80px;
+    height: 50px;
+    margin-top: 30px;
   }

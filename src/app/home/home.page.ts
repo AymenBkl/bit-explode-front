@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
   balance: number;
   submmited: boolean = false;
   celClicked: string = 'click-cel';
-  colClick: {col:Col,indexRow: number, indexCol: number,data:EncryptedData }[] = [];
+  colClick: {col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }[] = [];
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -77,10 +77,8 @@ export class HomePage implements OnInit {
   }
 
   isValid(game) {
-    console.log(game);
     this.game = game;
     this.valid = game.completed == true ? true: false;
-    console.log(this.valid);
   }
 
 
@@ -133,7 +131,7 @@ export class HomePage implements OnInit {
     this.colClick = game.activeIndex;
   }
 
-  colClicked(col:{col:Col,indexRow: number, indexCol: number,data:EncryptedData }){
+  colClicked(col:{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }){
     if (col.col && col.col.color == 'green'){
       this.celClicked = 'success-cel';
     }

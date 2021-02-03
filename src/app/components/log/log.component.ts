@@ -11,7 +11,7 @@ import { Game } from 'src/app/interfaces/game';
 export class LogComponent implements OnInit {
 
   @Input('game') game: Game;
-  @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number,data:EncryptedData}];
+  @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }];
   @ViewChild('container') private container: ElementRef;
   constructor() { }
 

@@ -5,4 +5,5 @@ export interface ClickCel {
     indexMines: [{ indexRow: number, indexCol: number }];
     color: string;
     data:EncryptedData;
+    mines:string;
 } 

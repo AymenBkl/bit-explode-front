@@ -18,7 +18,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
-  @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData }> = new EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData }>();
+  @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string}> = new EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }>();
   @Output() clickCel: EventEmitter<boolean> = new EventEmitter<boolean>();
   next: number;
   map: Array<Array<Col>> = [];
@@ -56,10 +56,12 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.isValid.emit(this.game);
     if (this.game.stake < 100) {
       this.game.stake = 100 * 2;
+      this.algorith();
     }
 
     else {
       this.game.stake *= 2;
+      this.algorith();
     }
   }
 
@@ -67,16 +69,18 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.isValid.emit(this.game);
     if (this.game.stake < 100) {
       this.game.stake = 100 + 1;
+      this.algorith();
     }
 
     else {
       this.game.stake += 1;
+      this.algorith();
     }
   }
 
 
   algorith() {
-    if (this.game && this.game.playing) {
+    if (this.game) {
       const A = this.game.stake;
       const X = this.game.numberMines + this.game.userClick;
       const Y = 25 - this.game.userClick;
@@ -113,7 +117,10 @@ export class MatrixComponent implements OnInit,OnChanges {
     }
   }
 
+
+
   ngOnChanges(changes) {
+    console.log("here");
     if (!this.activeGame){
       this.initMap();
     }
@@ -127,11 +134,11 @@ export class MatrixComponent implements OnInit,OnChanges {
       this.game.userClick = response.userClick;
       col.value = this.next;
       this.algorith();
-      this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null});
+      this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
     }
     else {
       this.loseGame(response.indexMines)
-      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data});
+      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:null});
     }
   }
 

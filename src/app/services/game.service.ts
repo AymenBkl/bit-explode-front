@@ -63,7 +63,7 @@ export class GameService {
     }
 
     else if (msg == 'YOU HAVE CLICK MINE CELL') {
-      return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data};
+      return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data,mines:response.mines};
     }
   }
 

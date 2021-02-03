@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ion-grid *ngIf="validRoute">
           <ion-row>
-                <ion-col size="12" size-md="7" size-lg="3" offset-lg="2" class="first-col">
+                <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">
                   <ion-text class="segment-header">Bombs</ion-text>
                   <ion-segment class="segment" value="1" (ionChange)="segmentChanged($event)" [disabled]='game.playing || submmited'>
                     <ion-segment-button class="segment-button" value="1">
@@ -32,7 +32,7 @@
 
           </ion-row>
           <ion-row >
-            <ion-col size="12" size-md="8" size-lg="4" offset-lg="2"  class="row-matrix">
+            <ion-col size="12" size-md="8" size-lg="3" offset-lg="3"  class="row-matrix">
                 <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
                   (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)"></app-matrix>
                 <ion-row>

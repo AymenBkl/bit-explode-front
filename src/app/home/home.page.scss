@@ -217,6 +217,20 @@ ion-content {
   }
 }
 
+@media only screen and (min-width: 1278px) {
+  .row-games{
+    min-height: 25%;
+    max-height: 25%;
+    height: 25%;
+  }
+  
+  .row-log {
+    min-height: 16%;
+    max-height: 16%;
+    height: 16%;
+  }
+}
+
 
 
 

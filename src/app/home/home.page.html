@@ -65,12 +65,22 @@
                 <ion-row class="row-information ion-hide-md-down ion-hide-lg-up" >
                   <ion-col size="6" offset-md="3" size-md="3">
                     <div class="information-div">
-                      Next
+                      <ion-text class="title-div-information">
+                        Next
+                      </ion-text>
+                      <div class="content-div-information" *ngIf="game">
+                        {{next}}
+                    </div>
                     </div>
                   </ion-col>
                   <ion-col size="6" size-md="3">
                     <div class="information-div">
-                      Stake
+                      <ion-text class="title-div-information">
+                        Stake
+                      </ion-text>   
+                      <div class="content-div-information" *ngIf="game">
+                        {{game.stake}}
+                    </div>                 
                     </div>
                   </ion-col>
                 </ion-row>
@@ -87,12 +97,22 @@
                 <ion-row class="row-information ion-hide-lg-down" >
                   <ion-col size="6" size-md="4">
                     <div class="information-div">
-                      Next
+                      <ion-text class="title-div-information">
+                        Next
+                      </ion-text>
+                      <div class="content-div-information" *ngIf="game">
+                        {{next}}
+                    </div>
                     </div>
                   </ion-col>
                   <ion-col size="6" size-md="4">
                     <div class="information-div">
-                      Stake
+                      <ion-text class="title-div-information">
+                        Stake
+                      </ion-text>
+                      <div class="content-div-information" *ngIf="game">
+                          {{game.stake}}
+                      </div>
                     </div>
                   </ion-col>
                 </ion-row>

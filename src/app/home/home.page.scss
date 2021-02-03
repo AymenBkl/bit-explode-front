@@ -153,6 +153,20 @@ ion-content {
   height: 30%;
 }
 
+.title-div-information {
+  text-align: left;
+  margin-left: 5px;
+  
+}
+
+.content-div-information{
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 30px;
+}
+
 @media only screen and (max-width: 600px) {
   .row-games{
     min-height: 21%;

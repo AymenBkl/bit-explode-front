@@ -64,25 +64,29 @@
   }
 
 .button-operation{
-    --padding-bottom:20px;
-    --padding-end	:20px;
-    --padding-start	:20px;
-    --padding-top	:20px;
-    border-radius: 5px;
-    font-size: 15px;
-    --background:white;
-    --color:black;
+  --padding-bottom: 15px;
+  --padding-end: 15px;
+  --padding-start: 15px;
+  --padding-top: 21%;
+  /* --border-radius: 39px; */
+  --border-radius: 150px;
+  font-size: 15px;
+  --background: white;
+  --color: black;
+  height: 50px;
   }
   
 .button-operation:last-child {
-    --padding-bottom:15px;
-    --padding-end	:15px;
-    --padding-start	:15px;
-    --padding-top	:15px;
-    border-radius: 5px;
-    font-size: 15px;
-    --background:white;
-    --color:black;
+  --padding-bottom: 15px;
+  --padding-end: 15px;
+  --padding-start: 15px;
+  --padding-top: 21%;
+  /* --border-radius: 39px; */
+  --border-radius: 150px;
+  font-size: 15px;
+  --background: white;
+  --color: black;
+  height: 50px;
   }
   
 .button-operation:last-child ion-icon {
@@ -101,6 +105,7 @@ ion-input {
     border-radius: 5px;
     vertical-align: middle;
     margin-top: 4px;
+    height: 50px;
   }
 
 ion-input[type=number]::-webkit-inner-spin-button,

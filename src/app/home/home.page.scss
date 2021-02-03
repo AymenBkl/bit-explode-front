@@ -125,6 +125,18 @@ ion-content {
   --color:black;
 }
 
+.information-div {
+  background-color: #283136;
+  color:white;
+  text-align: left;
+  height: 100%;
+}
+
+.row-information{
+  min-height: 55px;
+  max-height: 55px;
+  height: 55px;
+}
 
 
 .row-matrix {
@@ -183,9 +195,9 @@ ion-content {
   }
   
   .row-log {
-    min-height: 85px;
-    max-height: 85px;
-    height: 85px;
+    min-height: 18%;
+    max-height: 18%;
+    height: 31%;
   }
 }
 
@@ -198,9 +210,9 @@ ion-content {
   }
   
   .row-log {
-    min-height: 20%;
-    max-height: 20%;
-    height: 30%;
+    min-height: 28%;
+    max-height: 28%;
+    height: 28%;
   }
 }
 

@@ -6,6 +6,7 @@ import { StorageServiceService } from '../services/storage-service.service';
 import { GameService } from '../services/game.service';
 import { HashService } from '../services/hash.service';
 import { Hash } from '../interfaces/hash';
+import { EncryptedData } from '../interfaces/encryptedData';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,7 @@ export class HomePage implements OnInit {
   historyGames: Game[];
   balance: number;
   submmited: boolean = false;
-  colClick: {col:Col,indexRow: number, indexCol: number }[] = [];
+  colClick: {col:Col,indexRow: number, indexCol: number,data:EncryptedData }[] = [];
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,

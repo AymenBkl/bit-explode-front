@@ -1,6 +1,7 @@
 import { Component, OnInit,Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
 import { ClickCel } from 'src/app/interfaces/clickCel';
 import { Col } from 'src/app/interfaces/col';
+import { EncryptedData } from 'src/app/interfaces/encryptedData';
 import { Game } from 'src/app/interfaces/game';
 import { GameService } from 'src/app/services/game.service';
 import { StorageServiceService } from 'src/app/services/storage-service.service';
@@ -17,7 +18,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
-  @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number }> = new EventEmitter<{col:Col,indexRow: number, indexCol: number }>();
+  @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData }> = new EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData }>();
   next: number;
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
@@ -121,11 +122,11 @@ export class MatrixComponent implements OnInit,OnChanges {
       this.game.userClick = response.userClick;
       col.value = this.next;
       this.algorith();
-      this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol});
+      this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null});
     }
     else {
       this.loseGame(response.indexMines)
-      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol});
+      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data});
     }
   }
 

@@ -22,6 +22,12 @@
         <ion-text *ngIf="!col.col">
           You found Mine in {{col.indexRow}}-{{col.indexCol}}
         </ion-text>
+        <div class="lose" *ngIf="col.data">
+          <ion-text class="lose-text">You lost this game</ion-text>
+          <ion-text class="lose-text">Algorithm : {{col.data.algorithm}}</ion-text>
+          <ion-text class="lose-text">Key: {{col.data.key}}</ion-text>
+          <ion-text class="lose-text">IV: {{col.data.iv}}</ion-text>
+        </div>
       </div>
     </div>
   </div>

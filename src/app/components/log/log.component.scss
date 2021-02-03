@@ -22,6 +22,14 @@
     font-weight: bold;
     background-color: #283136;
   }
+
+  .lose {
+    display: block;
+  }
+
+  .lose-text{
+    display: block;
+  }
   
   .flow {
     overflow: auto;
@@ -110,7 +118,7 @@
   @media only screen and (min-width: 600px) {
     .container {
 
-      height: 25%;
+      height: 285px;
       min-height: 25%;
       max-height: 25%;
 
@@ -118,12 +126,20 @@
     
   
   }
+
+  @media only screen and (max-width: 600px) {
+    .container {
+      height: 250px;
+      min-height: 25%;
+      max-height: 25%;
+    }
+  }
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
     .container {
 
-      height: 76%;
+      height: 285px;
     min-height: 76%;
     max-height: 76%;
 
@@ -136,7 +152,7 @@
   @media only screen and (min-width: 992px) {
     .container {
 
-      height: 47%;
+      height: 285px;
     min-height: 46%;
     max-height: 46%;
 
@@ -148,7 +164,7 @@
   @media only screen and (min-width: 1200px) {
     .container {
 
-      height: 50%;
+      height: 254px;
     min-height: 49%;
     max-height: 49%;
 
@@ -156,7 +172,7 @@
 
     @media only screen and (min-width: 1278px) {
       .container {
-        height: 50%;
+        height: 257px;
         min-height: 50%;
         max-height: 50%;
   

@@ -97,11 +97,21 @@
     margin-left: 10px;
 }
 
+@media only screen and (max-width: 600px) {
+  .container {
+    height: 300px;
+    min-height: 25%;
+    max-height: 25%;
+  }
+  
+
+}
+
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .container {
-    height: 25%;
+    height: 625px;
     min-height: 25%;
     max-height: 25%;
   }
@@ -112,7 +122,7 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .container {
-    height: 54%;
+    height: 400px;
     min-height: 54%;
     max-height: 54%;
   }
@@ -124,7 +134,7 @@
 @media only screen and (min-width: 992px) {
   .container {
 
-    height: 20%;
+    height: 642px;
     min-height: 20%;
     max-height: 20%;
   }
@@ -134,7 +144,7 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .container {
-    height: 29%;
+    height: 625px;
     min-height: 29%;
     max-height: 29%;
   }
@@ -142,7 +152,7 @@
 
   @media only screen and (min-width: 1278px) {
     .container {
-      height: 51%;
+      height: 500px;
       min-height: 44%;
       max-height: 44%;
     }

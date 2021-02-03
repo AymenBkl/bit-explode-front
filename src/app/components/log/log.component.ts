@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Col } from 'src/app/interfaces/col';
+import { EncryptedData } from 'src/app/interfaces/encryptedData';
 import { Game } from 'src/app/interfaces/game';
 
 @Component({
@@ -10,7 +11,7 @@ import { Game } from 'src/app/interfaces/game';
 export class LogComponent implements OnInit {
 
   @Input('game') game: Game;
-  @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number }];
+  @Input('colClick') colClick: [{col:Col,indexRow: number, indexCol: number,data:EncryptedData}];
   @ViewChild('container') private container: ElementRef;
   constructor() { }
 

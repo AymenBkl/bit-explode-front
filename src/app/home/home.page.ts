@@ -7,6 +7,7 @@ import { GameService } from '../services/game.service';
 import { HashService } from '../services/hash.service';
 import { Hash } from '../interfaces/hash';
 import { EncryptedData } from '../interfaces/encryptedData';
+import { ClickCel } from '../interfaces/clickCel';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomePage implements OnInit {
   historyGames: Game[];
   balance: number;
   submmited: boolean = false;
+  celClicked: string = 'click-cel';
   colClick: {col:Col,indexRow: number, indexCol: number,data:EncryptedData }[] = [];
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
@@ -83,6 +85,9 @@ export class HomePage implements OnInit {
 
 
 
+  celClick(clicked){
+    this.celClicked = 'click-cel';
+  }
   async play() {
     this.createGame();
   }
@@ -128,7 +133,13 @@ export class HomePage implements OnInit {
     this.colClick = game.activeIndex;
   }
 
-  colClicked(col){
+  colClicked(col:{col:Col,indexRow: number, indexCol: number,data:EncryptedData }){
+    if (col.col && col.col.color == 'green'){
+      this.celClicked = 'success-cel';
+    }
+    else {
+      this.celClicked = 'lose-game';
+    }
     this.colClick.push(col);
   }
 

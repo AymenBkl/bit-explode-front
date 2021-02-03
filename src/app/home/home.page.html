@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngClass]="celClicked">
   <ion-grid class="ion-align-items-center">
           <ion-row class="ion-align-self-center" >
                 <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">
@@ -34,7 +34,7 @@
           <ion-row >
             <ion-col size="12" offset-md="3" size-md="6" size-lg="3" offset-lg="3"  class="row-matrix">
                 <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
-                  (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)"></app-matrix>
+                  (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)" (clickCel)="celClick($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" >
                     <ion-button class="button-play" expand="full" [disabled]="game && (game.playing || submmited)" (click)="play()" >

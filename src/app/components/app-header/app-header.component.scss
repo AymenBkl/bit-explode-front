@@ -1,11 +1,11 @@
 ion-header {
     height: 150px;
     color:white;
-    background: linear-gradient(to right, #152620,#16201F,#151F20,#16201F,#141C1F,#161B1F,#151A1E);
+    background: linear-gradient(90deg,#152620, #151A1E);
   }
   ion-toolbar {
     color:white;
-    --background: linear-gradient(to right, #152620,#16201F,#151F20,#16201F,#141C1F,#161B1F,#151A1E);
+    --background: linear-gradient(90deg,#152620, #151A1E);
 }
 
 #button-header-play {

@@ -19,6 +19,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() isValid: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData }> = new EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData }>();
+  @Output() clickCel: EventEmitter<boolean> = new EventEmitter<boolean>();
   next: number;
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
@@ -36,8 +37,8 @@ export class MatrixComponent implements OnInit,OnChanges {
 
   clickCol(col: Col, rowIndex: number, colIndex: number) {
       if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute) {
-        
         col.submitted = true;
+        this.clickCel.emit(true);
         setTimeout(() => {
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,rowIndex,colIndex,this.next)
           .then((result: any) => {

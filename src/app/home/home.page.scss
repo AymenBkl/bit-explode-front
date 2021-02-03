@@ -16,10 +16,15 @@ ion-grid {
 
 
 
-ion-content {
-  
-  --background: linear-gradient(to right, #152620,#16201F,#151F20,#16201F,#141C1F,#161B1F,#151A1E);;
-  position: relative;
+
+.lose-game {
+  --background: linear-gradient(90deg,#524e4e, red);
+}
+.success-cel {
+  --background: linear-gradient(90deg,#152620, #151A1E);
+}
+.click-cel {
+  --background: linear-gradient(90deg,#524e4e, #151A1E);
 }
 .header-item {
   --border-radius:15px;

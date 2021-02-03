@@ -3,8 +3,8 @@
   <div  class="col"  >
     <div class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color' (click)="clickCol(col,indexRow,indexCol)">
           <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
-          <ion-icon *ngIf="col.clicked && col.value == 0" src="../../../../assets/imgs/bombe.svg"></ion-icon>
-          <ion-spinner name="bubbles" *ngIf="col.submitted"></ion-spinner>
+          <div class="spin"><ion-icon *ngIf="col.clicked && col.value == 0" src="../../../../assets/imgs/bombe.svg"></ion-icon></div>
+          <div class="spin" *ngIf="col.submitted"><ion-spinner name="bubbles" ></ion-spinner></div>
     </div>
   </div>
 </div>

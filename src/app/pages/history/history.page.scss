@@ -1,41 +1,66 @@
-.flip-card-clicked {
+ion-content {
+  --background: linear-gradient(90deg,#152620, #151A1E);
+
+}
+
+
+.flip-card {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  background: white;
+  position: relative;
+  text-align: center;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+  display: inline-block;
+  margin-left: 6px;
+  border-radius: 8px;
+  width: 17%;
+  height: 47px;
+}
+
+.flip-card:first-child {
+  margin-left: 0px;
+}
+
+.flip-card-clicked:first-child {
+  margin-left: 0px;
+}
+
+
+
+  .flip-card-clicked {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    transform: rotate(180deg);
+    transform: rotate(360deg);
     transition: transform 0.5s linear;
     position: relative;
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 6px;
     border-radius: 8px;
     text-align: center;
-    width: 12%;
-  
-  }
-
-  .flip-card {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    --background: white;
-    position: relative;
-    text-align: center;
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
-    transform: rotateY(0deg);
-    display: inline-block;
-    margin-left: 5px;
-    border-radius: 8px;
-    width: 12%;
+    width: 17%;
+    height: 47px;
   }
 
 
   .red {
-    --background: red !important;
-    --color: white;
+    background: red !important;
+    color: white;
     font-size: 15px;
   }
 
+  .spin{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+
+
   
 .green {
-    --background: green !important;
-    --color: white;
+    background: green !important;
+    color: white;
     font-size: 15px;
   }
 
@@ -63,10 +88,8 @@
     transform: translate(-50%, -50%);
   }
 
-ion-input[type=number]::-webkit-inner-spin-button,
-ion-input[type=number]::-webkit-outer-spin-button {
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-margin: 0;
-}
+  .row {
+    width: 100%;
+    display: block;
+  }
+

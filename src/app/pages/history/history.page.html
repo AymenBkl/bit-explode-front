@@ -1,21 +1,22 @@
 
 <ion-content>
   <ion-grid *ngIf="game">
-  <div *ngIf="game.matrix">
-    <ion-row *ngFor="let row of game.matrix;let indexRow = index"  >
-      <ion-col  size="18" size-lg="12" offset-lg="4" >
-        <ion-item class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color '>
-              <ion-text *ngIf="col.clicked && col.color == 'green'" class="mine-value">{{col.value}}</ion-text>
-              <ion-icon *ngIf="col.clicked && col.color == 'red'" src="../../../../assets/imgs/bombe.svg"></ion-icon>
-        </ion-item>
+    <ion-row>
+      <ion-col size-md="5" size="12" offset-md="2">
+        <div *ngIf="game.matrix">
+          <div *ngFor="let row of game.matrix;let indexRow = index"  class="row" >
+            <div  class="col"  >
+              <div class="flip-card" lines="none"  *ngFor="let col of row;let indexCol = index" [ngClass]='col.clicked ? "flip-card-clicked " + col.color : "flip-card" + col.color'>
+                    <ion-text *ngIf="col.clicked && col.value != 0" class="mine-value">{{col.value}}</ion-text>
+                    <div class="spin"><ion-icon *ngIf="col.clicked && col.value == 0" src="../../../../assets/imgs/bombe.svg"></ion-icon></div>
+              </div>
+            </div>
+          </div>
+          </div>
       </ion-col>
-      </ion-row>
-      <ion-row *ngIf="game">
-        <ion-col size-md="6"  size-lg="4" size="6" offset-lg="4">
-          <ion-input [value]='game.stake' [disabled]='true'
-          ></ion-input>
-        </ion-col>
-      </ion-row>
-    </div>
+      <ion-col size-md="5" size="12">
+        <app-log [colClick]='colClick' [game]='game' ></app-log>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Game } from 'src/app/interfaces/game';
 import { Hash } from 'src/app/interfaces/hash';
 import { HistoryService } from 'src/app/services/history.service';
@@ -26,14 +26,8 @@ export class HistoryGamesComponent implements OnInit {
 
 
   goToHistoryPage(game:Game){
-    this.router.navigate(['/history'], {
-      relativeTo: this.activatedRouter,
-      queryParams: {
-        url: this.gameHash.hashId,
-        playingame: JSON.stringify(game)
-      },
-      queryParamsHandling: 'merge',
-    });
+    let navigationExtras: NavigationExtras = { state: { url: this.gameHash.hashId,playingame:JSON.stringify(game) } };
+    this.router.navigate(['/history'], navigationExtras);
   }
 
   getAllHistory() {

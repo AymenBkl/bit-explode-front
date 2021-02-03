@@ -40,6 +40,7 @@ export class HomePage implements OnInit {
   }
 
   createGame() {
+    console.log(this.game,this.valid);
     if (this.validRoute && this.valid) {
       this.submmited = true;
       this.colClick = [];
@@ -73,12 +74,22 @@ export class HomePage implements OnInit {
 
 
   segmentChanged($event) {
-    this.game.numberMines = Number($event.detail.value);
+    this.game = {
+      _id: this.game._id,
+      stake: this.game.stake,
+      numberMines: Number($event.detail.value),
+      userClick: this.game.userClick,
+      playing: this.game.playing,
+      completed: this.game.completed,
+      matrix:this.game.matrix,
+      data:this.game.data,
+    }
   }
 
   isValid(game) {
+    console.log(this.game);
     this.game = game;
-    this.valid = game.completed == true ? true: false;
+    this.valid = game.completed;
   }
 
 

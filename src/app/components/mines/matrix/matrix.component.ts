@@ -53,7 +53,6 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   multiply() {
-    this.isValid.emit(this.game);
     if (this.game.stake < 100) {
       this.game.stake = 100 * 2;
       this.algorith();
@@ -66,7 +65,6 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   addOne() {
-    this.isValid.emit(this.game);
     if (this.game.stake < 100) {
       this.game.stake = 100 + 1;
       this.algorith();

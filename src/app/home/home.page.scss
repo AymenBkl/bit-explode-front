@@ -118,6 +118,7 @@ ion-content {
   margin-left: -5px;
   --background: linear-gradient(270deg,#0EFB3E, #1CC050);
   --color:white;
+  height: 50px;
 }
 
 .cashout{
@@ -133,9 +134,9 @@ ion-content {
 }
 
 .row-information{
-  min-height: 55px;
-  max-height: 55px;
-  height: 55px;
+  min-height: 60px;
+  max-height: 60px;
+  height: 60px;
 }
 
 
@@ -195,24 +196,24 @@ ion-content {
   }
   
   .row-log {
-    min-height: 18%;
-    max-height: 18%;
-    height: 31%;
+    min-height: 25%;
+    max-height: 25%;
+    height: 25%;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .row-games{
-    min-height: 185px;
-    max-height: 185px;
-    height: 185px;
+    min-height: 20%;
+    max-height: 20%;
+    height: 20%;
   }
   
   .row-log {
-    min-height: 28%;
-    max-height: 28%;
-    height: 28%;
+    min-height: 13%;
+    max-height: 13%;
+    height: 13%;
   }
 }
 

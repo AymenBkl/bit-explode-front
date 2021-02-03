@@ -177,29 +177,30 @@ ion-content {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .row-games{
-    min-height: 21%;
-    max-height: 21%;
-    height: 21%;
+    min-height: 135px;
+    max-height: 135px;
+    height: 135px;
   }
   
   .row-log {
-    min-height: 25%;
-    max-height: 25%;
+    min-height: 85px;
+    max-height: 85px;
+    height: 85px;
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .row-games{
-    min-height: 30%;
-    max-height: 30%;
-    height: 30%;
+    min-height: 185px;
+    max-height: 185px;
+    height: 185px;
   }
   
   .row-log {
     min-height: 20%;
     max-height: 20%;
-    height: 20%;
+    height: 30%;
   }
 }
 

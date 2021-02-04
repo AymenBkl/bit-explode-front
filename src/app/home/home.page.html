@@ -37,7 +37,7 @@
                   (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)" (clickCel)="celClick($event)"></app-matrix>
                 <ion-row>
                   <ion-col size="6" >
-                    <ion-button class="button-play" expand="full" [disabled]="game && (game.playing || submmited)" (click)="play()" >
+                    <ion-button class="button-play" expand="full" [disabled]="(game && (game.playing || submmited)) && valid" (click)="play()" >
                       <ion-text *ngIf="!submmited">Play</ion-text>
                       <ion-spinner name="bubbles" *ngIf="submmited"></ion-spinner>
                     </ion-button>

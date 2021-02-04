@@ -79,7 +79,7 @@ export class HomePage implements OnInit {
       _id: this.game._id,
       stake: this.game.stake,
       numberMines: Number($event.detail.value),
-      userClick: this.game.userClick,
+      userClick: this.game.userClick + this.game.numberMines == 25 ? 0 : this.game.userClick,
       playing: this.game.playing,
       completed: this.game.completed,
       matrix:this.game.matrix,

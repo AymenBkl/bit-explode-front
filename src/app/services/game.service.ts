@@ -61,8 +61,10 @@ export class GameService {
     if (msg == 'YOU HAVE CLICK RIGHT CELL'){
       return {color: response.color,userClick: response.userClick};
     }
-
     else if (msg == 'YOU HAVE CLICK MINE CELL') {
+      return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data,mines:response.mines};
+    }
+    else if (msg == 'YOU WON THE GAME') {
       return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data,mines:response.mines};
     }
   }

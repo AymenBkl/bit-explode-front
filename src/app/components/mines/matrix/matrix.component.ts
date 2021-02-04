@@ -39,7 +39,6 @@ export class MatrixComponent implements OnInit,OnChanges {
       if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute) {
         col.submitted = true;
         this.clickCel.emit(true);
-        setTimeout(() => {
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,rowIndex,colIndex,this.next)
           .then((result: any) => {
             col.submitted = false;
@@ -47,7 +46,6 @@ export class MatrixComponent implements OnInit,OnChanges {
               this.affectValueToMap(col,result,rowIndex,colIndex);
             }
           })
-      },1500)
     };
     
   }
@@ -132,12 +130,31 @@ export class MatrixComponent implements OnInit,OnChanges {
       this.game.userClick = response.userClick;
       col.value = this.next;
       this.algorith();
-      this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
+      if (response.userClick + this.game.numberMines == 25){
+        this.winGame(response.indexMines);
+        this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
+      }
+      else {
+        
+        this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
+      }
+      
     }
     else {
       this.loseGame(response.indexMines)
-      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:null});
+      this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
     }
+  }
+
+  winGame(indexMines : [{ indexRow: number, indexCol: number }]){
+    this.activeGame = false;
+    this.game.completed = true;
+    this.game.playing = false;
+    this.storage.removeActiveGame();
+    this.isValid.emit(this.game);
+    indexMines.map(col => {
+      this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
+    })
   }
 
   checkGame(){

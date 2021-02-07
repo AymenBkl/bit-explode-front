@@ -38,15 +38,24 @@ export class HistoryPage implements OnInit {
 
   clickCols(){
     this.colClick = [];
+    let greenValues = 0;
     this.game.matrix.map((row,indexRow) => {
       row.map((col,indexCol) => {
         if (col.clicked && col.color == 'green'){
-          this.colClick.push({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
+          greenValues += 1;
+          if (greenValues + this.game.numberMines == 25){
+            this.colClick.push({col:col,indexRow:indexRow,indexCol:indexCol,data:this.game.data,mines:null});
+          }
+          else {
+            this.colClick.push({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
+          }
         }
         else if (col.clicked && col.color == 'red') {
           this.colClick.push({col:null,indexRow:indexRow,indexCol:indexCol,data:this.game.data,mines:null});
         }
       })
     })
+
+
   }
 }

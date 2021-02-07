@@ -5,4 +5,5 @@ export interface HashResponse{
     msg: string;
     success: boolean;
     hash: Hash;
+    token: string;
 }

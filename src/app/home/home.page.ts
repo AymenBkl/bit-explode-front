@@ -240,7 +240,9 @@ export class HomePage implements OnInit {
     modal.onDidDismiss()
         .then(data => {
             console.log(data);
-            this.gameHash.passwordChange = true;
+            if (data.data && data.data.loggedIn){
+              this.validRoute = true;
+            }
         });
     return await modal.present();
     }

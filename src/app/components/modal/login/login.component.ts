@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
@@ -14,9 +14,11 @@ export class LoginComponent implements OnInit {
   submitted:boolean;
   hashId:string;
   password:string = '';
+  incorrectPassword: boolean = false;
   constructor(private navParams: NavParams,
               private interactionService: InteractionService,
-              private authService: AuthServiceService) { }
+              private authService: AuthServiceService,
+              private modalController: ModalController) { }
 
   ngOnInit() {
     this.getData();
@@ -34,16 +36,23 @@ export class LoginComponent implements OnInit {
       .then((result: any) => {
         this.submitted = false;
         if (result && result != false){
-          //this.modalController.dismiss({hash: result});
-          this.interactionService.createToast('Password Has been reseted !','success','bottom')
+          this.modalController.dismiss({loggedIn: true});
+          this.interactionService.createToast('WELCOM BACK !','success','bottom')
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+          this.interactionService.createToast('Wrong Password !','danger','bottom')
         }
       })
       .catch(err => {
         this.submitted = false;
-        this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+        console.log(err,err.error)
+        if (err && err.error && err.error.err.name == 'IncorrectPasswordError'){
+          this.incorrectPassword = true;
+          this.interactionService.createToast('Wrong Password !','danger','bottom')
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+        }
       })
   }
 }

@@ -82,6 +82,7 @@ export class AuthServiceService {
           .subscribe(response => {
             console.log(response);
             if (response && response.status == 200){
+              this.saveToken(response.token);
               resolve(response.hash);
             }
             else {

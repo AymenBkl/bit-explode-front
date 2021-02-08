@@ -14,7 +14,7 @@
           <div  class="password">
             <ion-input [(ngModel)]="password" [disabled]='!passwordChanged' placeHolder="Password"
             ></ion-input>
-            <!--<ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>-->
+            <ion-label class="label-error" *ngIf="incorrectPassword">*Password Incorrect</ion-label>
           </div>       
       </ion-col>
     </ion-row>

@@ -127,7 +127,7 @@ export class HomePage implements OnInit {
           .then((result: any) => {
             if (result && result != false) {
               this.gameHash = result;
-              this.callChangePassword()
+              //this.callChangePassword()
               this.initGame();
               this.authService.checkJWT(gameHash)
                 .then((result: boolean) => {

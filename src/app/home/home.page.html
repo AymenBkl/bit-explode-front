@@ -1,4 +1,19 @@
 <ion-content [fullscreen]="true" [ngClass]="celClicked">
+  <ion-header [translucent]="true" class="ion-no-border" [ngClass]="celClicked">
+    <ion-toolbar [ngClass]="celClicked">
+      <ion-title slot="start">
+        BitExplode Home
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button  id="button-header-play" size="large">
+          Play   
+        </ion-button>
+        <ion-button   id="button-header-help" size="large">
+          Help
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <ion-grid class="ion-align-items-center" *ngIf="validRoute">
           <ion-row class="ion-align-self-center" >
                 <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">

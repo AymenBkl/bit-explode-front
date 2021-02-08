@@ -19,12 +19,17 @@ ion-grid {
 
 .lose-game {
   --background: linear-gradient(90deg,#524e4e, red);
+  background: linear-gradient(90deg,#524e4e, red);
 }
 .success-cel {
   --background: linear-gradient(90deg,#152620, #151A1E);
+  background: linear-gradient(90deg,#152620, #151A1E);
+
 }
 .click-cel {
   --background: linear-gradient(90deg,#524e4e, #151A1E);
+  background: linear-gradient(90deg,#524e4e, #151A1E);
+
 }
 .header-item {
   --border-radius:15px;
@@ -264,6 +269,45 @@ ion-grid {
   width: 100%;
   position: absolute;
   display: block;
+}
+
+
+ion-header {
+  height: 150px;
+  color:white;
+}
+ion-toolbar {
+  color:white;
+}
+
+#button-header-play {
+  --color:green;
+  font-size:18px;
+  --background:white;
+  --background-color:white;
+  --border-radius:15px;
+  --padding-bottom:23px;
+  --padding-top:23px;
+  --padding-end:23px;
+  --padding-start:23px;	
+  width: 200px;
+  height: 50px;
+  margin-top: 30px;
+  text-shadow: -2px -2px 12px rgba(0, 0, 0, 1);
+}
+
+#button-header-help {
+  color:white;
+  font-size:18px;
+  --border-radius:15px;
+  --border-radius:15px;
+  --padding-bottom:23px;
+  --padding-top:23px;
+  --padding-end:23px;
+  --padding-start:23px;
+  width: 80px;
+  height: 50px;
+  margin-top: 30px;
 }
 
 

@@ -8,6 +8,7 @@ import { HashService } from '../services/hash.service';
 import { Hash } from '../interfaces/hash';
 import { EncryptedData } from '../interfaces/encryptedData';
 import { ClickCel } from '../interfaces/clickCel';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,8 @@ export class HomePage implements OnInit {
     private storage: StorageServiceService,
     private router: Router,
     private gameService: GameService,
-    private hashService: HashService) { }
+    private hashService: HashService,
+    private authService: AuthServiceService) { }
   async ngOnInit() {
     this.checkHash();
     this.checkRouter();
@@ -123,6 +125,10 @@ export class HomePage implements OnInit {
             if (result && result != false) {
               this.validRoute = true;
               this.initGame();
+              this.authService.checkJWT()
+                .then(() => {
+
+                });
             }
             else {
               this.validRoute = false;

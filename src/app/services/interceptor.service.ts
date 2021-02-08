@@ -14,7 +14,9 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.authService.getToken();
+    
     const authReq = req.clone({ headers: req.headers.set('Authorization', 'bearer ' + authToken) });
+    console.log("here",authReq.headers.keys(),authToken);
       return next.handle(authReq);
   }
 }
@@ -27,6 +29,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.authService.getToken();
+    console.log("here");
     return next
       .handle(req)
       .pipe(tap((event: HttpEvent<any>) => {

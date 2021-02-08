@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true" [ngClass]="celClicked">
-  <ion-grid class="ion-align-items-center">
+  <ion-grid class="ion-align-items-center" *ngIf="validRoute">
           <ion-row class="ion-align-self-center" >
                 <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">
                   <ion-text class="segment-header">Bombs</ion-text>

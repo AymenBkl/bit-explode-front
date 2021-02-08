@@ -108,6 +108,7 @@ export class HomePage implements OnInit {
 
   checkHash() {
     const hash = this.storage.getCurrentHash();
+    console.log("here");
     if (hash.hashId && hash.hashId != null && hash.hashId != '') {
       this.navigateHome(hash.hashId);
     }

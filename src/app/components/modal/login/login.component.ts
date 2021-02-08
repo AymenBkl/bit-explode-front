@@ -18,7 +18,10 @@ export class LoginComponent implements OnInit {
               private interactionService: InteractionService,
               private authService: AuthServiceService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+    console.log(this.passwordChanged);
+  }
 
   getData(){
     this.passwordChanged = this.navParams.get('passwordchanged');

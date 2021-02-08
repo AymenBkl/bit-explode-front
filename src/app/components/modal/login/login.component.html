@@ -20,8 +20,8 @@
     </ion-row>
     <ion-row>
       <ion-col size="10" size-md="6" offset-md="3" offset="1">
-        <ion-button shape="round" expand="full" color="success" [disabled]="password.length < 6 && (!passwordChanged || submitted)" (click)="login()">
-          <ion-text *ngIf="!submitted">CHANGE PASSWORD</ion-text>
+        <ion-button shape="round" expand="full" color="success" [disabled]="password.length < 6 && (passwordChanged == false || !submitted)" (click)="login()">
+          <ion-text *ngIf="!submitted">LOGIN</ion-text>
           <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
         </ion-button>
       </ion-col>

@@ -21,6 +21,8 @@ export class GameService {
         if (gameResponse.status == 200 && gameResponse.success){
           resolve(this.proceccGameResponseSuccess(gameResponse.msg,gameResponse.game));
         }
+      },err => {
+        reject(err);
       })
     })
   }
@@ -33,6 +35,8 @@ export class GameService {
         if (colResponse.status == 200 && colResponse.success){
           resolve(this.proccesClickCelResponseSuccess(colResponse.msg,colResponse.response));
         }
+      },err => {
+        reject(err);
       })
     })
   }
@@ -46,6 +50,8 @@ export class GameService {
         if (checkGameResponse.status == 200 && checkGameResponse.success){
           resolve(this.proccesCheckGameResponseSuccess(checkGameResponse.msg,checkGameResponse.game));
         }
+      },err => {
+        reject(err);
       })
     })
   }

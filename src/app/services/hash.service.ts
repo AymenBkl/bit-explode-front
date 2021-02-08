@@ -23,6 +23,8 @@ export class HashService {
         else if (hashResponse.status == 404 && !hashResponse.success){
           resolve(false);
         }
+      },err => {
+        reject(err);
       })
     })
   }
@@ -39,6 +41,8 @@ export class HashService {
         else if (hashResponse.status == 404 && !hashResponse.success){
           resolve(false);
         }
+      },err => {
+        reject(err);
       })
     })
   }

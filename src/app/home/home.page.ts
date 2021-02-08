@@ -60,6 +60,11 @@ export class HomePage implements OnInit {
             this.game = result;
             this.storage.saveCurrentGame(this.game._id);
           }
+        })
+        .catch(err => {
+          if (err && err.error == 'Unauthorized'){
+            this.callLogin();
+          }
         });
     }
   }

@@ -20,6 +20,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string}> = new EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }>();
   @Output() clickCel: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() callLogin: EventEmitter<boolean> = new EventEmitter<boolean>();
   next: number;
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
@@ -44,6 +45,12 @@ export class MatrixComponent implements OnInit,OnChanges {
             col.submitted = false;
             if (result && result != false ) {
               this.affectValueToMap(col,result,rowIndex,colIndex);
+            }
+          })
+          .catch(err => {
+            col.submitted = false;
+            if (err && err.error == 'Unauthorized'){
+              this.callLogin.emit(true);
             }
           })
     };
@@ -166,6 +173,11 @@ export class MatrixComponent implements OnInit,OnChanges {
           this.affectValues(result.activeIndex);
           this.activeGame = true;
           this.newGame.emit(result);
+        }
+      })
+      .catch(err => {
+        if (err && err.error == 'Unauthorized'){
+          this.callLogin.emit(true);
         }
       })
     }

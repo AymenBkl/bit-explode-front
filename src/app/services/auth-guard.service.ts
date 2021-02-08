@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
     private activatedRouter: ActivatedRoute) { }
 
   async canActivate(): Promise<boolean> {
-    await Promise.resolve(this.authService.checkJWT('sa'));
+    /**await Promise.resolve(this.authService.checkJWT('sa'));
     if (this.authService.getToken()) {
       console.log("here")
       return Promise.resolve(true);
@@ -23,7 +23,9 @@ export class AuthGuardService implements CanActivate {
       console.log("hereee",this.storageService.getCurrentHash().hashId)
       this.navigateHome();
       return Promise.resolve(true);
-    }
+    }**/
+    return Promise.resolve(true);
+
   }
 
 

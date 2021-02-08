@@ -12,6 +12,7 @@ import { AuthServiceService } from '../services/auth-service.service';
 import { ModalController } from '@ionic/angular';
 import { ChangePasswordComponent } from '../components/modal/change-password/change-password.component';
 import { InteractionService } from '../services/interaction.service';
+import { LoginComponent } from '../components/modal/login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -133,9 +134,17 @@ export class HomePage implements OnInit {
               this.authService.checkJWT(gameHash)
                 .then((result: boolean) => {
                     this.validRoute = result;
-                    this.initGame();
+                    if (result){
+                      this.initGame();
+                    }
+                    else {
+                      if (this.gameHash.passwordChange){
+                        this.callLogin();
+                      }
+                    }
                 })
                 .catch(err => {
+                  this.callLogin();
                   this.validRoute = false;
                 });
             }
@@ -216,5 +225,29 @@ export class HomePage implements OnInit {
       }
       
   }
+
+  async callLogin(){
+    if (this.gameHash.passwordChange){
+      const modal = await this.modalCntrl.create({
+        component : LoginComponent,
+        backdropDismiss:false,
+        cssClass:'login',
+        componentProps : {
+            passwordchanged : this.gameHash.passwordChange,
+            hashId: this.gameHash.hashId
+        }
+    });
+    modal.onDidDismiss()
+        .then(data => {
+            console.log(data);
+            this.gameHash.passwordChange = true;
+        });
+    return await modal.present();
+    }
+    else {
+      this.interactionService.createToast('You have already changed the password','primary','bottom');
+    }
+    
+}
 
 }

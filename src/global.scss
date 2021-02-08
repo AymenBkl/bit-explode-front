@@ -58,11 +58,29 @@
       display: block;
       border-radius: 30px;
     }
+
+    .login .modal-wrapper {
+      height:200px;
+      top: 5%;
+      width: 60%;
+      position: absolute;
+      display: block;
+      border-radius: 30px;
+    }
   }
 
   @media only screen and (max-width: 600px) {
     .changePassword .modal-wrapper {
       height: 500px;
+      top: 5%;
+      width: 100%;
+      position: absolute;
+      display: block;
+      border-radius: 30px;
+    }
+
+    .login .modal-wrapper {
+      height: 250px;
       top: 5%;
       width: 100%;
       position: absolute;

@@ -80,6 +80,7 @@ export class AuthServiceService {
     return new Promise((resolve,reject) => {
           this.httpClient.post<AuthResponse>(environment.url + 'auth/login',{password:password,hashId:hashId})
           .subscribe(response => {
+            console.log(response);
             if (response && response.status == 200){
               resolve(response.hash);
             }

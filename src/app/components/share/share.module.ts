@@ -9,6 +9,7 @@ import { HistoryGamesComponent } from '../history-games/history-games.component'
 import { FooterComponent } from '../footer/footer.component';
 import { LogComponent } from '../log/log.component';
 import { ChangePasswordComponent } from '../modal/change-password/change-password.component';
+import { LoginComponent } from '../modal/login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ChangePasswordComponent } from '../modal/change-password/change-passwor
     HistoryGamesComponent,
     FooterComponent,
     LogComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    LoginComponent
   ],
   exports: [
     AppHeaderComponent,
@@ -25,7 +27,8 @@ import { ChangePasswordComponent } from '../modal/change-password/change-passwor
     HistoryGamesComponent,
     FooterComponent,
     LogComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    LoginComponent
   ],
   imports: [
     IonicModule,

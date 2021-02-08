@@ -9,13 +9,12 @@ import { StorageServiceService } from './storage-service.service';
   providedIn: 'root'
 })
 export class InterceptorService implements HttpInterceptor {
-  constructor(private inj: Injector,
-              private authService: AuthServiceService,
-              ) { 
+  constructor(private inj: Injector) { 
               }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = this.authService.getToken();
+    const authService = this.inj.get(AuthServiceService);
+    const authToken = authService.getToken();
     
     const authReq = req.clone({ headers: req.headers.set('Authorization', 'bearer ' + authToken) });
     console.log("here",authReq.headers.keys(),authToken);
@@ -26,12 +25,12 @@ export class InterceptorService implements HttpInterceptor {
 @Injectable()
 export class UnauthorizedInterceptor implements HttpInterceptor {
   constructor(private inj: Injector,
-              private authService: AuthServiceService,
               private storageService: StorageServiceService) { 
               }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = this.authService.getToken();
+    const authService = this.inj.get(AuthServiceService);
+    const authToken = authService.getToken();
     console.log("here");
     return next
       .handle(req)
@@ -40,7 +39,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401 && authToken) {
-            this.authService.checkJWT(this.storageService.getCurrentHash().hashId);
+            //authService.checkJWT(this.storageService.getCurrentHash().hashId);
           }
         }
       }));

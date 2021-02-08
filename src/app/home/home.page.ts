@@ -123,11 +123,13 @@ export class HomePage implements OnInit {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
             if (result && result != false) {
-              this.validRoute = true;
               this.initGame();
               this.authService.checkJWT()
-                .then(() => {
-
+                .then((result: boolean) => {
+                    this.validRoute = result;
+                })
+                .catch(err => {
+                  this.validRoute = false;
                 });
             }
             else {

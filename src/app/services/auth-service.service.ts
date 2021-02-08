@@ -31,7 +31,7 @@ export class AuthServiceService {
         .subscribe(response => {
           console.log(response);
           if (response.token === 'TOKEN VALID' && response.status === 200){
-            this.saveToken('token');
+            this.saveToken(token);
             resolve(true);
           }
           else {

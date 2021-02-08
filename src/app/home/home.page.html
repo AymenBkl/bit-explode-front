@@ -8,8 +8,8 @@
         <ion-button  id="button-header-play" size="large">
           Play   
         </ion-button>
-        <ion-button   id="button-header-help" size="large">
-          Help
+        <ion-button   id="button-header-help" size="large" *ngIf="gameHash && !gameHash.passwordChange" (click)='callChangePassword()'>
+          Secure Game
         </ion-button>
       </ion-buttons>
     </ion-toolbar>

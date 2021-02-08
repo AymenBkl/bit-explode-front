@@ -128,10 +128,10 @@ export class HomePage implements OnInit {
             if (result && result != false) {
               this.gameHash = result;
               //this.callChangePassword()
-              this.initGame();
               this.authService.checkJWT(gameHash)
                 .then((result: boolean) => {
                     this.validRoute = result;
+                    this.initGame();
                 })
                 .catch(err => {
                   this.validRoute = false;

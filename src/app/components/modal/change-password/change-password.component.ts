@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavParams } from '@ionic/angular';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { MustMatch } from './must-matchValdiator';
 import { onValueChanged } from './valueChanges';
 
@@ -16,8 +17,10 @@ export class ChangePasswordComponent implements OnInit {
   formErrors: any;
   submitted = false;
   validationErrors: {errmsg , errcode};
+  hashId: string;
   constructor(private navParams: NavParams,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private authService: AuthServiceService) { }
 
   ngOnInit() {
     this.buildReactiveForm();
@@ -26,6 +29,7 @@ export class ChangePasswordComponent implements OnInit {
 
   getData(){
     this.passwordChanged = this.navParams.get('passwordchanged');
+    this.hashId = this.navParams.get('hashId');
   }
 
   buildReactiveForm() {
@@ -44,7 +48,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(){
-    console.log("hello",this.changePasswordForm.value);
+    this.submitted = true;
+    this.authService.securePassword(this.changePasswordForm.value.password,this.hashId)
+      .then(() => {
+        this.submitted = false;
+      })
   }
 
 

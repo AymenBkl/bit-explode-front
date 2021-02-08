@@ -198,6 +198,7 @@ export class HomePage implements OnInit {
           cssClass:'changePassword',
           componentProps : {
               passwordchanged : this.gameHash.passwordChange,
+              hashId: this.gameHash.hashId
           }
       });
       modal.onDidDismiss()

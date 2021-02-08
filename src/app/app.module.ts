@@ -16,9 +16,8 @@ import { GameService } from './services/game.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashService } from './services/hash.service';
 import { HistoryService } from './services/history.service';
-import { AuthServiceService } from './services/auth-service.service';
 import { InterceptorService, UnauthorizedInterceptor } from './services/interceptor.service';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthServiceService } from './services/auth-service.service';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -38,7 +37,6 @@ import { AuthGuardService } from './services/auth-guard.service';
     HashService,
     HistoryService,
     AuthServiceService,
-    AuthGuardService,
     InterceptorService,
     {
       provide: HTTP_INTERCEPTORS,

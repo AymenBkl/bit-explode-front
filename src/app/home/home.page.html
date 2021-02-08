@@ -8,10 +8,21 @@
         <ion-button  id="button-header-play" size="large">
           Play   
         </ion-button>
-        <ion-button   id="button-header-help" size="large" *ngIf="gameHash && !gameHash.passwordChange" (click)='callChangePassword()'>
+        <ion-button   id="button-header-secure" size="large" *ngIf="gameHash && !gameHash.passwordChange" (click)='callChangePassword()'>
           Secure Game
         </ion-button>
+        <ion-button   id="button-header-help" size="large" *ngIf="gameHash && !gameHash.passwordChange" (click)='callChangePassword()'>
+          Help
+        </ion-button>
       </ion-buttons>
+      <div class="topnav" id="myTopnav">
+        <a >Play </a>
+        <a *ngIf="gameHash && !gameHash.passwordChange" (click)='callChangePassword()'>Secure Game</a>
+        <a>Help</a>
+        <a href="javascript:void(0);" class="icon" (click)="display()">
+          <ion-icon name="menu"></ion-icon>
+        </a>
+      </div>
     </ion-toolbar>
   </ion-header>
   <ion-grid class="ion-align-items-center" *ngIf="validRoute">

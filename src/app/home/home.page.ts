@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Col } from '../interfaces/col';
 import { Game } from '../interfaces/game';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -46,6 +46,8 @@ export class HomePage implements OnInit {
     this.checkHash();
     this.checkRouter();
   }
+
+
 
   createGame() {
     console.log(this.game,this.valid);
@@ -255,6 +257,15 @@ export class HomePage implements OnInit {
       this.interactionService.createToast('You have already changed the password','primary','bottom');
     }
     
+}
+
+display(){
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
 }
 
 }

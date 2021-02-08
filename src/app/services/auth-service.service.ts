@@ -36,23 +36,23 @@ export class AuthServiceService {
               resolve(true);
             }
             else {
-              //this.removeToken();
+              this.removeToken();
               resolve(false);
             }
           }
           else {
-            //this.removeToken();
+            this.removeToken();
             resolve(false);
           }
         }, err => {
           console.log(err);
           reject(err);
-          //this.removeToken();
+          this.removeToken();
         });
       }
     else {
       resolve(false);
-      //this.removeToken();
+      this.removeToken();
     }
     })
   }

@@ -47,12 +47,27 @@
   }
 
 
-  .changePassword .modal-wrapper {
-    height: 20%;
-    top: 5%;
-    width: 60%;
-    position: absolute;
-    display: block;
-    border-radius: 30px;
+  
+
+  @media only screen and (min-width: 600px) {
+    .changePassword .modal-wrapper {
+      height: 300px;
+      top: 5%;
+      width: 60%;
+      position: absolute;
+      display: block;
+      border-radius: 30px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .changePassword .modal-wrapper {
+      height: 400px;
+      top: 5%;
+      width: 100%;
+      position: absolute;
+      display: block;
+      border-radius: 30px;
+    }
   }
   

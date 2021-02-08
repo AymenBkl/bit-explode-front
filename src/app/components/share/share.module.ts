@@ -8,6 +8,7 @@ import { MatrixComponent } from '../mines/matrix/matrix.component';
 import { HistoryGamesComponent } from '../history-games/history-games.component';
 import { FooterComponent } from '../footer/footer.component';
 import { LogComponent } from '../log/log.component';
+import { ChangePasswordComponent } from '../modal/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,16 @@ import { LogComponent } from '../log/log.component';
     MatrixComponent,
     HistoryGamesComponent,
     FooterComponent,
-    LogComponent
+    LogComponent,
+    ChangePasswordComponent
   ],
   exports: [
     AppHeaderComponent,
     MatrixComponent,
     HistoryGamesComponent,
     FooterComponent,
-    LogComponent
+    LogComponent,
+    ChangePasswordComponent
   ],
   imports: [
     IonicModule,

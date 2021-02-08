@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-change-password',
@@ -7,8 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChangePasswordComponent implements OnInit {
 
-  constructor() { }
+  passwordChanged:boolean;
+  password:string;
+  confirmPassword:string;
+  constructor(private navParams: NavParams) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
+
+  getData(){
+    this.passwordChanged = this.navParams.get('passwordchanged');
+  }
 
 }

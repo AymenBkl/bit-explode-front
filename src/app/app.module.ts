@@ -39,6 +39,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     HistoryService,
     AuthServiceService,
     AuthGuardService,
+    InterceptorService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

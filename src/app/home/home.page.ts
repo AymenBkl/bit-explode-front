@@ -9,6 +9,8 @@ import { Hash } from '../interfaces/hash';
 import { EncryptedData } from '../interfaces/encryptedData';
 import { ClickCel } from '../interfaces/clickCel';
 import { AuthServiceService } from '../services/auth-service.service';
+import { ModalController } from '@ionic/angular';
+import { ChangePasswordComponent } from '../components/modal/change-password/change-password.component';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +37,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private gameService: GameService,
     private hashService: HashService,
-    private authService: AuthServiceService) { }
+    private authService: AuthServiceService,
+    private modalCntrl: ModalController) { }
   async ngOnInit() {
     this.checkHash();
     this.checkRouter();
@@ -123,8 +126,10 @@ export class HomePage implements OnInit {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
             if (result && result != false) {
+              this.gameHash = result;
+              this.callChangePassword()
               this.initGame();
-              this.authService.checkJWT()
+              this.authService.checkJWT(gameHash)
                 .then((result: boolean) => {
                     this.validRoute = result;
                 })
@@ -183,6 +188,23 @@ export class HomePage implements OnInit {
       queryParamsHandling: 'merge',
     });
 
+  }
+
+
+  async callChangePassword(){
+      const modal = await this.modalCntrl.create({
+          component : ChangePasswordComponent,
+          backdropDismiss:false,
+          cssClass:'changePassword',
+          componentProps : {
+              passwordchanged : this.gameHash.passwordChange,
+          }
+      });
+      modal.onDidDismiss()
+          .then(data => {
+              console.log(data);
+          });
+      return await modal.present();
   }
 
 }

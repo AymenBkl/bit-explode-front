@@ -22,7 +22,7 @@ export class AuthServiceService {
     localStorage.removeItem('token');
   }
 
-  checkJWT() {
+  checkJWT(hashId: string) {
     return new Promise((resolve,reject) => {
       const token = this.getToken();
       if (token){
@@ -31,8 +31,14 @@ export class AuthServiceService {
         .subscribe(response => {
           console.log(response);
           if (response.token === 'TOKEN VALID' && response.status === 200){
-            this.saveToken(token);
-            resolve(true);
+            if (response.hash.hashId == hashId){
+              this.saveToken(token);
+              resolve(true);
+            }
+            else {
+              //this.removeToken();
+              resolve(false);
+            }
           }
           else {
             //this.removeToken();

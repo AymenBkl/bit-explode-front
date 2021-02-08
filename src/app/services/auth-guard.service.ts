@@ -14,7 +14,7 @@ export class AuthGuardService implements CanActivate {
     private activatedRouter: ActivatedRoute) { }
 
   async canActivate(): Promise<boolean> {
-    await Promise.resolve(this.authService.checkJWT());
+    await Promise.resolve(this.authService.checkJWT('sa'));
     if (this.authService.getToken()) {
       console.log("here")
       return Promise.resolve(true);

@@ -11,6 +11,7 @@ import { ClickCel } from '../interfaces/clickCel';
 import { AuthServiceService } from '../services/auth-service.service';
 import { ModalController } from '@ionic/angular';
 import { ChangePasswordComponent } from '../components/modal/change-password/change-password.component';
+import { InteractionService } from '../services/interaction.service';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,8 @@ export class HomePage implements OnInit {
     private gameService: GameService,
     private hashService: HashService,
     private authService: AuthServiceService,
-    private modalCntrl: ModalController) { }
+    private modalCntrl: ModalController,
+    private interactionService: InteractionService) { }
   async ngOnInit() {
     this.checkHash();
     this.checkRouter();
@@ -192,7 +194,8 @@ export class HomePage implements OnInit {
 
 
   async callChangePassword(){
-      const modal = await this.modalCntrl.create({
+      if (!this.gameHash.passwordChange){
+        const modal = await this.modalCntrl.create({
           component : ChangePasswordComponent,
           backdropDismiss:false,
           cssClass:'changePassword',
@@ -204,8 +207,14 @@ export class HomePage implements OnInit {
       modal.onDidDismiss()
           .then(data => {
               console.log(data);
+              this.gameHash.passwordChange = true;
           });
       return await modal.present();
+      }
+      else {
+        this.interactionService.createToast('You have already changed the password','primary','bottom');
+      }
+      
   }
 
 }

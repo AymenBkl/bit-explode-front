@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { MustMatch } from './must-matchValdiator';
@@ -22,7 +22,8 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private navParams: NavParams,
               private formBuilder: FormBuilder,
               private authService: AuthServiceService,
-              private interactionService: InteractionService) { }
+              private interactionService: InteractionService,
+              private modalController:ModalController) { }
 
   ngOnInit() {
     this.buildReactiveForm();
@@ -52,9 +53,15 @@ export class ChangePasswordComponent implements OnInit {
   changePassword(){
     this.submitted = true;
     this.authService.securePassword(this.changePasswordForm.value.password,this.hashId)
-      .then(() => {
+      .then((result: any) => {
         this.submitted = false;
-        this.interactionService.createToast('Password Has been reseted !','success','bottom')
+        if (result && result != false){
+          this.modalController.dismiss({hash: result});
+          this.interactionService.createToast('Password Has been reseted !','success','bottom')
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+        }
       })
       .catch(err => {
         this.submitted = false;

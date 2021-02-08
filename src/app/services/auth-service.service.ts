@@ -62,11 +62,15 @@ export class AuthServiceService {
     return new Promise((resolve,reject) => {
           this.httpClient.post<AuthResponse>(environment.url + 'auth/securepassword',{oldPassword:password,newPassword:newPassword,hashId:hashId})
           .subscribe(response => {
-            console.log(response);
+            if (response && response.status == 200){
+              resolve(response.hash);
+            }
+            else {
+              resolve(false);
+            }
           }, err => {
             console.log(err);
             reject(err);
-            //this.removeToken();
           });
         
     })

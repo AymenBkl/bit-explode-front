@@ -145,9 +145,7 @@ export class HomePage implements OnInit {
                       this.initGame();
                     }
                     else {
-                      if (this.gameHash.passwordChange){
                         this.callLogin();
-                      }
                     }
                 })
                 .catch(err => {
@@ -234,7 +232,6 @@ export class HomePage implements OnInit {
   }
 
   async callLogin(){
-    if (this.gameHash.passwordChange){
       const modal = await this.modalCntrl.create({
         component : LoginComponent,
         backdropDismiss:false,
@@ -252,10 +249,8 @@ export class HomePage implements OnInit {
             }
         });
     return await modal.present();
-    }
-    else {
-      this.interactionService.createToast('You have already changed the password','primary','bottom');
-    }
+    
+    
     
 }
 

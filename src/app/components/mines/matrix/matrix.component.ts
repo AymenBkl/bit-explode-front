@@ -120,6 +120,12 @@ export class MatrixComponent implements OnInit,OnChanges {
     }
   }
 
+  ngAfterViewInit(){
+    console.log("called");
+    this.initMap();
+    this.checkGame();
+  }
+
 
 
   ngOnChanges(changes) {

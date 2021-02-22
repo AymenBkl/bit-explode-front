@@ -232,6 +232,8 @@ export class HomePage implements OnInit {
   }
 
   async callLogin(){
+      this.validRoute = false;
+      this.valid = false;
       const modal = await this.modalCntrl.create({
         component : LoginComponent,
         backdropDismiss:false,
@@ -246,6 +248,7 @@ export class HomePage implements OnInit {
             console.log(data);
             if (data.data && data.data.loggedIn){
               this.validRoute = true;
+              this.initGame();
             }
         });
     return await modal.present();

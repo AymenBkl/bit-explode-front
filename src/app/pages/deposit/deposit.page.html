@@ -25,7 +25,7 @@
         <div id="address">
           <div id="address-info">Address </div>
           <div id="address-value">{{value}}</div>
-          <div id="address-copy"><ion-icon name="copy-outline"></ion-icon></div>
+          <div id="address-copy"><ion-button ngxClipboard [cbContent]='value' id="button-copy"><ion-icon name="copy-outline"></ion-icon></ion-button></div>
         </div>
       </ion-col>
     </ion-row>

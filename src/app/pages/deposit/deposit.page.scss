@@ -32,6 +32,12 @@
     vertical-align: middle;
 }
 
+#button-copy{
+    --background: transparent;
+    --color: black;
+    --box-shadow: 0px;
+}
+
 ion-col {
     text-align: center;
 }

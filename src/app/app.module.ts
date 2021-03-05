@@ -18,6 +18,7 @@ import { HashService } from './services/hash.service';
 import { HistoryService } from './services/history.service';
 import { InterceptorService, UnauthorizedInterceptor } from './services/interceptor.service';
 import { AuthServiceService } from './services/auth-service.service';
+import { ScrollbarThemeModule } from './directives/scrollbar.directive';
 
 
 @NgModule({

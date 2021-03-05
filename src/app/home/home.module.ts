@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { ShareModule } from '../components/share/share.module';
+import { ScrollbarThemeModule } from '../directives/scrollbar.directive';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ShareModule } from '../components/share/share.module';
     IonicModule,
     HomePageRoutingModule,
     ShareModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ScrollbarThemeModule
   ],
   declarations: [HomePage]
 })

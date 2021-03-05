@@ -3,7 +3,7 @@
     <ion-title slot="start">
       BitExplode {{currentLink | uppercase}}
     </ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="currentLink != 'deposit'">
       <ion-button  id="button-header-play" size="large">
         Play   
       </ion-button>

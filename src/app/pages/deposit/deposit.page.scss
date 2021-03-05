@@ -8,14 +8,28 @@
 
 #address{
     text-align: center;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 8px;
+    display: inline-block;
 }
 
 #address-info{
-    text-align: center;
+    text-align: left;
+    display: inline-block;
 }
 
 #address-value{
-    text-align: center;
+    text-align: left;
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: middle;
+}
+#address-copy{
+    text-align: left;
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: middle;
 }
 
 ion-col {

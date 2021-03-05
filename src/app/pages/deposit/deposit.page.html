@@ -4,6 +4,13 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12">
+        <div id="title-address">
+          Send to this address
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
         <div id="qr-code">
           <ngx-qrcode [elementType]="elementType" [value] = "value">
           </ngx-qrcode>
@@ -12,14 +19,13 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <div id="title-address">
-          Send to this address
-        </div>
+        OR
       </ion-col>
       <ion-col size="12">
         <div id="address">
-          <div id="address-info">Address</div>
-          <div id="address-value"></div>
+          <div id="address-info">Address </div>
+          <div id="address-value">{{value}}</div>
+          <div id="address-copy"><ion-icon name="copy-outline"></ion-icon></div>
         </div>
       </ion-col>
     </ion-row>

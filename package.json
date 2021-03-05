@@ -27,6 +27,7 @@
     "@ionic/angular": "^5.0.0",
     "crypto-js": "^4.0.0",
     "ng2-validation": "^4.2.0",
+    "ngx-clipboard": "^14.0.1",
     "ngx-qrcode2": "^9.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

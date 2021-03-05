@@ -19,11 +19,11 @@ export class DepositPage implements OnInit {
   }
 
   presentToast(){
-    this.interactionService.createToast("Copied To Click Board","transparent",'bottom');
+    this.interactionService.createToast("Copied To Click Board","transparent",'bottom','toast-customize');
   }
 
   deposit(){
-    console.log('deposit');
+    this.interactionService.createToast('<ion-icon name="checkmark-outline"></ion-icon>',"light","middle",'toast-deposit');
   }
 
   cancel(){

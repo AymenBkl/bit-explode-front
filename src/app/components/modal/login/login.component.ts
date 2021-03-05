@@ -41,10 +41,10 @@ export class LoginComponent implements OnInit {
         this.submitted = false;
         if (result && result != false){
           this.modalController.dismiss({loggedIn: true});
-          this.interactionService.createToast('WELCOM BACK !','success','bottom')
+          this.interactionService.createToast('WELCOM BACK !','success','bottom','toast-customize')
         }
         else {
-          this.interactionService.createToast('Wrong Password !','danger','bottom')
+          this.interactionService.createToast('Wrong Password !','danger','bottom','toast-customize')
         }
       })
       .catch(err => {
@@ -52,10 +52,10 @@ export class LoginComponent implements OnInit {
         console.log(err,err.error)
         if (err && err.error && err.error.err.name == 'IncorrectPasswordError'){
           this.incorrectPassword = true;
-          this.interactionService.createToast('Wrong Password !','danger','bottom')
+          this.interactionService.createToast('Wrong Password !','danger','bottom','toast-customize')
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+          this.interactionService.createToast('Something Went Wrong !','danger','bottom','toast-customize')
         }
       })
   }

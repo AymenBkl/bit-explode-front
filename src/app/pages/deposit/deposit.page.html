@@ -22,7 +22,7 @@
         
       </ion-col>
       <ion-col size="12">
-        <div id="address">
+        <div id="address" ngxClipboard [cbContent]='value' (click)="presentToast()">
           <div id="address-info">Address </div>
           <div id="address-value">{{value}}</div>
           <div id="address-copy"><ion-button ngxClipboard [cbContent]='value' id="button-copy" (click)="presentToast()"><ion-icon name="copy-outline"></ion-icon></ion-button></div>

@@ -11,17 +11,18 @@ export class InteractionService {
     private loadingController: LoadingController,
     private alertController: AlertController) { }
 
-  async createToast(msg, clr, pos) {
+  async createToast(msg, clr, pos,appliedclass) {
     const toast = await this.toastController.create({
       message: msg,
       color: clr,
       position: pos,
       duration: 1500,
       animated: true,
-      cssClass: 'toast-customize',
+      cssClass: appliedclass,
     });
     return await toast.present();
   }
+
 
   async createLoading(msg?) {
     return new Promise((resolve, reject) => {

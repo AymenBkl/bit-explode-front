@@ -57,15 +57,15 @@ export class ChangePasswordComponent implements OnInit {
         this.submitted = false;
         if (result && result != false){
           this.modalController.dismiss({hash: result});
-          this.interactionService.createToast('Password Has been reseted !','success','bottom')
+          this.interactionService.createToast('Password Has been reseted !','success','bottom','toast-customize')
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+          this.interactionService.createToast('Something Went Wrong !','danger','bottom','toast-customize')
         }
       })
       .catch(err => {
         this.submitted = false;
-        this.interactionService.createToast('Something Went Wrong !','danger','bottom')
+        this.interactionService.createToast('Something Went Wrong !','danger','bottom','toast-customize')
       })
   }
 

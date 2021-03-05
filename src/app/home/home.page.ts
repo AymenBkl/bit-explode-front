@@ -227,7 +227,7 @@ export class HomePage implements OnInit {
       return await modal.present();
     }
     else {
-      this.interactionService.createToast('You have already changed the password', 'primary', 'bottom');
+      this.interactionService.createToast('You have already changed the password', 'primary', 'bottom','toast-customize');
     }
 
   }

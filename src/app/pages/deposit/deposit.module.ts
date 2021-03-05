@@ -8,6 +8,7 @@ import { DepositPageRoutingModule } from './deposit-routing.module';
 
 import { DepositPage } from './deposit.page';
 import { ShareModule } from 'src/app/components/share/share.module';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ShareModule } from 'src/app/components/share/share.module';
     IonicModule,
     DepositPageRoutingModule,
     ShareModule,
+    NgxQRCodeModule
   ],
   declarations: [DepositPage]
 })

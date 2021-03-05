@@ -18,6 +18,8 @@ import { HashService } from './services/hash.service';
 import { HistoryService } from './services/history.service';
 import { InterceptorService, UnauthorizedInterceptor } from './services/interceptor.service';
 import { AuthServiceService } from './services/auth-service.service';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,7 +29,7 @@ import { AuthServiceService } from './services/auth-service.service';
     AppRoutingModule,
     CustomFormsModule,
     ShareModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

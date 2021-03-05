@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { NgxQrcodeElementTypes } from 'ngx-qrcode2';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
@@ -8,15 +10,24 @@ import { InteractionService } from 'src/app/services/interaction.service';
 })
 export class DepositPage implements OnInit {
 
-  elementType: 'url' | 'canvas' | 'img' = 'url';
+  elementType = NgxQrcodeElementTypes.URL;
   value: string = 'bcrt1q6jhwfrax6c7ee5tj0g2l4r0ehppaq60dq3fyg8';
-  constructor(private interactionService: InteractionService) { }
+  constructor(private interactionService: InteractionService,
+              private modalController: ModalController) { }
 
   ngOnInit() {
   }
 
   presentToast(){
-    this.interactionService.createToast("Copied To Click Board","transparent",'center');
+    this.interactionService.createToast("Copied To Click Board","transparent",'bottom');
+  }
+
+  deposit(){
+    console.log('deposit');
+  }
+
+  cancel(){
+    this.modalController.dismiss();
   }
 
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ModalController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-app-header',
@@ -11,7 +12,9 @@ export class AppHeaderComponent implements OnInit {
   currentLink: string;
   @Input('type') type: string;
   @Input('name') name:string;
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private modalController: ModalController,
+              public platform: Platform) { }
 
   ngOnInit() {
     this.getCurrentRoute();
@@ -30,6 +33,10 @@ export class AppHeaderComponent implements OnInit {
       this.currentLink = this.name;
     }
 
+  }
+
+  close(){
+    this.modalController.dismiss();
   }
 
 }

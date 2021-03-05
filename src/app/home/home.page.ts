@@ -259,7 +259,6 @@ export class HomePage implements OnInit {
   async deposit() {
     const modal = await this.modalCntrl.create({
       component: DepositPage,
-      backdropDismiss: false,
       cssClass: 'deposit',
       componentProps: {
         passwordchanged: this.gameHash.passwordChange,

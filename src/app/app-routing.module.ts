@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'history',
     loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
+  },  {
+    path: 'deposit',
+    loadChildren: () => import('./pages/deposit/deposit.module').then( m => m.DepositPageModule)
   },
+
 ];
 
 @NgModule({

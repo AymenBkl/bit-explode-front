@@ -261,8 +261,7 @@ export class HomePage implements OnInit {
       component: DepositPage,
       cssClass: 'deposit',
       componentProps: {
-        passwordchanged: this.gameHash.passwordChange,
-        hashId: this.gameHash.hashId
+        hashId: this.gameHash.hashId,
       }
     });
     modal.onDidDismiss()

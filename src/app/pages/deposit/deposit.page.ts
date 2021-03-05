@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { NgxQrcodeElementTypes } from 'ngx-qrcode2';
 import { InteractionService } from 'src/app/services/interaction.service';
 
@@ -12,14 +12,22 @@ export class DepositPage implements OnInit {
 
   elementType = NgxQrcodeElementTypes.URL;
   value: string = 'bcrt1q6jhwfrax6c7ee5tj0g2l4r0ehppaq60dq3fyg8';
+  hashId: string;
   constructor(private interactionService: InteractionService,
-              private modalController: ModalController) { }
+              private modalController: ModalController,
+              private navParams: NavParams) { }
 
   ngOnInit() {
+    this.getHash();
+  }
+
+  getHash(){
+    this.hashId = this.navParams.get('hashId');
+    console.log(this.hashId);
   }
 
   presentToast(){
-    this.interactionService.createToast("Copied To Click Board","transparent",'bottom','toast-customize');
+    this.interactionService.createToast("Copied To Click Board","success",'bottom','toast-customize');
   }
 
   deposit(){

@@ -46,6 +46,10 @@
 .handler-buttons {
     text-align: center;
     width: 50%;
+    --padding-bottom: 25px;
+    --padding-end: 25px;
+    --padding-start: 25px;
+    --padding-top: 25px;
 }
 
 
@@ -56,6 +60,27 @@ ion-col {
 }
 
 ion-content {
-    --background: linear-gradient(90deg,#152620, #151A1E);
+--background: linear-gradient(90deg,#152620, #151A1E);
   background: linear-gradient(90deg,#152620, #151A1E);
 }
+
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background:#283136; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

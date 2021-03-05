@@ -10,6 +10,7 @@ import { DepositPage } from './deposit.page';
 import { ShareModule } from 'src/app/components/share/share.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ScrollbarThemeModule } from 'src/app/directives/scrollbar.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     DepositPageRoutingModule,
     ShareModule,
     NgxQRCodeModule,
-    ClipboardModule
+    ClipboardModule,
+    ScrollbarThemeModule
   ],
   declarations: [DepositPage]
 })

@@ -8,6 +8,7 @@ import { HistoryPageRoutingModule } from './history-routing.module';
 
 import { HistoryPage } from './history.page';
 import { ShareModule } from 'src/app/components/share/share.module';
+import { ScrollbarThemeModule } from 'src/app/directives/scrollbar.directive';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ShareModule } from 'src/app/components/share/share.module';
     FormsModule,
     IonicModule,
     HistoryPageRoutingModule,
-    ShareModule
+    ShareModule,
+    ScrollbarThemeModule
   ],
   declarations: [HistoryPage]
 })

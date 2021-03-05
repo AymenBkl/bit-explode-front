@@ -43,11 +43,19 @@
     --box-shadow: 0px;
 }
 
+ion-header {
+    height: 80px;
+    color:white;
+  }
+  ion-toolbar {
+    color:white;
+  }
+
 ion-col {
     text-align: center;
 }
 
-ion-content {
-    --background: linear-gradient(90deg,#152620, #151A1E);
+.background {
+--background: linear-gradient(90deg,#152620, #151A1E);
   background: linear-gradient(90deg,#152620, #151A1E);
 }

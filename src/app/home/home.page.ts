@@ -13,6 +13,7 @@ import { ModalController } from '@ionic/angular';
 import { ChangePasswordComponent } from '../components/modal/change-password/change-password.component';
 import { InteractionService } from '../services/interaction.service';
 import { LoginComponent } from '../components/modal/login/login.component';
+import { DepositPage } from '../pages/deposit/deposit.page';
 
 @Component({
   selector: 'app-home',
@@ -33,7 +34,7 @@ export class HomePage implements OnInit {
   balance: number;
   submmited: boolean = false;
   celClicked: string = 'click-cel';
-  colClick: {col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }[] = [];
+  colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -50,7 +51,7 @@ export class HomePage implements OnInit {
 
 
   createGame() {
-    console.log(this.game,this.valid);
+    console.log(this.game, this.valid);
     if (this.validRoute && this.valid) {
       this.submmited = true;
       this.colClick = [];
@@ -64,7 +65,7 @@ export class HomePage implements OnInit {
           }
         })
         .catch(err => {
-          if (err && err.error == 'Unauthorized'){
+          if (err && err.error == 'Unauthorized') {
             this.callLogin();
           }
         });
@@ -80,8 +81,8 @@ export class HomePage implements OnInit {
         userClick: 0,
         playing: false,
         completed: false,
-        matrix:null,
-        data:null,
+        matrix: null,
+        data: null,
       }
       this.valid = true;
       delete this.game.data;
@@ -97,8 +98,8 @@ export class HomePage implements OnInit {
       userClick: this.game.userClick + this.game.numberMines == 25 ? 0 : this.game.userClick,
       playing: this.game.playing,
       completed: this.game.completed,
-      matrix:this.game.matrix,
-      data:this.game.data,
+      matrix: this.game.matrix,
+      data: this.game.data,
     }
   }
 
@@ -110,7 +111,7 @@ export class HomePage implements OnInit {
 
 
 
-  celClick(clicked){
+  celClick(clicked) {
     this.celClicked = 'click-cel';
   }
   async play() {
@@ -140,13 +141,13 @@ export class HomePage implements OnInit {
               //this.callChangePassword()
               this.authService.checkJWT(gameHash)
                 .then((result: boolean) => {
-                    this.validRoute = result;
-                    if (result){
-                      this.initGame();
-                    }
-                    else {
-                        this.callLogin();
-                    }
+                  this.validRoute = result;
+                  if (result) {
+                    this.initGame();
+                  }
+                  else {
+                    this.callLogin();
+                  }
                 })
                 .catch(err => {
                   this.callLogin();
@@ -173,8 +174,8 @@ export class HomePage implements OnInit {
     this.colClick = game.activeIndex;
   }
 
-  colClicked(col:{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }){
-    if (col.col && col.col.color == 'green'){
+  colClicked(col: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }) {
+    if (col.col && col.col.color == 'green') {
       this.celClicked = 'success-cel';
     }
     else {
@@ -207,63 +208,84 @@ export class HomePage implements OnInit {
   }
 
 
-  async callChangePassword(){
-      if (!this.gameHash.passwordChange){
-        const modal = await this.modalCntrl.create({
-          component : ChangePasswordComponent,
-          backdropDismiss:false,
-          cssClass:'changePassword',
-          componentProps : {
-              passwordchanged : this.gameHash.passwordChange,
-              hashId: this.gameHash.hashId
-          }
+  async callChangePassword() {
+    if (!this.gameHash.passwordChange) {
+      const modal = await this.modalCntrl.create({
+        component: ChangePasswordComponent,
+        backdropDismiss: false,
+        cssClass: 'changePassword',
+        componentProps: {
+          passwordchanged: this.gameHash.passwordChange,
+          hashId: this.gameHash.hashId
+        }
       });
       modal.onDidDismiss()
-          .then(data => {
-              console.log(data);
-              this.gameHash.passwordChange = true;
-          });
+        .then(data => {
+          console.log(data);
+          this.gameHash.passwordChange = true;
+        });
       return await modal.present();
-      }
-      else {
-        this.interactionService.createToast('You have already changed the password','primary','bottom');
-      }
-      
+    }
+    else {
+      this.interactionService.createToast('You have already changed the password', 'primary', 'bottom');
+    }
+
   }
 
-  async callLogin(){
-      this.validRoute = false;
-      this.valid = false;
-      const modal = await this.modalCntrl.create({
-        component : LoginComponent,
-        backdropDismiss:false,
-        cssClass:'login',
-        componentProps : {
-            passwordchanged : this.gameHash.passwordChange,
-            hashId: this.gameHash.hashId
-        }
+  async callLogin() {
+    this.validRoute = false;
+    this.valid = false;
+    const modal = await this.modalCntrl.create({
+      component: LoginComponent,
+      backdropDismiss: false,
+      cssClass: 'login',
+      componentProps: {
+        passwordchanged: this.gameHash.passwordChange,
+        hashId: this.gameHash.hashId
+      }
     });
     modal.onDidDismiss()
-        .then(data => {
-            console.log(data);
-            if (data.data && data.data.loggedIn){
-              this.validRoute = true;
-              this.initGame();
-            }
-        });
+      .then(data => {
+        console.log(data);
+        if (data.data && data.data.loggedIn) {
+          this.validRoute = true;
+          this.initGame();
+        }
+      });
     return await modal.present();
-    
-    
-    
-}
 
-display(){
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
   }
-}
+
+  async deposit() {
+    const modal = await this.modalCntrl.create({
+      component: DepositPage,
+      backdropDismiss: false,
+      cssClass: 'deposit',
+      componentProps: {
+        passwordchanged: this.gameHash.passwordChange,
+        hashId: this.gameHash.hashId
+      }
+    });
+    modal.onDidDismiss()
+      .then(data => {
+        console.log(data);
+        if (data.data && data.data.loggedIn) {
+          this.validRoute = true;
+          this.initGame();
+        }
+      });
+    return await modal.present();
+  }
+
+  display() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+
+
 
 }

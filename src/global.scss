@@ -67,6 +67,12 @@
       display: block;
       border-radius: 30px;
     }
+
+    .deposit.modal-wrapper {
+      height:500px;
+      top: 5%;
+      width: 60%;
+    }
   }
 
   @media only screen and (max-width: 600px) {
@@ -87,7 +93,14 @@
       display: block;
       border-radius: 30px;
     }
+
+    .deposit .modal-wrapper {
+      height: 100%;
+    }
   }
+
+
+  
 
   .toast-customize {
     --border-radius : 15px;

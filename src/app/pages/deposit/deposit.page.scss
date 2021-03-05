@@ -4,6 +4,7 @@
 
 #title-address {
     text-align: center;
+    color:white;
 }
 
 #address{
@@ -12,8 +13,12 @@
     border-radius: 15px;
     padding: 8px;
     display: inline-block;
+    background-color: white;;
 }
 
+#or {
+    color:white;
+}
 #address-info{
     text-align: left;
     display: inline-block;
@@ -40,4 +45,9 @@
 
 ion-col {
     text-align: center;
+}
+
+ion-content {
+    --background: linear-gradient(90deg,#152620, #151A1E);
+  background: linear-gradient(90deg,#152620, #151A1E);
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { Address } from 'cluster';
 import { NgxQrcodeElementTypes } from 'ngx-qrcode2';
+import { BitcoinService } from 'src/app/services/bitcoin.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 @Component({
@@ -11,19 +13,45 @@ import { InteractionService } from 'src/app/services/interaction.service';
 export class DepositPage implements OnInit {
 
   elementType = NgxQrcodeElementTypes.URL;
-  value: string = 'bcrt1q6jhwfrax6c7ee5tj0g2l4r0ehppaq60dq3fyg8';
+  address: Address = null;
   hashId: string;
   constructor(private interactionService: InteractionService,
               private modalController: ModalController,
-              private navParams: NavParams) { }
+              private navParams: NavParams,
+              private bitcoinService: BitcoinService) { }
 
   ngOnInit() {
     this.getHash();
   }
 
   getHash(){
-    this.hashId = this.navParams.get('hashId');
-    console.log(this.hashId);
+    this.interactionService.createLoading("Getting Your Address Please Wait")
+      .then(() => {
+        this.hashId = this.navParams.get('hashId');
+        this.address = this.navParams.get('address');
+        console.log(this.address == null && (this.address != null && this.address.address == null))
+        if (this.address == null){
+          this.bitcoinService.getNewAddress(this.hashId)
+          .then((result:any) => {
+            this.interactionService.hide();
+            if (result && result != false){
+              this.address = result;
+            }
+            else {
+              this.interactionService.createToast("Something Went Wrong !","danger",'bottom','toast-customize');
+              this.cancel();
+            }
+          })
+          .catch(err => {
+            this.interactionService.createToast("Something Went Wrong !","danger",'bottom','toast-customize');
+            this.cancel();
+          })
+        }
+        else {
+          this.interactionService.hide();
+        }
+      })
+    
   }
 
   presentToast(){

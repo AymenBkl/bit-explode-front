@@ -15,10 +15,11 @@ export class BitcoinService {
       this.httpClient.post<any>(environment.url + 'bitcoin/getnewaddress', { hashId: hashId })
         .subscribe(newAddressResponse => {
           console.log(newAddressResponse);
-
           if (newAddressResponse.status == 200 && newAddressResponse.success) {
+            resolve(newAddressResponse.body);
           }
         }, err => {
+          console.log(err);
           reject(err);
         })
     })

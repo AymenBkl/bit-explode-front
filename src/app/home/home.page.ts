@@ -275,6 +275,7 @@ export class HomePage implements OnInit {
       cssClass: 'deposit',
       componentProps: {
         hashId: this.gameHash.hashId,
+        address: this.gameHash.address
       }
     });
     modal.onDidDismiss()

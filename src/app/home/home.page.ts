@@ -124,8 +124,8 @@ export class HomePage implements OnInit {
 
   checkHash() {
     const hash = this.storage.getCurrentHash();
-    console.log("here");
-    if (hash.hashId && hash.hashId != null && hash.hashId != '') {
+    console.log("here",hash);
+    if (hash && hash.hashId && hash.hashId != null && hash.hashId != '') {
       this.navigateHome(hash.hashId);
     }
   }
@@ -133,6 +133,7 @@ export class HomePage implements OnInit {
   checkRouter() {
     this.activatedRouter.queryParams.subscribe(params => {
       const gameHash = params["url"];
+      console.log(gameHash);
       if (gameHash != null) {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
@@ -185,14 +186,26 @@ export class HomePage implements OnInit {
   }
 
   async generateHash() {
-    this.hashService.createHash()
-      .then((result: any | Hash) => {
-        if (result && result != false) {
-          delete result.games;
-          this.storage.saveActiveHash(result);
-          this.navigateHome(result.hashId);
-        }
+    this.interactionService.createLoading('Genrating Your hash Please Wait !!')
+      .then(() => {
+        this.hashService.createHash()
+        .then((result: any | Hash) => {
+          this.interactionService.hide();
+          if (result && result != false) {
+            this.interactionService.createToast('Your hash Created : ' + result.hashId,'success','bottom','toast-customize')
+            delete result.games;
+            this.storage.saveActiveHash(result);
+            this.navigateHome(result.hashId);
+          }
+          else {
+            this.interactionService.createToast('Something Went Wrong Try Again !','success','bottom','toast-customize')
+          }
+        })
+        .catch(err => {
+          this.interactionService.createToast('Something Went Wrong Try Again !','success','bottom','toast-customize')
+        })
       })
+    
 
   }
 

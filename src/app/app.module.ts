@@ -19,6 +19,7 @@ import { HistoryService } from './services/history.service';
 import { InterceptorService, UnauthorizedInterceptor } from './services/interceptor.service';
 import { AuthServiceService } from './services/auth-service.service';
 import { ScrollbarThemeModule } from './directives/scrollbar.directive';
+import { BitcoinService } from './services/bitcoin.service';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ScrollbarThemeModule } from './directives/scrollbar.directive';
     HistoryService,
     AuthServiceService,
     InterceptorService,
+    BitcoinService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

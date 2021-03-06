@@ -1,3 +1,4 @@
+import { Address } from "cluster";
 import { Game } from "./game";
 
 export interface Hash {
@@ -5,4 +6,5 @@ export interface Hash {
     hashId: string;
     games: Game[];
     passwordChange: boolean;
+    address: Address;
 }

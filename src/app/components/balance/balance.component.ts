@@ -18,7 +18,7 @@ export class BalanceComponent implements OnInit {
 
   calculateTotalDeposit() {
     this.deposits.map(deposit => {
-      this.totalDeposit +=  deposit.currentBalance;
+      this.totalDeposit +=  deposit.currentBalance * 100000000;
     })
   }
 

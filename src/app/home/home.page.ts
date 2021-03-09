@@ -178,6 +178,7 @@ export class HomePage implements OnInit {
 
   colClicked(col: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }) {
     if (col.col && col.col.color == 'green') {
+      
       this.celClicked = 'success-cel';
     }
     else {

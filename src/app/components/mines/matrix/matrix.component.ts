@@ -148,7 +148,6 @@ export class MatrixComponent implements OnInit,OnChanges {
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
       }
       else {
-        
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
       }
       

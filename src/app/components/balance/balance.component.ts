@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Deposit } from 'src/app/interfaces/deposit';
 
 @Component({
   selector: 'app-balance',
@@ -7,8 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BalanceComponent implements OnInit {
 
+  @Input('deposits') deposits: Deposit[];
+  totalDeposit: number = 0;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.calculateTotalDeposit();
+  }
+
+  calculateTotalDeposit() {
+    this.deposits.map(deposit => {
+      this.totalDeposit +=  deposit.currentBalance;
+    })
+  }
 
 }

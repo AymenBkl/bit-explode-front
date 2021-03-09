@@ -42,7 +42,6 @@ export class GameService {
   }
 
   checkGame(gameHash: string, gameId: string) {
-    console.log("here",gameHash,gameId);
     return new Promise((resolve,reject) => {
       this.httpClient.post<CheckGameResponse>(environment.url + 'game/checkgame', {gameHash: gameHash, gameId: gameId})
       .subscribe(checkGameResponse => {
@@ -55,6 +54,20 @@ export class GameService {
       })
     })
   }
+
+  /**getBalance(hashId: string) {
+    return new Promise((resolve,reject) => {
+      this.httpClient.post<CheckGameResponse>(environment.url + 'game/checkgame', {gameHash: gameHash, gameId: gameId})
+      .subscribe(checkGameResponse => {
+        console.log(checkGameResponse);
+        if (checkGameResponse.status == 200 && checkGameResponse.success){
+          resolve(this.proccesCheckGameResponseSuccess(checkGameResponse.msg,checkGameResponse.game));
+        }
+      },err => {
+        reject(err);
+      })
+    })
+  }**/
 
   proceccGameResponseSuccess(msg: string,game: Game) {
     if (msg == 'YOUR GAME HAS BEEN CREATED') {

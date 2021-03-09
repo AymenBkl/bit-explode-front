@@ -65,6 +65,7 @@ export class HomePage implements OnInit {
           }
         })
         .catch(err => {
+          this.submmited = false;
           if (err && err.error == 'Unauthorized') {
             this.callLogin();
           }

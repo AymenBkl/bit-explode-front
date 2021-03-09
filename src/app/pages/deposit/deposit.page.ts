@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { Address } from 'cluster';
+import { Address } from '../../interfaces/address';
 import { NgxQrcodeElementTypes } from 'ngx-qrcode2';
 import { BitcoinService } from 'src/app/services/bitcoin.service';
 import { InteractionService } from 'src/app/services/interaction.service';

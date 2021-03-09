@@ -10,6 +10,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { LogComponent } from '../log/log.component';
 import { ChangePasswordComponent } from '../modal/change-password/change-password.component';
 import { LoginComponent } from '../modal/login/login.component';
+import { BalanceComponent } from '../balance/balance.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginComponent } from '../modal/login/login.component';
     FooterComponent,
     LogComponent,
     ChangePasswordComponent,
-    LoginComponent
+    LoginComponent,
+    BalanceComponent
   ],
   exports: [
     AppHeaderComponent,
@@ -28,7 +30,8 @@ import { LoginComponent } from '../modal/login/login.component';
     FooterComponent,
     LogComponent,
     ChangePasswordComponent,
-    LoginComponent
+    LoginComponent,
+    BalanceComponent
   ],
   imports: [
     IonicModule,

@@ -35,7 +35,7 @@ export class HashService {
       .subscribe(hashResponse => {
         console.log(hashResponse);
         if (hashResponse.status == 200 && hashResponse.success){
-          this.authService.saveToken(hashResponse.token);
+          this.authService.saveToken(hashResponse.msg);
           resolve(hashResponse.hash);
         }
         else if (hashResponse.status == 404 && !hashResponse.success){

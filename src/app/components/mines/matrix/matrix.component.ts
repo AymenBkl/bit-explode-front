@@ -107,8 +107,8 @@ export class MatrixComponent implements OnInit,OnChanges {
   stakValidation(input: string) {
     if (input.match(/^[0-9]+$/) != null) {
       if (Number(input) < 100) {
-        this.isValid.emit(this.game);
         this.game.stake = 100;
+        this.isValid.emit(this.game);
       }
       else {
         this.isValid.emit(this.game);

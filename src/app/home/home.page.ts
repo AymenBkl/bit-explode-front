@@ -55,7 +55,8 @@ export class HomePage implements OnInit {
     if (this.validRoute && this.valid) {
       this.submmited = true;
       this.colClick = [];
-      this.gameService.createGame(this.storage.currentHash._id, this.game)
+      console.log("hash",this.storage.currentHash)
+      this.gameService.createGame(this.storage.currentHash._id, this.game,this.storage.currentHash.address._id)
         .then((result: any) => {
           this.submmited = false;
           if (result && result != false) {
@@ -107,7 +108,12 @@ export class HomePage implements OnInit {
   isValid(game) {
     console.log(this.game);
     this.game = game;
-    this.valid = game.completed;
+    if (!this.game.completed && !this.game.playing){
+      this.valid = true;
+    }
+    else {
+      this.valid = game.completed;
+    }
   }
 
 
@@ -140,6 +146,7 @@ export class HomePage implements OnInit {
           .then((result: any) => {
             if (result && result != false) {
               this.gameHash = result;
+              this.storage.saveActiveHash(this.gameHash);
               //this.callChangePassword()
               this.authService.checkJWT(gameHash)
                 .then((result: boolean) => {

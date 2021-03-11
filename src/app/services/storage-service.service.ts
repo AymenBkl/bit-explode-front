@@ -13,6 +13,7 @@ export class StorageServiceService {
 
   async saveActiveHash(hash: Hash){
     this.currentHash = hash;
+    console.log('hash',this.currentHash);
     await localStorage.setItem('currentHash',JSON.stringify(hash));
   }
 

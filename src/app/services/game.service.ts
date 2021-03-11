@@ -14,9 +14,9 @@ export class GameService {
 
   constructor(private httpClient : HttpClient) { }
 
-  createGame(gameHash: string, game: Game) {
+  createGame(gameHash: string, game: Game,addressId: string) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post<GameResponse>(environment.url + 'game/creategame', {gameHash: gameHash,game: game})
+      this.httpClient.post<GameResponse>(environment.url + 'game/creategame', {gameHash: gameHash,game: game,addressId: addressId})
       .subscribe(gameResponse => {
         if (gameResponse.status == 200 && gameResponse.success){
           resolve(this.proceccGameResponseSuccess(gameResponse.msg,gameResponse.game));

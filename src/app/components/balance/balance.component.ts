@@ -12,11 +12,10 @@ export class BalanceComponent implements OnInit {
 
   @Input('deposits') deposits: Deposit[];
   totalDeposit: number = 0;
-  @Input('matrix') matrix: Col[][];
+  @Input('game') game: Game;
   constructor() { }
 
   ngOnInit() {
-    console.log('matrix',this.matrix)
     this.calculateTotalDeposit();
     this.calculateBalance();
   }
@@ -33,19 +32,21 @@ export class BalanceComponent implements OnInit {
 
   ngOnChanges(changes) {
     this.totalDeposit = 0;
-    console.log("called balance");
-    console.log('matrix',this.matrix)
     this.calculateTotalDeposit();
     this.calculateBalance();
   }
 
   calculateBalance(){
-    if (this.matrix) {
-      this.matrix.map(rowMatrix => {
+    let balanceGame = 0;
+    let loseGame : boolean = false;
+    if (this.game && this.game.matrix) {
+      this.game.matrix.map(rowMatrix => {
         rowMatrix.map(colMatrix => {
-          this.totalDeposit += colMatrix.value;
+          balanceGame += colMatrix.value;
+          loseGame = colMatrix.color == 'red' ? true : loseGame;
         })
       })
+      this.totalDeposit += loseGame ? 0 : balanceGame;
     }
   }
 

@@ -43,8 +43,9 @@ export class MatrixComponent implements OnInit,OnChanges {
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,this.storage.getCurrentHash().address._id,rowIndex,colIndex,this.next)
           .then((result: any) => {
             col.submitted = false;
-            if (result && result != false ) {
-              this.affectValueToMap(col,result,rowIndex,colIndex);
+            console.log(result && result != false);
+            if (result && result != false) {
+              this.affectValueToMap(col,result,rowIndex,colIndex,result.value);
             }
           })
           .catch(err => {
@@ -105,7 +106,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
   
   stakValidation(input: string) {
-    if (input.match(/^[0-9]+$/) != null) {
+    /**if (input.match(/^[0-9]+$/) != null) {
       if (Number(input) < 100) {
         this.game.stake = 100;
         this.isValid.emit(this.game);
@@ -117,11 +118,10 @@ export class MatrixComponent implements OnInit,OnChanges {
     }
     else {
       this.isValid.emit(this.game);
-    }
+    }**/
   }
 
   ngAfterViewInit(){
-    console.log("called");
     this.initMap();
     this.checkGame();
   }
@@ -132,16 +132,18 @@ export class MatrixComponent implements OnInit,OnChanges {
     console.log("here");
     if (!this.activeGame){
       this.initMap();
+      this.checkGame();
     }
     this.algorith();
   }
 
-  affectValueToMap(col: Col,response: ClickCel,indexRow:number,indexCol:number){
+  affectValueToMap(col: Col,response: ClickCel,indexRow:number,indexCol:number,value = this.next){
+    console.log(value);
     col.clicked = true;
     col.color = response.color;
     if (response.color != 'red'){
       this.game.userClick = response.userClick;
-      col.value = this.next;
+      col.value = value;
       this.algorith();
       if (response.userClick + this.game.numberMines == 25){
         this.winGame(response.indexMines);
@@ -170,6 +172,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   checkGame(){
+    console.log("gamecheck",this.storage.getCurrentGame());
     if (this.storage.getCurrentHash() != null && this.storage.getCurrentGame() != null){
       this.gameService.checkGame(this.storage.getCurrentHash()._id,this.storage.getCurrentGame())
       .then((result: any) => {
@@ -193,6 +196,6 @@ export class MatrixComponent implements OnInit,OnChanges {
     activeIndex.map(value => {
       this.map[value.indexRow][value.indexCol] = value.col;
     }) 
-    this.game.matrix = this.map
+    this.game.matrix = this.map;
   }
 }

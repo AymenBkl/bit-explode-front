@@ -16,7 +16,6 @@ export class HashService {
     return new Promise((resolve,reject) => {
       this.httpClient.get<HashResponse>(environment.url + 'hash/checkHash?hashId=' + hashId)
       .subscribe(hashResponse => {
-        console.log(hashResponse);
         if (hashResponse.status == 200 && hashResponse.success){
           resolve(hashResponse.hash);
         }

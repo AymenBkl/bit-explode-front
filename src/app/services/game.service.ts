@@ -55,19 +55,7 @@ export class GameService {
     })
   }
 
-  /**getBalance(hashId: string) {
-    return new Promise((resolve,reject) => {
-      this.httpClient.post<CheckGameResponse>(environment.url + 'game/checkgame', {gameHash: gameHash, gameId: gameId})
-      .subscribe(checkGameResponse => {
-        console.log(checkGameResponse);
-        if (checkGameResponse.status == 200 && checkGameResponse.success){
-          resolve(this.proccesCheckGameResponseSuccess(checkGameResponse.msg,checkGameResponse.game));
-        }
-      },err => {
-        reject(err);
-      })
-    })
-  }**/
+
 
   proceccGameResponseSuccess(msg: string,game: Game) {
     if (msg == 'YOUR GAME HAS BEEN CREATED') {
@@ -85,6 +73,9 @@ export class GameService {
     }
     else if (msg == 'YOU WON THE GAME') {
       return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data,mines:response.mines};
+    }
+    else if (msg == 'This cell is already clicked') {
+      return {color: response.color,userClick: response.userClick,value:response.value};
     }
   }
 

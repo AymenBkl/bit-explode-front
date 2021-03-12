@@ -6,4 +6,5 @@ export interface ClickCel {
     color: string;
     data:EncryptedData;
     mines:string;
+    value:number;
 } 

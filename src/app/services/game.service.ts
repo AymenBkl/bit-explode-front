@@ -27,9 +27,9 @@ export class GameService {
     })
   }
 
-  clickCol(gameHash: string, gameId: string, indexRow: number, indexCol: number,val: number) {
+  clickCol(gameHash: string, gameId: string,addressId:string, indexRow: number, indexCol: number,val: number) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post<ColClickResponse>(environment.url + 'game/clickcel', {gameHash: gameHash, gameId: gameId, rowIndex: indexRow,colIndex: indexCol,value: val})
+      this.httpClient.post<ColClickResponse>(environment.url + 'game/clickcel', {gameHash: gameHash, gameId: gameId, rowIndex: indexRow,colIndex: indexCol,value: val,addressId: addressId})
       .subscribe(colResponse => {
         console.log(colResponse);
         if (colResponse.status == 200 && colResponse.success){

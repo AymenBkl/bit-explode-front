@@ -22,4 +22,15 @@ export class BalanceComponent implements OnInit {
     })
   }
 
+  ngAfterViewInit(){
+   
+  }
+
+  ngOnChanges(changes) {
+    this.totalDeposit = 0;
+    console.log("called balance");
+    this.calculateTotalDeposit();
+
+  }
+
 }

@@ -45,9 +45,15 @@ export class HomePage implements OnInit {
     private interactionService: InteractionService) { }
   async ngOnInit() {
     this.checkHash();
-    this.checkRouter();
+    this.checkRouter(true);
   }
 
+  ionViewDidEnter() {
+    setInterval(() => {
+      this.checkRouter(false);
+          
+    },1000);
+  }
 
 
   createGame() {
@@ -140,7 +146,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  checkRouter() {
+  checkRouter(executeJWT: boolean) {
     this.activatedRouter.queryParams.subscribe(params => {
       const gameHash = params["url"];
       console.log(gameHash);
@@ -151,20 +157,9 @@ export class HomePage implements OnInit {
               this.gameHash = result;
               this.storage.saveActiveHash(this.gameHash);
               //this.callChangePassword()
-              this.authService.checkJWT(gameHash)
-                .then((result: boolean) => {
-                  this.validRoute = result;
-                  if (result) {
-                    this.initGame();
-                  }
-                  else {
-                    this.callLogin();
-                  }
-                })
-                .catch(err => {
-                  this.callLogin();
-                  this.validRoute = false;
-                });
+              if (executeJWT) {
+                this.checkJWT();
+              }
             }
             else {
               this.validRoute = false;
@@ -176,6 +171,25 @@ export class HomePage implements OnInit {
       }
     })
   }
+
+
+  checkJWT() {
+    this.authService.checkJWT(this.gameHash._id)
+    .then((result: boolean) => {
+      this.validRoute = result;
+      if (result) {
+        this.initGame();
+      }
+      else {
+        this.callLogin();
+      }
+    })
+    .catch(err => {
+      this.callLogin();
+      this.validRoute = false;
+    });
+  }
+
 
   nextValue(next) {
     this.next = next;
@@ -309,6 +323,7 @@ export class HomePage implements OnInit {
       x.className = "topnav";
     }
   }
+
 
 
 

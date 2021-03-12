@@ -193,5 +193,6 @@ export class MatrixComponent implements OnInit,OnChanges {
     activeIndex.map(value => {
       this.map[value.indexRow][value.indexCol] = value.col;
     }) 
+    this.game.matrix = this.map
   }
 }

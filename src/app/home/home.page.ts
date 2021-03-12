@@ -70,6 +70,9 @@ export class HomePage implements OnInit {
           if (err && err.error == 'Unauthorized') {
             this.callLogin();
           }
+          else if (err && err.error.err == 'You don"t have enough balance') {
+            this.interactionService.createToast('You don"t have enough balance','danger','bottom','toast-customize')
+          }
         });
     }
   }

@@ -97,7 +97,7 @@ export class HomePage implements OnInit {
         completed: false,
         matrix: null,
         data: null,
-        status:'active'
+        status:''
       }
       this.valid = true;
       delete this.game.data;

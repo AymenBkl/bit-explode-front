@@ -9,4 +9,5 @@ export interface Game {
     completed:boolean;
     matrix:Col[][];
     data: EncryptedData; 
+    status: string;
 }

@@ -35,6 +35,7 @@ export class HomePage implements OnInit {
   submmited: boolean = false;
   celClicked: string = 'click-cel';
   colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
+  stakeWon: number = 0;
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -94,6 +95,7 @@ export class HomePage implements OnInit {
         completed: false,
         matrix: null,
         data: null,
+        status:'active'
       }
       this.valid = true;
       delete this.game.data;
@@ -111,6 +113,7 @@ export class HomePage implements OnInit {
       completed: this.game.completed,
       matrix: this.game.matrix,
       data: this.game.data,
+      status:this.game.status,
     }
   }
 
@@ -126,6 +129,9 @@ export class HomePage implements OnInit {
   }
 
 
+  onWinStake(winStake){
+    this.stakeWon = winStake;
+  }
 
   celClick(clicked) {
     this.celClicked = 'click-cel';

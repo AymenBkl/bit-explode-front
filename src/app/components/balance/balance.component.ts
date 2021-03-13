@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Col } from 'src/app/interfaces/col';
 import { Deposit } from 'src/app/interfaces/deposit';
 import { Game } from 'src/app/interfaces/game';
@@ -13,6 +13,7 @@ export class BalanceComponent implements OnInit {
   @Input('deposits') deposits: Deposit[];
   totalDeposit: number = 0;
   @Input('game') game: Game;
+  @Output() stakeWon: EventEmitter<number> = new EventEmitter<number>();
   constructor() { }
 
   ngOnInit() {
@@ -26,9 +27,7 @@ export class BalanceComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit(){
-   
-  }
+
 
   ngOnChanges(changes) {
     this.totalDeposit = 0;
@@ -46,7 +45,7 @@ export class BalanceComponent implements OnInit {
           loseGame = colMatrix.color == 'red' ? true : loseGame;
         })
       })
-      this.totalDeposit += loseGame ? 0 : balanceGame;
+      this.stakeWon.emit(loseGame ? 0 : balanceGame);
     }
   }
 

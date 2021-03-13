@@ -66,9 +66,9 @@
                     </ion-button>
                   </ion-col>
                   <ion-col size="6">
-                    <ion-button class="button-play cashout" expand="full" (click)='cashOut()' [disabled]="game.status != 'active' || submmited" >
-                      <ion-text *ngIf="!submmited">Cashout</ion-text>
-                      <ion-spinner name="bubbles" *ngIf="submmited"></ion-spinner>
+                    <ion-button class="button-play cashout" expand="full" (click)='cashOut()' [disabled]="game.status != 'active' || submmitedCashout" >
+                      <ion-text *ngIf="!submmitedCashout">Cashout</ion-text>
+                      <ion-spinner name="bubbles" *ngIf="submmitedCashout"></ion-spinner>
                     </ion-button>
                   </ion-col>
                 </ion-row>
@@ -86,7 +86,7 @@
                     </ion-button>
                   </ion-col>
                 </ion-row>
-                <ion-row class="row-information ion-hide-md-down ion-hide-lg-up" >
+                <ion-row class="row-information  ion-hide-lg-up" >
                   <ion-col size="6" offset-md="3" size-md="3">
                     <div class="information-div">
                       <ion-text class="title-div-information">

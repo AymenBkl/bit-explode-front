@@ -10,7 +10,7 @@
 </div>
   <div *ngIf="game" class="row">
     <div  id="stake">
-      <ion-input [(ngModel)]='game.stake' type="number"  [min]="100" (input)='stakValidation($event.target.value)' [disabled]='game.playing'
+      <ion-input [(ngModel)]='game.stake' type="number"  [min]="100" (input)='stakValidation($event.target.value)' (keypress)="inputChar($event)" [disabled]='game.playing'
       ></ion-input>
     </div>
     <div id='add'>

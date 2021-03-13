@@ -110,6 +110,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
   
   stakValidation(input: string) {
+    
     if (input.match(/^[0-9]+$/) != null) {
       if (Number(input) < 100) {
         this.game.stake = 100;
@@ -122,6 +123,16 @@ export class MatrixComponent implements OnInit,OnChanges {
     }
     else {
       this.isValid.emit(this.game);
+    }
+  }
+
+  inputChar(event) {
+    const pattern = /[0-9.,]/;
+    let inputChar = String.fromCharCode(event.charCode);
+
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
     }
   }
 

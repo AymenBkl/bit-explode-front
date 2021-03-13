@@ -34,6 +34,7 @@ export class HomePage implements OnInit {
   historyGames: Game[];
   balance: number;
   submmited: boolean = false;
+  submmitedCashout: boolean = false;
   celClicked: string = 'click-cel';
   colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
   stakeWon: number = 0;
@@ -243,16 +244,16 @@ export class HomePage implements OnInit {
 
   cashOut() {
     if (this.validRoute && this.valid){
-      this.submmited = true;
+      this.submmitedCashout = true;
       this.gameService.cashOut(this.storage.currentHash._id,this.storage.currentHash.address._id)
         .then((result:any) => {
-          this.submmited = false;
+          this.submmitedCashout = false;
           if (result && result != false){
             this.matrixComponent.cashOut(result);
           }
         })
         .catch(err => {
-          this.submmited = false;
+          this.submmitedCashout = false;
           console.log(err);
         })
     }

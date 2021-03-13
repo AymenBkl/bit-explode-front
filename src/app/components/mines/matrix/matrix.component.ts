@@ -24,6 +24,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   next: number;
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
+  clickedCol: boolean = false;
   constructor(private storage: StorageServiceService,
               private gameService: GameService) { }
 
@@ -37,12 +38,14 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   clickCol(col: Col, rowIndex: number, colIndex: number) {
-      if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute) {
+      if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute && !this.clickedCol) {
         col.submitted = true;
+        this.clickedCol = true;
         this.clickCel.emit(true);
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,this.storage.getCurrentHash().address._id,rowIndex,colIndex,this.next)
           .then((result: any) => {
             col.submitted = false;
+            this.clickedCol = false;
             console.log(result && result != false);
             if (result && result != false) {
               this.affectValueToMap(col,result,rowIndex,colIndex,result.value);
@@ -50,6 +53,7 @@ export class MatrixComponent implements OnInit,OnChanges {
           })
           .catch(err => {
             col.submitted = false;
+            this.clickedCol = false;
             if (err && err.error == 'Unauthorized'){
               this.callLogin.emit(true);
             }

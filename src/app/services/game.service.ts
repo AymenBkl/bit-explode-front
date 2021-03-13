@@ -55,6 +55,21 @@ export class GameService {
     })
   }
 
+  cashOut(gameHash:string,addressId: string) {
+    return new Promise((resolve,reject) => {
+      this.httpClient.post<ColClickResponse>(environment.url + 'game/cashout', {gameHash: gameHash,addressId:addressId})
+      .subscribe(cashOutGameResponse => {
+        console.log(cashOutGameResponse);
+        if (cashOutGameResponse.status == 200 && cashOutGameResponse.success){
+          resolve(this.proccesClickCelResponseSuccess(cashOutGameResponse.msg,cashOutGameResponse.response));
+
+        }
+      },err => {
+        reject(err);
+      })
+    })
+  }
+
 
 
   proceccGameResponseSuccess(msg: string,game: Game) {
@@ -75,9 +90,10 @@ export class GameService {
     else if (msg == 'YOU HAVE CLICK MINE CELL') {
       return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data,mines:response.mines};
     }
-    else if (msg == 'YOU WON THE GAME') {
+    else if (msg == 'YOU WON THE GAME' || msg == 'YOU WITHDRAW THE GAME') {
       return {color: response.color,userClick: response.userClick,indexMines: response.indexMines,data:response.data,mines:response.mines};
     }
+    
     else if (msg == 'This cell is already clicked') {
       return {color: response.color,userClick: response.userClick,value:response.value};
     }

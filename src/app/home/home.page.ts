@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Col } from '../interfaces/col';
 import { Game } from '../interfaces/game';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { ChangePasswordComponent } from '../components/modal/change-password/cha
 import { InteractionService } from '../services/interaction.service';
 import { LoginComponent } from '../components/modal/login/login.component';
 import { DepositPage } from '../pages/deposit/deposit.page';
+import { MatrixComponent } from '../components/mines/matrix/matrix.component';
 
 @Component({
   selector: 'app-home',
@@ -36,6 +37,7 @@ export class HomePage implements OnInit {
   celClicked: string = 'click-cel';
   colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
   stakeWon: number = 0;
+  @ViewChild('matrixComponent') matrixComponent: MatrixComponent;
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -237,8 +239,23 @@ export class HomePage implements OnInit {
           this.interactionService.createToast('Something Went Wrong Try Again !','success','bottom','toast-customize')
         })
       })
-    
+  }
 
+  cashOut() {
+    if (this.validRoute && this.valid){
+      this.submmited = true;
+      this.gameService.cashOut(this.storage.currentHash._id,this.storage.currentHash.address._id)
+        .then((result:any) => {
+          this.submmited = false;
+          if (result && result != false){
+            this.matrixComponent.cashOut(result);
+          }
+        })
+        .catch(err => {
+          this.submmited = false;
+          console.log(err);
+        })
+    }
   }
 
   navigateHome(hashId: string) {

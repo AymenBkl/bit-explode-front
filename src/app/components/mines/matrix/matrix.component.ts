@@ -105,7 +105,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
   
   stakValidation(input: string) {
-    /**if (input.match(/^[0-9]+$/) != null) {
+    if (input.match(/^[0-9]+$/) != null) {
       if (Number(input) < 100) {
         this.game.stake = 100;
         this.isValid.emit(this.game);
@@ -117,7 +117,7 @@ export class MatrixComponent implements OnInit,OnChanges {
     }
     else {
       this.isValid.emit(this.game);
-    }**/
+    }
   }
 
   ngAfterViewInit(){
@@ -157,6 +157,13 @@ export class MatrixComponent implements OnInit,OnChanges {
       this.loseGame(response.indexMines)
       this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
     }
+  }
+
+  cashOut(response:ClickCel){
+    this.game.userClick = response.userClick;
+    this.winGame(response.indexMines);
+    this.colClick.emit({col:null,indexRow:0,indexCol:0,data:response.data,mines:response.mines});
+
   }
 
   winGame(indexMines : [{ indexRow: number, indexCol: number }]){

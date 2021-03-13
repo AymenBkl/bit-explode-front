@@ -68,7 +68,6 @@ export class HomePage implements OnInit {
           if (result && result != false) {
             console.log(result);
             this.game = result;
-            this.storage.saveCurrentGame(this.game._id);
           }
         })
         .catch(err => {

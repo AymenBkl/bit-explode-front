@@ -20,19 +20,4 @@ export class StorageServiceService {
     this.currentHash = JSON.parse(localStorage.getItem('currentHash'));
     return this.currentHash;
   }
-
-  async saveCurrentGame(gameId: string) {
-    this.currentGame = localStorage.setItem('currentGame',gameId);
-    return this.currentGame;
-  }
-
-  getCurrentGame() {
-    this.currentGame = localStorage.getItem('currentGame');
-    return this.currentGame;
-  }
-
-  removeActiveGame() {
-    this.currentGame = null;
-    return localStorage.removeItem('currentGame');
-  }
 }

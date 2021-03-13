@@ -41,9 +41,9 @@ export class GameService {
     })
   }
 
-  checkGame(gameHash: string, gameId: string) {
+  checkGame(gameHash: string) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post<CheckGameResponse>(environment.url + 'game/checkgame', {gameHash: gameHash, gameId: gameId})
+      this.httpClient.post<CheckGameResponse>(environment.url + 'game/checkgame', {gameHash: gameHash})
       .subscribe(checkGameResponse => {
         console.log(checkGameResponse);
         if (checkGameResponse.status == 200 && checkGameResponse.success){

@@ -98,7 +98,6 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
-    this.storage.removeActiveGame();
     this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
@@ -164,7 +163,6 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
-    this.storage.removeActiveGame();
     this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
@@ -172,9 +170,8 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   checkGame(){
-    console.log("gamecheck",this.storage.getCurrentGame());
-    if (this.storage.getCurrentHash() != null && this.storage.getCurrentGame() != null){
-      this.gameService.checkGame(this.storage.getCurrentHash()._id,this.storage.getCurrentGame())
+    if (this.storage.getCurrentHash() != null){
+      this.gameService.checkGame(this.storage.getCurrentHash()._id)
       .then((result: any) => {
         if (result && result != null){
           this.game = result.game;

@@ -170,9 +170,11 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   checkGame(){
+    console.log("check game",this.storage.getCurrentHash())
     if (this.storage.getCurrentHash() != null){
       this.gameService.checkGame(this.storage.getCurrentHash()._id)
       .then((result: any) => {
+        console.log('check game',result);
         if (result && result != null){
           this.game = result.game;
           this.affectValues(result.activeIndex);
@@ -181,6 +183,7 @@ export class MatrixComponent implements OnInit,OnChanges {
         }
       })
       .catch(err => {
+        console.log('check game',err);
         if (err && err.error == 'Unauthorized'){
           this.callLogin.emit(true);
         }

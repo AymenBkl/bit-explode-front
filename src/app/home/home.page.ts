@@ -64,6 +64,7 @@ export class HomePage implements OnInit {
       console.log("hash",this.storage.currentHash)
       this.gameService.createGame(this.storage.currentHash._id, this.game,this.storage.currentHash.address._id)
         .then((result: any) => {
+          console.log(result);
           this.submmited = false;
           if (result && result != false) {
             console.log(result);

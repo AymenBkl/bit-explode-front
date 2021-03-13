@@ -58,8 +58,12 @@ export class GameService {
 
 
   proceccGameResponseSuccess(msg: string,game: Game) {
+    console.log(msg);
     if (msg == 'YOUR GAME HAS BEEN CREATED') {
       console.log("create");
+      return game;
+    }
+    else if (msg == 'YOU ALREADY HAVE A GAME'){
       return game;
     }
   }

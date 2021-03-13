@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Col } from '../interfaces/col';
 import { Game } from '../interfaces/game';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -47,6 +47,17 @@ export class HomePage implements OnInit {
     private authService: AuthServiceService,
     private modalCntrl: ModalController,
     private interactionService: InteractionService) { }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (event.keyCode == 32 && !this.submmited) {
+      console.log("here");
+      this.play();
+    }
+    else if (event.keyCode == 13 && !this.submmitedCashout) {
+      this.cashOut();
+    }
+  }
   async ngOnInit() {
     this.checkHash();
     this.checkRouter(true);
@@ -55,18 +66,18 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     setInterval(() => {
       this.checkRouter(false);
-          
-    },1000);
+
+    }, 1000);
   }
 
 
   createGame() {
     console.log(this.game, this.valid);
-    if (this.validRoute && this.valid) {
+    if (this.validRoute && this.valid && !this.game.playing) {
       this.submmited = true;
       this.colClick = [];
-      console.log("hash",this.storage.currentHash)
-      this.gameService.createGame(this.storage.currentHash._id, this.game,this.storage.currentHash.address._id)
+      console.log("hash", this.storage.currentHash)
+      this.gameService.createGame(this.storage.currentHash._id, this.game, this.storage.currentHash.address._id)
         .then((result: any) => {
           console.log(result);
           this.submmited = false;
@@ -81,7 +92,7 @@ export class HomePage implements OnInit {
             this.callLogin();
           }
           else if (err && err.error.err == 'You don"t have enough balance') {
-            this.interactionService.createToast('You don"t have enough balance','danger','bottom','toast-customize')
+            this.interactionService.createToast('You don"t have enough balance', 'danger', 'bottom', 'toast-customize')
           }
         });
     }
@@ -98,7 +109,7 @@ export class HomePage implements OnInit {
         completed: false,
         matrix: null,
         data: null,
-        status:''
+        status: ''
       }
       this.valid = true;
       delete this.game.data;
@@ -116,14 +127,14 @@ export class HomePage implements OnInit {
       completed: this.game.completed,
       matrix: this.game.matrix,
       data: this.game.data,
-      status:this.game.status,
+      status: this.game.status,
     }
   }
 
   isValid(game) {
     console.log(this.game);
     this.game = game;
-    if (!this.game.completed && !this.game.playing){
+    if (!this.game.completed && !this.game.playing) {
       this.valid = true;
     }
     else {
@@ -132,7 +143,7 @@ export class HomePage implements OnInit {
   }
 
 
-  onWinStake(winStake){
+  onWinStake(winStake) {
     this.stakeWon = winStake;
   }
 
@@ -149,7 +160,7 @@ export class HomePage implements OnInit {
 
   checkHash() {
     const hash = this.storage.getCurrentHash();
-    console.log("here",hash);
+    console.log("here", hash);
     if (hash && hash.hashId && hash.hashId != null && hash.hashId != '') {
       this.navigateHome(hash.hashId);
     }
@@ -184,19 +195,19 @@ export class HomePage implements OnInit {
 
   checkJWT() {
     this.authService.checkJWT(this.gameHash._id)
-    .then((result: boolean) => {
-      this.validRoute = result;
-      if (result) {
-        this.initGame();
-      }
-      else {
+      .then((result: boolean) => {
+        this.validRoute = result;
+        if (result) {
+          this.initGame();
+        }
+        else {
+          this.callLogin();
+        }
+      })
+      .catch(err => {
         this.callLogin();
-      }
-    })
-    .catch(err => {
-      this.callLogin();
-      this.validRoute = false;
-    });
+        this.validRoute = false;
+      });
   }
 
 
@@ -211,7 +222,7 @@ export class HomePage implements OnInit {
 
   colClicked(col: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }) {
     if (col.col && col.col.color == 'green') {
-      
+
       this.celClicked = 'success-cel';
     }
     else {
@@ -224,31 +235,33 @@ export class HomePage implements OnInit {
     this.interactionService.createLoading('Genrating Your hash Please Wait !!')
       .then(() => {
         this.hashService.createHash()
-        .then((result: any | Hash) => {
-          this.interactionService.hide();
-          if (result && result != false) {
-            this.interactionService.createToast('Your hash Created : ' + result.hashId,'success','bottom','toast-customize')
-            delete result.games;
-            this.storage.saveActiveHash(result);
-            this.navigateHome(result.hashId);
-          }
-          else {
-            this.interactionService.createToast('Something Went Wrong Try Again !','success','bottom','toast-customize')
-          }
-        })
-        .catch(err => {
-          this.interactionService.createToast('Something Went Wrong Try Again !','success','bottom','toast-customize')
-        })
+          .then((result: any | Hash) => {
+            this.interactionService.hide();
+            if (result && result != false) {
+              this.interactionService.createToast('Your hash Created : ' + result.hashId, 'success', 'bottom', 'toast-customize')
+              delete result.games;
+              this.storage.saveActiveHash(result);
+              this.navigateHome(result.hashId);
+            }
+            else {
+              this.interactionService.createToast('Something Went Wrong Try Again !', 'success', 'bottom', 'toast-customize')
+            }
+          })
+          .catch(err => {
+            this.interactionService.createToast('Something Went Wrong Try Again !', 'success', 'bottom', 'toast-customize')
+          })
       })
   }
 
+
+
   cashOut() {
-    if (this.validRoute && this.valid){
+    if (this.validRoute && this.valid && this.game && this.game.status == 'active') {
       this.submmitedCashout = true;
-      this.gameService.cashOut(this.storage.currentHash._id,this.storage.currentHash.address._id)
-        .then((result:any) => {
+      this.gameService.cashOut(this.storage.currentHash._id, this.storage.currentHash.address._id)
+        .then((result: any) => {
           this.submmitedCashout = false;
-          if (result && result != false){
+          if (result && result != false) {
             this.matrixComponent.cashOut(result);
           }
         })
@@ -290,7 +303,7 @@ export class HomePage implements OnInit {
       return await modal.present();
     }
     else {
-      this.interactionService.createToast('You have already changed the password', 'primary', 'bottom','toast-customize');
+      this.interactionService.createToast('You have already changed the password', 'primary', 'bottom', 'toast-customize');
     }
 
   }

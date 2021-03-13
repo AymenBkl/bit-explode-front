@@ -17,7 +17,7 @@ import { ScrollbarThemeModule } from '../directives/scrollbar.directive';
     HomePageRoutingModule,
     ShareModule,
     ReactiveFormsModule,
-    ScrollbarThemeModule
+    ScrollbarThemeModule,
   ],
   declarations: [HomePage]
 })

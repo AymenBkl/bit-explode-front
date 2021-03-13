@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true" [ngClass]="celClicked" appScrollbar>
+<ion-content [fullscreen]="true" [ngClass]="celClicked" appScrollbar  >
   <ion-header [translucent]="true" class="ion-no-border" [ngClass]="celClicked">
     <ion-toolbar [ngClass]="celClicked">
       <ion-title slot="start">
@@ -25,7 +25,7 @@
       </div>
     </ion-toolbar>
   </ion-header>
-  <ion-grid class="ion-align-items-center" *ngIf="validRoute">
+  <ion-grid class="ion-align-items-center" *ngIf="validRoute" >
           <ion-row class="ion-align-self-center" >
                 <ion-col size="12" size-md="7" size-lg="2" offset-lg="3" class="first-col">
                   <ion-text class="segment-header">Bombs</ion-text>

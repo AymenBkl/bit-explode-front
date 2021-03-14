@@ -31,7 +31,6 @@ export class BalanceComponent implements OnInit {
 
 
   ngOnChanges(changes) {
-    console.log("changes");
     this.calculateTotalDeposit();
     this.calculateBalance();
   }
@@ -46,7 +45,6 @@ export class BalanceComponent implements OnInit {
           loseGame = colMatrix.color == 'red' ? true : loseGame;
         })
       })
-      console.log("added");
       this.stakeWon.emit(loseGame ? 0 : balanceGame);
     }
   }

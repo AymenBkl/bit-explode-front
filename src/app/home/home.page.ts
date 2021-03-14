@@ -15,6 +15,7 @@ import { InteractionService } from '../services/interaction.service';
 import { LoginComponent } from '../components/modal/login/login.component';
 import { DepositPage } from '../pages/deposit/deposit.page';
 import { MatrixComponent } from '../components/mines/matrix/matrix.component';
+import { BalanceComponent } from '../components/balance/balance.component';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ export class HomePage implements OnInit {
   stakeWon: number = 0;
   gameType:string = 'bitcoin';
   @ViewChild('matrixComponent') matrixComponent: MatrixComponent;
+  @ViewChild('appBalance') appBalance: BalanceComponent;
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
     private router: Router,
@@ -148,7 +150,6 @@ export class HomePage implements OnInit {
   }
 
   isValid(game) {
-    console.log(this.game);
     this.game = game;
     if (!this.game.completed && !this.game.playing) {
       this.valid = true;
@@ -245,7 +246,7 @@ export class HomePage implements OnInit {
       this.celClicked = 'lose-game';
     }
     this.colClick.push(col);
-    this.gameHash = this.gameHash;
+    this.appBalance.calculateBalance();
   }
 
   async generateHash() {

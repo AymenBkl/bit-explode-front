@@ -41,6 +41,7 @@ export class MatrixComponent implements OnInit,OnChanges {
       if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute && !this.clickedCol) {
         col.submitted = true;
         this.clickedCol = true;
+        
         this.clickCel.emit(true);
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,this.storage.getAddressId(),rowIndex,colIndex,this.next)
           .then((result: any) => {
@@ -161,7 +162,6 @@ export class MatrixComponent implements OnInit,OnChanges {
       this.game.userClick = response.userClick;
       col.value = value;
       this.algorith();
-      this.isValid.emit(this.game);
       if (response.userClick + this.game.numberMines == 25){
         this.winGame(response.indexMines);
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});

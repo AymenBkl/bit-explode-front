@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Col } from 'src/app/interfaces/col';
 import { Deposit } from 'src/app/interfaces/deposit';
 import { Game } from 'src/app/interfaces/game';
+import { Hash } from 'src/app/interfaces/hash';
 
 @Component({
   selector: 'app-balance',
@@ -10,7 +11,7 @@ import { Game } from 'src/app/interfaces/game';
 })
 export class BalanceComponent implements OnInit {
 
-  @Input('deposits') deposits: Deposit[];
+  @Input('gameHash') gameHash: Hash ;
   totalDeposit: number = 0;
   @Input('game') game: Game;
   @Output() stakeWon: EventEmitter<number> = new EventEmitter<number>();
@@ -23,9 +24,12 @@ export class BalanceComponent implements OnInit {
 
   calculateTotalDeposit() {
     this.totalDeposit = 0;
-    this.deposits.map(deposit => {
-      this.totalDeposit +=  deposit.currentBalance;
-    })
+    if (this.gameHash && this.gameHash.address && this.gameHash.address.deposits && this.gameHash.address.deposits.length > 0){
+      this.gameHash.address.deposits.map(deposit => {
+        this.totalDeposit +=  deposit.currentBalance;
+      })
+    }
+    
   }
 
 

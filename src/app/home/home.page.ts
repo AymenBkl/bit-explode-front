@@ -68,7 +68,7 @@ export class HomePage implements OnInit {
     setInterval(() => {
       this.checkRouter(false);
 
-    }, 100000);
+    }, 5000);
   }
 
 
@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
             this.game = result;
           }
           else if (result && result.status == false && result.type == 'addressId'){
-            this.deposit();
+            this.handleAlert();
           }
         })
         .catch(err => {
@@ -106,7 +106,6 @@ export class HomePage implements OnInit {
     this.interactionService.alertWithHandler("Do you want to play for free",'You don"t have enough balance',"CANCEL","PLAY")
       .then((result) => {
         if (result && result != false){
-          console.log('play for free');
           this.game.type = 'test';
           this.createGame();
         }
@@ -274,20 +273,23 @@ export class HomePage implements OnInit {
 
 
   cashOut() {
-    if (this.validRoute && this.valid && this.game && this.game.status == 'active') {
-      this.submmitedCashout = true;
-      this.gameService.cashOut(this.storage.getCurrentHash()._id, this.storage.getAddressId())
-        .then((result: any) => {
-          this.submmitedCashout = false;
-          if (result && result != false) {
-            this.matrixComponent.cashOut(result);
-          }
-        })
-        .catch(err => {
-          this.submmitedCashout = false;
-          console.log(err);
-        })
+    if (this.game.type == 'bitcoin'){
+      if (this.validRoute && this.valid && this.game && this.game.status == 'active') {
+        this.submmitedCashout = true;
+        this.gameService.cashOut(this.storage.getCurrentHash()._id, this.storage.getAddressId())
+          .then((result: any) => {
+            this.submmitedCashout = false;
+            if (result && result != false) {
+              this.matrixComponent.cashOut(result);
+            }
+          })
+          .catch(err => {
+            this.submmitedCashout = false;
+            console.log(err);
+          })
+      }
     }
+    
   }
 
   navigateHome(hashId: string) {

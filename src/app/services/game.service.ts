@@ -15,16 +15,24 @@ export class GameService {
   constructor(private httpClient : HttpClient) { }
 
   createGame(gameHash: string, game: Game,addressId: string) {
-    return new Promise((resolve,reject) => {
-      this.httpClient.post<GameResponse>(environment.url + 'game/creategame', {gameHash: gameHash,game: game,addressId: addressId})
-      .subscribe(gameResponse => {
-        if (gameResponse.status == 200 && gameResponse.success){
-          resolve(this.proceccGameResponseSuccess(gameResponse.msg,gameResponse.game));
-        }
-      },err => {
-        reject(err);
-      })
-    })
+      return new Promise((resolve,reject) => {
+        if (addressId != null && addressId != ''){
+          
+          this.httpClient.post<GameResponse>(environment.url + 'game/creategame', {gameHash: gameHash,game: game,addressId: addressId})
+          .subscribe(gameResponse => {
+            console.log(gameResponse);
+            if (gameResponse.status == 200 && gameResponse.success){
+              resolve(this.proceccGameResponseSuccess(gameResponse.msg,gameResponse.game));
+            }
+          },err => {
+            reject(err);
+          })
+    }
+    else {
+      resolve({status: false,type:'addressId'});
+    }
+  })
+    
   }
 
   clickCol(gameHash: string, gameId: string,addressId:string, indexRow: number, indexCol: number,val: number) {
@@ -57,16 +65,21 @@ export class GameService {
 
   cashOut(gameHash:string,addressId: string) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post<ColClickResponse>(environment.url + 'game/cashout', {gameHash: gameHash,addressId:addressId})
-      .subscribe(cashOutGameResponse => {
-        console.log(cashOutGameResponse);
-        if (cashOutGameResponse.status == 200 && cashOutGameResponse.success){
-          resolve(this.proccesClickCelResponseSuccess(cashOutGameResponse.msg,cashOutGameResponse.response));
-
-        }
-      },err => {
-        reject(err);
-      })
+      if (addressId != null && addressId != ''){
+        this.httpClient.post<ColClickResponse>(environment.url + 'game/cashout', {gameHash: gameHash,addressId:addressId})
+        .subscribe(cashOutGameResponse => {
+          console.log(cashOutGameResponse);
+          if (cashOutGameResponse.status == 200 && cashOutGameResponse.success){
+            resolve(this.proccesClickCelResponseSuccess(cashOutGameResponse.msg,cashOutGameResponse.response));
+  
+          }
+        },err => {
+          reject(err);
+        })
+      }
+      else {
+        resolve({status: false,type:'addressId'});
+      }
     })
   }
 

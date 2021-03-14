@@ -76,14 +76,16 @@ export class HomePage implements OnInit {
     if (this.validRoute && this.valid && !this.game.playing) {
       this.submmited = true;
       this.colClick = [];
-      console.log("hash", this.storage.currentHash)
-      this.gameService.createGame(this.storage.currentHash._id, this.game, this.storage.currentHash.address._id)
+      this.gameService.createGame(this.storage.getCurrentHash()._id, this.game, this.storage.getAddressId())
         .then((result: any) => {
           console.log(result);
           this.submmited = false;
-          if (result && result != false) {
+          if (result && result != false && result.status != false) {
             console.log(result);
             this.game = result;
+          }
+          else if (result && result.status == false && result.type == 'addressId'){
+            this.deposit();
           }
         })
         .catch(err => {
@@ -259,7 +261,7 @@ export class HomePage implements OnInit {
   cashOut() {
     if (this.validRoute && this.valid && this.game && this.game.status == 'active') {
       this.submmitedCashout = true;
-      this.gameService.cashOut(this.storage.currentHash._id, this.storage.currentHash.address._id)
+      this.gameService.cashOut(this.storage.getCurrentHash()._id, this.storage.getAddressId())
         .then((result: any) => {
           this.submmitedCashout = false;
           if (result && result != false) {

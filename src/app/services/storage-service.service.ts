@@ -7,17 +7,24 @@ import { Hash } from '../interfaces/hash';
 })
 export class StorageServiceService {
 
-  currentHash: Hash;
-  currentGame: any;
   constructor() { }
 
   async saveActiveHash(hash: Hash){
-    this.currentHash = hash;
     await localStorage.setItem('currentHash',JSON.stringify(hash));
   }
 
   getCurrentHash(){
-    this.currentHash = JSON.parse(localStorage.getItem('currentHash'));
-    return this.currentHash;
+    let  currentHash : Hash = JSON.parse(localStorage.getItem('currentHash'));
+    return currentHash;
+  }
+
+  getAddressId() {
+    let  currentHash : Hash = JSON.parse(localStorage.getItem('currentHash'));
+    if (currentHash.address && currentHash.address._id){
+      return currentHash.address._id;
+    }
+    else {
+      return '';
+    }
   }
 }

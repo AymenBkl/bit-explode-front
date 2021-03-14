@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
     setInterval(() => {
       this.checkRouter(false);
 
-    }, 1000);
+    }, 100000);
   }
 
 

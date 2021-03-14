@@ -38,6 +38,7 @@ export class HomePage implements OnInit {
   celClicked: string = 'click-cel';
   colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
   stakeWon: number = 0;
+  gameType:string = 'bitcoin';
   @ViewChild('matrixComponent') matrixComponent: MatrixComponent;
   constructor(private activatedRouter: ActivatedRoute,
     private storage: StorageServiceService,
@@ -94,10 +95,22 @@ export class HomePage implements OnInit {
             this.callLogin();
           }
           else if (err && err.error.err == 'You don"t have enough balance') {
-            this.interactionService.createToast('You don"t have enough balance', 'danger', 'bottom', 'toast-customize')
+            this.interactionService.createToast('You don"t have enough balance', 'danger', 'bottom', 'toast-customize');
+            this.handleAlert();
           }
         });
     }
+  }
+
+  handleAlert() {
+    this.interactionService.alertWithHandler("Do you want to play for free",'You don"t have enough balance',"CANCEL","PLAY")
+      .then((result) => {
+        if (result && result != false){
+          console.log('play for free');
+          this.game.type = 'test';
+          this.createGame();
+        }
+      })
   }
 
   initGame() {
@@ -111,7 +124,8 @@ export class HomePage implements OnInit {
         completed: false,
         matrix: null,
         data: null,
-        status: ''
+        status: '',
+        type:this.gameType,
       }
       this.valid = true;
       delete this.game.data;
@@ -130,6 +144,7 @@ export class HomePage implements OnInit {
       matrix: this.game.matrix,
       data: this.game.data,
       status: this.game.status,
+      type:this.gameType
     }
   }
 

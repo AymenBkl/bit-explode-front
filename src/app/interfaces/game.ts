@@ -10,4 +10,5 @@ export interface Game {
     matrix:Col[][];
     data: EncryptedData; 
     status: string;
+    type:string;
 }

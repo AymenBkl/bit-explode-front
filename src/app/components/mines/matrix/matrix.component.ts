@@ -103,6 +103,7 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.game.completed = true;
     this.game.playing = false;
     this.game.status = 'lose';
+    this.game.type = 'bitcoin';
     this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
@@ -160,6 +161,7 @@ export class MatrixComponent implements OnInit,OnChanges {
       this.game.userClick = response.userClick;
       col.value = value;
       this.algorith();
+      this.isValid.emit(this.game);
       if (response.userClick + this.game.numberMines == 25){
         this.winGame(response.indexMines);
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
@@ -188,6 +190,7 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.game.completed = true;
     this.game.playing = false;
     this.game.status = 'win';
+    this.game.type = 'bitcoin';
     this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};

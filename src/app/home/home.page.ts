@@ -245,6 +245,7 @@ export class HomePage implements OnInit {
       this.celClicked = 'lose-game';
     }
     this.colClick.push(col);
+    this.gameHash = this.gameHash;
   }
 
   async generateHash() {

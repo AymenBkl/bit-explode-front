@@ -19,10 +19,7 @@
 #or {
     color:white;
 }
-#address-info{
-    text-align: left;
-    display: inline-block;
-}
+
 
 #address-value{
     text-align: left;
@@ -83,4 +80,29 @@ ion-content {
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+  }
+
+
+  @media only screen and (max-width: 456px) {
+    #address-value{
+      font-size: 11px;
+  }
+
+  #button-copy{
+    font-size: 11px;
+}
+
+    
+  }
+
+  @media only screen and (max-width: 329px) {
+    #address-value{
+      font-size: 9px;
+  }
+
+  #button-copy{
+    font-size: 9px;
+}
+
+    
   }

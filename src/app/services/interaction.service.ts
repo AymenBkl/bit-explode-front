@@ -18,23 +18,18 @@ export class InteractionService {
       showConfirmButton: false,
       width: 600,
       background: this.handleToastBar(type),
+      timer:loading ? 60000 : 4000,
       didOpen: (toast) => {
         if (loading) Swal.showLoading();
 
       }
     })
 
-
     Toast.fire({
       icon: type,
       title: msg
     })
-    if (!loading) {
-      setTimeout(() => {
-        Toast.close()
-      }, 4000);
-    }
-    console.log('toast', Toast);
+    
     return Toast;
   }
 

@@ -123,6 +123,12 @@ export class HomePage implements OnInit {
       })
   }
 
+  playAgain(event){
+    if (event && event == true){
+      this.play();
+    }
+  }
+
   initGame() {
     if (this.validRoute) {
       this.game = {

@@ -22,6 +22,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   @Output() colClick: EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string}> = new EventEmitter<{col:Col,indexRow: number, indexCol: number,data:EncryptedData,mines: string }>();
   @Output() clickCel: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() callLogin: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() playAgain: EventEmitter<boolean> = new EventEmitter<boolean>();
   next: number;
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
@@ -106,7 +107,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   loseGame(indexMines : [{ indexRow: number, indexCol: number }]){
-    this.interactionService.alertMsg('Lose','You Lost The Game','error');
+    this.handleAlert("Lost",'You Lost the Game','warning',"PLAY AGAIN","CANCEL");
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
@@ -116,6 +117,15 @@ export class MatrixComponent implements OnInit,OnChanges {
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
     })
+  }
+
+  handleAlert(msg: string, text: string, icon: string, confirmBtn: string, cancelBtn: string){
+    this.interactionService.alertWithHandler(msg,text,icon,confirmBtn,cancelBtn)
+      .then((result: any) => {
+        if (result && result == true){
+          this.playAgain.emit(true);
+        }
+      })
   }
   
   stakValidation(input: string) {
@@ -194,7 +204,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   winGame(indexMines : [{ indexRow: number, indexCol: number }]){
-    this.interactionService.alertMsg('Win','Congrats You Won The Game','success');
+    this.handleAlert("Won",'Congrats! You Won The Game','success',"PLAY AGAIN","CANCEL");
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;

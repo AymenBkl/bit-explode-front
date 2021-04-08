@@ -64,10 +64,6 @@ export class HomePage implements OnInit {
   async ngOnInit() {
     this.checkHash();
     this.checkRouter(true);
-    setTimeout(() => {
-      this.interactionService.alertMsg('Lose','You Lost The Game','lose');
-
-    },1000)
   }
 
   ionViewDidEnter() {
@@ -117,9 +113,10 @@ export class HomePage implements OnInit {
   }
 
   handleAlert() {
-    this.interactionService.alertWithHandler("Do you want to play for free",'You don"t have enough balance',"CANCEL","PLAY")
-      .then((result) => {
-        if (result && result != false){
+    this.interactionService.alertWithHandler("Do you want to play for free",'You don"t have enough balance','warning',"PLAY TEST","CANCEL")
+      .then((result:any) => {
+        console.log(result);
+        if (result && result.status != false){
           this.game.type = 'test';
           this.createGame();
         }

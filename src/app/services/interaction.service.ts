@@ -12,7 +12,6 @@ export class InteractionService {
     private alertController: AlertController) { }
 
   createToast(msg, type, loading: boolean) {
-
     const Toast = Swal.mixin({
       toast: true,
       position: 'bottom',
@@ -68,33 +67,25 @@ export class InteractionService {
     this.presentingLoadingController = null;
   }
 
-  alertWithHandler(msg, hdr, cancelBtn, confirmBtn) {
-    return new Promise((resolve, reject) => {
-      this.alertController.create({
-        header: hdr,
-        message: msg,
-        animated: true,
-        buttons: [
-          {
-            text: cancelBtn,
-            role: 'cancel',
-            handler: () => {
-              resolve(false);
-            }
-          },
-          {
-            text: confirmBtn,
-            cssClass: 'danger',
-            handler: () => {
-              resolve(true);
-            }
+  alertWithHandler(msg: string, text: string, icon: string, confirmBtn: string, cancelBtn: string) {
+      return new Promise((resolve, reject) => {
+        Swal.fire({
+          title: msg,
+          text: text,
+          icon: icon,
+          showCancelButton: true,
+          confirmButtonText: confirmBtn,
+          cancelButtonText: cancelBtn,
+          backdrop: false,
+        }).then((result) => {
+          console.log(result);
+          if (result.value || result.isConfirmed) {
+            resolve({ status: true });
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            resolve({ status: false });
           }
-        ]
-      }).
-        then((alert) => {
-          alert.present();
-        });
-    });
+        })
+      })
   }
 
 
@@ -128,7 +119,6 @@ export class InteractionService {
         text: msg,
         icon: type,
         timer: 500000,
-        showConfirmButton: false,
         allowOutsideClick: false,
         allowEscapeKey: false
       });
@@ -139,11 +129,10 @@ export class InteractionService {
         title: header,
         text: msg,
         imageUrl: imageUrl,
-        
         timer: 500000,
-        showConfirmButton: false,
         allowOutsideClick: false,
-        allowEscapeKey: false
+        allowEscapeKey: false,
+        backdrop: false,
       });
     }
 

@@ -65,9 +65,9 @@ export class HomePage implements OnInit {
     this.checkHash();
     this.checkRouter(true);
     setTimeout(() => {
-      this.interactionService.alertMsg('Lose','You Lost The Game','error');
+      this.interactionService.alertMsg('Lose','You Lost The Game','lose');
 
-    },6000)
+    },1000)
   }
 
   ionViewDidEnter() {

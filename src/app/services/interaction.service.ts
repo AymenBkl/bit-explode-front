@@ -11,16 +11,14 @@ export class InteractionService {
     private loadingController: LoadingController,
     private alertController: AlertController) { }
 
-  createToast(msg, type,loading:boolean) {
-    
+  createToast(msg, type, loading: boolean) {
+
     const Toast = Swal.mixin({
       toast: true,
-      target: '#custom-target',
       position: 'bottom',
       showConfirmButton: false,
       width: 600,
-      className: "pos-toast-swt",
-      background:this.handleToastBar(type),
+      background: this.handleToastBar(type),
       didOpen: (toast) => {
         if (loading) Swal.showLoading();
 
@@ -35,9 +33,9 @@ export class InteractionService {
     if (!loading) {
       setTimeout(() => {
         Toast.close()
-      },4000);
+      }, 4000);
     }
-    console.log('toast',Toast);
+    console.log('toast', Toast);
     return Toast;
   }
 
@@ -54,9 +52,9 @@ export class InteractionService {
         }).then((loading) => {
           this.presentingLoadingController = loading;
           this.presentingLoadingController.present()
-          .then(() => {
-            resolve(true);
-          });
+            .then(() => {
+              resolve(true);
+            });
         });
       }
     });
@@ -100,8 +98,8 @@ export class InteractionService {
   }
 
 
-  confirmBox(msg:string,text:string,icon:string,confirmBtn:string,cancelBtn:string,handler) {
-    return new Promise((resolve,reject) => {
+  confirmBox(msg: string, text: string, icon: string, confirmBtn: string, cancelBtn: string) {
+    return new Promise((resolve, reject) => {
       Swal.fire({
         title: msg,
         text: text,
@@ -109,12 +107,13 @@ export class InteractionService {
         showCancelButton: true,
         confirmButtonText: confirmBtn,
         cancelButtonText: cancelBtn,
+
       }).then((result) => {
         console.log(result);
         if (result.value || result.isConfirmed) {
-          resolve({status:true});
+          resolve({ status: true });
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            resolve({status:false});
+          resolve({ status: false });
         }
       })
     })
@@ -122,14 +121,33 @@ export class InteractionService {
   }
 
 
-  alertMsg(header:string,msg:string,type) {
-    Swal.fire({
-      header:header,
-      text: msg,
-      icon:type
+  alertMsg(header: string, msg: string, type) {
+    if (type != 'win' && type != 'lose') {
+      Swal.fire({
+        title: header,
+        text: msg,
+        icon: type,
+        timer: 500000,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      });
     }
-      
-    )
+    else {
+      const imageUrl = type == 'win' ? '../../assets/imgs/happy.svg' : '../../assets/imgs/sad-sleepy-emoticon-face-square.svg';
+      Swal.fire({
+        title: header,
+        text: msg,
+        imageUrl: imageUrl,
+        
+        timer: 500000,
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      });
+    }
+
+
   }
 
   showValidationError(error) {
@@ -139,16 +157,16 @@ export class InteractionService {
   }
 
   private handleToastBar(type: string): string {
-    if (type == 'error'){
+    if (type == 'error') {
       return '#d9534f';
     }
-    else if (type == 'success'){
+    else if (type == 'success') {
       return '#5cb85c';
     }
-    else if (type == 'warning'){
+    else if (type == 'warning') {
       return '#f0ad4e';
     }
-    else if (type == 'info'){
+    else if (type == 'info') {
       return '';
     }
     else {
@@ -156,14 +174,14 @@ export class InteractionService {
     }
   }
 
-  displayToast(msg:string,loading:boolean,type:string) {
+  displayToast(msg: string, loading: boolean, type: string) {
     const Toast = Swal.mixin({
       toast: true,
       target: '#custom-target',
       position: 'bottom-start',
       showConfirmButton: false,
       className: "pos-toast-swt",
-      background:this.handleToastBar(type),
+      background: this.handleToastBar(type),
       didOpen: (toast) => {
         if (loading) Swal.showLoading();
 
@@ -178,17 +196,16 @@ export class InteractionService {
     if (!loading) {
       setTimeout(() => {
         Toast.close()
-      },4000);
+      }, 4000);
     }
     return Toast;
 
   }
 
   closeToast(toast) {
-    console.log('toast',toast);
+    console.log('toast');
     if (toast) {
       toast.close();
-
     }
   }
 }

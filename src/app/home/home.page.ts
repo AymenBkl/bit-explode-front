@@ -75,31 +75,39 @@ export class HomePage implements OnInit {
 
 
   createGame() {
-    console.log(this.game, this.valid);
     if (this.validRoute && this.valid && !this.game.playing) {
       this.submmited = true;
       this.colClick = [];
+      this.interactionService.createToast('Checking Game','info',true);
       this.gameService.createGame(this.storage.getCurrentHash()._id, this.game, this.storage.getAddressId())
         .then((result: any) => {
           console.log(result);
-          this.submmited = false;
-          if (result && result != false && result.status != false) {
-            console.log(result);
-            this.game = result;
-          }
-          else if (result && result.status == false && result.type == 'addressId'){
-            this.handleAlert();
-          }
+          setTimeout(() => {
+            this.interactionService.closeToast();
+            this.submmited = false;
+            if (result && result != false && result.status != false) {
+              console.log(result);
+              this.game = result;
+              this.interactionService.createToast('Game Created Succesfully','success',false);
+            }
+            else if (result && result.status == false && result.type == 'addressId'){
+              this.handleAlert();
+            }
+          },5000)
+          
         })
         .catch(err => {
-          this.submmited = false;
-          if (err && err.error == 'Unauthorized') {
-            this.callLogin();
-          }
-          else if (err && err.error.err == 'You don"t have enough balance') {
-            this.interactionService.createToast('You don"t have enough balance', 'warning',false);
-            this.handleAlert();
-          }
+          setTimeout(() => {
+            this.submmited = false;
+            if (err && err.error == 'Unauthorized') {
+              this.callLogin();
+            }
+            else if (err && err.error.err == 'You don"t have enough balance') {
+              this.interactionService.createToast('You don"t have enough balance', 'warning',false);
+              this.handleAlert();
+            }
+          },5000)
+          
         });
     }
   }

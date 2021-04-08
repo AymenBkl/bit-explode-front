@@ -34,22 +34,16 @@ export class InteractionService {
 
 
   async createLoading(msg?) {
-    return new Promise((resolve, reject) => {
-      console.log(this.presentingLoadingController);
-      if (!this.presentingLoadingController) {
-        this.loadingController.create({
-          message: msg,
-          cssClass: 'loading-customize',
-          duration: 100000,
-          spinner: 'circles'
-        }).then((loading) => {
-          this.presentingLoadingController = loading;
-          this.presentingLoadingController.present()
-            .then(() => {
-              resolve(true);
-            });
-        });
-      }
+      Swal.fire({
+        title: 'Loading !',
+        html: msg,// add html attribute if you want or remove
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        backdrop: false,
+        allowEscapeKey: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
     });
   }
 
@@ -71,8 +65,7 @@ export class InteractionService {
           showConfirmButton: true,
           confirmButtonText: confirmBtn,
           cancelButtonText: cancelBtn,
-          backdrop: true,
-          showLoaderOnConfirm: false
+          backdrop: false,
 
         }).then((result) => {
           console.log(result);

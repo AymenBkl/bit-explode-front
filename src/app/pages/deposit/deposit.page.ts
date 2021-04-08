@@ -26,14 +26,13 @@ export class DepositPage implements OnInit {
 
   getHash(){
     this.interactionService.createLoading("Getting Your Address Please Wait")
-      .then(() => {
         this.hashId = this.navParams.get('hashId');
         this.address = this.navParams.get('address');
         console.log(this.address == null && (this.address != null && this.address.address == null))
         if (this.address == null){
           this.bitcoinService.getNewAddress(this.hashId)
           .then((result:any) => {
-            this.interactionService.hide();
+            this.interactionService.closeToast();
             if (result && result != false){
               this.address = result;
             }
@@ -43,6 +42,7 @@ export class DepositPage implements OnInit {
             }
           })
           .catch(err => {
+            this.interactionService.hide();
             this.interactionService.createToast("Something Went Wrong !","error",false);
             this.cancel();
           })
@@ -50,7 +50,6 @@ export class DepositPage implements OnInit {
         else {
           this.interactionService.hide();
         }
-      })
     
   }
 

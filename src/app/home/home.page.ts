@@ -208,12 +208,17 @@ export class HomePage implements OnInit {
   checkRouter(executeJWT: boolean) {
     this.activatedRouter.queryParams.subscribe(params => {
       const gameHash = params["url"];
-      console.log(gameHash);
+      console.log('gameHash',gameHash);
       if (gameHash != null) {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
             console.log('home',result && result != false && result.status && result.status == 'blocked');
-             if (result && result != false) {
+            if (result && result != false && result.status && result.status == 'blocked') {
+              this.validRoute = false;
+              this.gameHash = result;
+              this.interactionService.alertMsg('BLOCKED',"YOU ARE NOT ALLOWED",'error');
+            }
+             else if (result && result != false) {
               this.gameHash = result;
               this.storage.saveActiveHash(this.gameHash);
               //this.callChangePassword()
@@ -275,10 +280,9 @@ export class HomePage implements OnInit {
   async generateHash() {
 
     this.interactionService.createLoading('Genrating Your hash Please Wait !!')
-      .then(() => {
         this.hashService.createHash()
           .then((result: any | Hash) => {
-            this.interactionService.hide();
+            this.interactionService.closeToast();
             if (result && result != false) {
               this.interactionService.createToast('Your hash Created : ' + result.hashId, 'success',false);
               delete result.games;
@@ -290,10 +294,9 @@ export class HomePage implements OnInit {
             }
           })
           .catch(err => {
-            this.interactionService.hide();
+            this.interactionService.closeToast();
             this.interactionService.createToast('Something Went Wrong Try Again !', 'error',false);
           })
-      })
   }
 
 

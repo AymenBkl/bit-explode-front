@@ -4,6 +4,7 @@ import { Col } from 'src/app/interfaces/col';
 import { EncryptedData } from 'src/app/interfaces/encryptedData';
 import { Game } from 'src/app/interfaces/game';
 import { GameService } from 'src/app/services/game.service';
+import { InteractionService } from 'src/app/services/interaction.service';
 import { StorageServiceService } from 'src/app/services/storage-service.service';
 
 @Component({
@@ -25,8 +26,10 @@ export class MatrixComponent implements OnInit,OnChanges {
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
   clickedCol: boolean = false;
+  toast;
   constructor(private storage: StorageServiceService,
-              private gameService: GameService) { }
+              private gameService: GameService,
+              private interactionService: InteractionService) { }
 
   async ngOnInit() {
     await this.initMap();
@@ -38,10 +41,13 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   clickCol(col: Col, rowIndex: number, colIndex: number) {
+
       if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute && !this.clickedCol) {
         col.submitted = true;
         this.clickedCol = true;
-        
+        if (this.toast){
+          this.interactionService.closeToast(this.toast);
+        }
         this.clickCel.emit(true);
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,this.storage.getAddressId(),rowIndex,colIndex,this.next)
           .then((result: any) => {
@@ -100,6 +106,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   loseGame(indexMines : [{ indexRow: number, indexCol: number }]){
+    this.interactionService.alertMsg('Lose','You Lost The Game','error');
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;
@@ -167,12 +174,13 @@ export class MatrixComponent implements OnInit,OnChanges {
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
       }
       else {
+        this.toast = this.interactionService.createToast('You Click Right Cell. Next : ' + this.next,'success',false);
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
       }
       
     }
     else {
-      this.loseGame(response.indexMines)
+      this.loseGame(response.indexMines);
       this.colClick.emit({col:null,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
     }
   }
@@ -186,6 +194,7 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   winGame(indexMines : [{ indexRow: number, indexCol: number }]){
+    this.interactionService.alertMsg('Win','Congrats You Won The Game','success');
     this.activeGame = false;
     this.game.completed = true;
     this.game.playing = false;

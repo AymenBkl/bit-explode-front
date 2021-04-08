@@ -64,6 +64,10 @@ export class HomePage implements OnInit {
   async ngOnInit() {
     this.checkHash();
     this.checkRouter(true);
+    setTimeout(() => {
+      this.interactionService.alertMsg('Lose','You Lost The Game','error');
+
+    },6000)
   }
 
   ionViewDidEnter() {
@@ -78,12 +82,12 @@ export class HomePage implements OnInit {
     if (this.validRoute && this.valid && !this.game.playing) {
       this.submmited = true;
       this.colClick = [];
-      this.interactionService.createToast('Checking Game','info',true);
+      const toast = this.interactionService.createToast('Checking Game','info',true);
       this.gameService.createGame(this.storage.getCurrentHash()._id, this.game, this.storage.getAddressId())
         .then((result: any) => {
           console.log(result);
           setTimeout(() => {
-            this.interactionService.closeToast();
+            this.interactionService.closeToast(toast);
             this.submmited = false;
             if (result && result != false && result.status != false) {
               console.log(result);

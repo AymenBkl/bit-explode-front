@@ -11,7 +11,7 @@ export class InteractionService {
     private loadingController: LoadingController,
     private alertController: AlertController) { }
 
-  async createToast(msg, type,loading:boolean) {
+  createToast(msg, type,loading:boolean) {
     
     const Toast = Swal.mixin({
       toast: true,
@@ -37,6 +37,8 @@ export class InteractionService {
         Toast.close()
       },4000);
     }
+    console.log('toast',Toast);
+    return Toast;
   }
 
 
@@ -121,10 +123,12 @@ export class InteractionService {
 
 
   alertMsg(header:string,msg:string,type) {
-    Swal.fire(
-      header,
-      msg,
-      type
+    Swal.fire({
+      header:header,
+      text: msg,
+      icon:type
+    }
+      
     )
   }
 
@@ -176,11 +180,15 @@ export class InteractionService {
         Toast.close()
       },4000);
     }
+    return Toast;
 
   }
 
-  closeToast() {
-    Swal.close();
+  closeToast(toast) {
+    console.log('toast',toast);
+    if (toast) {
+      toast.close();
 
+    }
   }
 }

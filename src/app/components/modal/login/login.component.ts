@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.submitted = true;
-    this.interactionService.createToast('Login In','info',true);
+    const toast = this.interactionService.createToast('Login In','info',true);
     this.authService.login(this.password,this.hashId)
       .then((result: any) => {
         this.submitted = false;
-        this.interactionService.closeToast();
+        this.interactionService.closeToast(toast);
         if (result && result != false){
           this.modalController.dismiss({loggedIn: true});
           this.interactionService.createToast('WELCOM BACK !','success',false);
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       })
       .catch(err => {
         this.submitted = false;
-        this.interactionService.closeToast();
+        this.interactionService.closeToast(toast);
         console.log(err,err.error)
         if (err && err.error && err.error.err.name == 'IncorrectPasswordError'){
           this.incorrectPassword = true;

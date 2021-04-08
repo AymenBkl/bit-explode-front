@@ -52,11 +52,11 @@ export class ChangePasswordComponent implements OnInit {
 
   changePassword(){
     this.submitted = true;
-    this.interactionService.createToast('Changing Password !','info',true);
+    const toast = this.interactionService.createToast('Changing Password !','info',true);
     this.authService.securePassword(this.changePasswordForm.value.password,this.hashId)
       .then((result: any) => {
         this.submitted = false;
-        this.interactionService.closeToast();
+        this.interactionService.closeToast(toast);
         if (result && result != false){
           this.modalController.dismiss({hash: result});
           this.interactionService.createToast('Password Has been reseted !','success',false);
@@ -66,7 +66,7 @@ export class ChangePasswordComponent implements OnInit {
         }
       })
       .catch(err => {
-        this.interactionService.closeToast();
+        this.interactionService.closeToast(toast);
         this.submitted = false;
         this.interactionService.createToast('Something Went Wrong !','error',false);
       })

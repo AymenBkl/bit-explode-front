@@ -36,12 +36,16 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.submitted = true;
-    const toast = this.interactionService.createToast('Login In','info',true);
+    this.interactionService.createToast('Login In','info',true);
     this.authService.login(this.password,this.hashId)
       .then((result: any) => {
         this.submitted = false;
-        this.interactionService.closeToast(toast);
-        if (result && result != false){
+        this.interactionService.closeToast();
+        if (result && result != false && result.status && result.status == 'blocked'){
+          this.modalController.dismiss({loggedIn: false});
+          this.interactionService.alertMsg('BLOCKED',"YOU NOT ALLOWED TO ACCESS",'error');
+        }
+        else if (result && result != false){
           this.modalController.dismiss({loggedIn: true});
           this.interactionService.createToast('WELCOM BACK !','success',false);
         }
@@ -51,8 +55,8 @@ export class LoginComponent implements OnInit {
       })
       .catch(err => {
         this.submitted = false;
-        this.interactionService.closeToast(toast);
-        console.log(err,err.error)
+        this.interactionService.closeToast();
+        console.log(err)
         if (err && err.error && err.error.err.name == 'IncorrectPasswordError'){
           this.incorrectPassword = true;
           this.interactionService.createToast('Wrong Password !','error',false);

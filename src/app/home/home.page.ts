@@ -78,12 +78,12 @@ export class HomePage implements OnInit {
     if (this.validRoute && this.valid && !this.game.playing) {
       this.submmited = true;
       this.colClick = [];
-      const toast = this.interactionService.createToast('Checking Game','info',true);
+      this.interactionService.createToast('Checking Game','info',true);
       this.gameService.createGame(this.storage.getCurrentHash()._id, this.game, this.storage.getAddressId())
         .then((result: any) => {
           console.log(result);
           setTimeout(() => {
-            this.interactionService.closeToast(toast);
+            this.interactionService.closeToast();
             this.submmited = false;
             if (result && result != false && result.status != false) {
               console.log(result);

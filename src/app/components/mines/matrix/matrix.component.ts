@@ -27,7 +27,6 @@ export class MatrixComponent implements OnInit,OnChanges {
   map: Array<Array<Col>> = [];
   activeGame: boolean = false;
   clickedCol: boolean = false;
-  toast;
   constructor(private storage: StorageServiceService,
               private gameService: GameService,
               private interactionService: InteractionService) { }
@@ -42,18 +41,17 @@ export class MatrixComponent implements OnInit,OnChanges {
   }
 
   clickCol(col: Col, rowIndex: number, colIndex: number) {
-
       if (!col.clicked && !this.game.completed && this.game.playing && this.validRoute && !this.clickedCol) {
         col.submitted = true;
         this.clickedCol = true;
-        if (this.toast){
-          this.interactionService.closeToast(this.toast);
-        }
+        this.interactionService.closeToast();
+        this.interactionService.createToast('Checking Col','info',true);
         this.clickCel.emit(true);
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,this.storage.getAddressId(),rowIndex,colIndex,this.next)
           .then((result: any) => {
             col.submitted = false;
             this.clickedCol = false;
+            this.interactionService.closeToast();
             console.log(result && result != false);
             if (result && result != false) {
               this.affectValueToMap(col,result,rowIndex,colIndex,result.value);
@@ -122,7 +120,8 @@ export class MatrixComponent implements OnInit,OnChanges {
   handleAlert(msg: string, text: string, icon: string, confirmBtn: string, cancelBtn: string){
     this.interactionService.alertWithHandler(msg,text,icon,confirmBtn,cancelBtn)
       .then((result: any) => {
-        if (result && result == true){
+
+        if (result && result.status == true){
           this.playAgain.emit(true);
         }
       })
@@ -184,7 +183,7 @@ export class MatrixComponent implements OnInit,OnChanges {
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:response.data,mines:response.mines});
       }
       else {
-        this.toast = this.interactionService.createToast('You Click Right Cell. Next : ' + this.next,'success',false);
+        this.interactionService.createToast('You Click Right Cell. Next : ' + this.next,'success',false);
         this.colClick.emit({col:col,indexRow:indexRow,indexCol:indexCol,data:null,mines:null});
       }
       

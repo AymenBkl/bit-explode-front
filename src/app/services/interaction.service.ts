@@ -30,7 +30,6 @@ export class InteractionService {
       title: msg
     })
     
-    return Toast;
   }
 
 
@@ -157,39 +156,7 @@ export class InteractionService {
       return '';
     }
   }
-
-  displayToast(msg: string, loading: boolean, type: string) {
-    const Toast = Swal.mixin({
-      toast: true,
-      target: '#custom-target',
-      position: 'bottom-start',
-      showConfirmButton: false,
-      className: "pos-toast-swt",
-      background: this.handleToastBar(type),
-      didOpen: (toast) => {
-        if (loading) Swal.showLoading();
-
-      }
-    })
-
-
-    Toast.fire({
-      icon: type,
-      title: msg
-    })
-    if (!loading) {
-      setTimeout(() => {
-        Toast.close()
-      }, 4000);
-    }
-    return Toast;
-
-  }
-
-  closeToast(toast) {
-    console.log('toast');
-    if (toast) {
-      toast.close();
-    }
+  closeToast() {
+    Swal.close();
   }
 }

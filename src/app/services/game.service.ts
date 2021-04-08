@@ -25,6 +25,7 @@ export class GameService {
               resolve(this.proceccGameResponseSuccess(gameResponse.msg,gameResponse.game));
             }
           },err => {
+            console.log(err);
             reject(err);
           })
     }

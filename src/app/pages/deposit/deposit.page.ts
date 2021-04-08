@@ -38,12 +38,12 @@ export class DepositPage implements OnInit {
               this.address = result;
             }
             else {
-              this.interactionService.createToast("Something Went Wrong !","danger",'bottom','toast-customize');
+              this.interactionService.createToast("Something Went Wrong !","danger",false);
               this.cancel();
             }
           })
           .catch(err => {
-            this.interactionService.createToast("Something Went Wrong !","danger",'bottom','toast-customize');
+            this.interactionService.createToast("Something Went Wrong !","danger",false);
             this.cancel();
           })
         }
@@ -55,11 +55,11 @@ export class DepositPage implements OnInit {
   }
 
   presentToast(){
-    this.interactionService.createToast("Copied To Click Board","success",'bottom','toast-customize');
+    this.interactionService.createToast("Copied To Click Board","success",false);
   }
 
   deposit(){
-    this.interactionService.createToast('<ion-icon name="checkmark-outline"></ion-icon>',"light","middle",'toast-deposit');
+    this.interactionService.createToast('<ion-icon name="checkmark-outline"></ion-icon>',"info",false);
   }
 
   cancel(){

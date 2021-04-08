@@ -36,26 +36,29 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.submitted = true;
+    this.interactionService.createToast('Login In','info',true);
     this.authService.login(this.password,this.hashId)
       .then((result: any) => {
         this.submitted = false;
+        this.interactionService.closeToast();
         if (result && result != false){
           this.modalController.dismiss({loggedIn: true});
-          this.interactionService.createToast('WELCOM BACK !','success','bottom','toast-customize')
+          this.interactionService.createToast('WELCOM BACK !','success',false);
         }
         else {
-          this.interactionService.createToast('Wrong Password !','danger','bottom','toast-customize')
+          this.interactionService.createToast('Wrong Password !','danger',false);
         }
       })
       .catch(err => {
         this.submitted = false;
+        this.interactionService.closeToast();
         console.log(err,err.error)
         if (err && err.error && err.error.err.name == 'IncorrectPasswordError'){
           this.incorrectPassword = true;
-          this.interactionService.createToast('Wrong Password !','danger','bottom','toast-customize')
+          this.interactionService.createToast('Wrong Password !','danger',false);
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !','danger','bottom','toast-customize')
+          this.interactionService.createToast('Something Went Wrong !','danger',false);
         }
       })
   }

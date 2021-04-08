@@ -11,16 +11,31 @@ export class InteractionService {
     private loadingController: LoadingController,
     private alertController: AlertController) { }
 
-  async createToast(msg, clr, pos,appliedclass) {
-    const toast = await this.toastController.create({
-      message: msg,
-      color: clr,
-      position: pos,
-      duration: 1500,
-      animated: true,
-      cssClass: appliedclass,
-    });
-    return await toast.present();
+  async createToast(msg, type,loading:boolean) {
+    
+    const Toast = Swal.mixin({
+      toast: true,
+      target: '#custom-target',
+      position: 'bottom-start',
+      showConfirmButton: false,
+      className: "pos-toast-swt",
+      background:this.handleToastBar(type),
+      didOpen: (toast) => {
+        if (loading) Swal.showLoading();
+
+      }
+    })
+
+
+    Toast.fire({
+      icon: type,
+      title: msg
+    })
+    if (!loading) {
+      setTimeout(() => {
+        Toast.close()
+      },4000);
+    }
   }
 
 
@@ -118,7 +133,7 @@ export class InteractionService {
     )
   }
 
-  private handleSnackBar(type: string): string {
+  private handleToastBar(type: string): string {
     if (type == 'error'){
       return '#d9534f';
     }
@@ -143,7 +158,7 @@ export class InteractionService {
       position: 'bottom-start',
       showConfirmButton: false,
       className: "pos-toast-swt",
-      background:this.handleSnackBar(type),
+      background:this.handleToastBar(type),
       didOpen: (toast) => {
         if (loading) Swal.showLoading();
 

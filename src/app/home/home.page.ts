@@ -97,7 +97,7 @@ export class HomePage implements OnInit {
             this.callLogin();
           }
           else if (err && err.error.err == 'You don"t have enough balance') {
-            this.interactionService.createToast('You don"t have enough balance', 'danger', 'bottom', 'toast-customize');
+            this.interactionService.createToast('You don"t have enough balance', 'warning',false);
             this.handleAlert();
           }
         });
@@ -250,24 +250,25 @@ export class HomePage implements OnInit {
   }
 
   async generateHash() {
+
     this.interactionService.createLoading('Genrating Your hash Please Wait !!')
       .then(() => {
         this.hashService.createHash()
           .then((result: any | Hash) => {
             this.interactionService.hide();
             if (result && result != false) {
-              this.interactionService.createToast('Your hash Created : ' + result.hashId, 'success', 'bottom', 'toast-customize')
+              this.interactionService.createToast('Your hash Created : ' + result.hashId, 'success',false);
               delete result.games;
               this.storage.saveActiveHash(result);
               this.navigateHome(result.hashId);
             }
             else {
-              this.interactionService.createToast('Something Went Wrong Try Again !', 'danger', 'bottom', 'toast-customize')
+              this.interactionService.createToast('Something Went Wrong Try Again !', 'danger',false);
             }
           })
           .catch(err => {
             this.interactionService.hide();
-            this.interactionService.createToast('Something Went Wrong Try Again !', 'danger', 'bottom', 'toast-customize')
+            this.interactionService.createToast('Something Went Wrong Try Again !', 'danger',false);
           })
       })
   }
@@ -325,7 +326,7 @@ export class HomePage implements OnInit {
       return await modal.present();
     }
     else {
-      this.interactionService.createToast('You have already changed the password', 'primary', 'bottom', 'toast-customize');
+      this.interactionService.createToast('You have already changed the password', 'warning',false);
     }
 
   }

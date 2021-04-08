@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           this.interactionService.createToast('WELCOM BACK !','success',false);
         }
         else {
-          this.interactionService.createToast('Wrong Password !','danger',false);
+          this.interactionService.createToast('Wrong Password !','error',false);
         }
       })
       .catch(err => {
@@ -55,10 +55,10 @@ export class LoginComponent implements OnInit {
         console.log(err,err.error)
         if (err && err.error && err.error.err.name == 'IncorrectPasswordError'){
           this.incorrectPassword = true;
-          this.interactionService.createToast('Wrong Password !','danger',false);
+          this.interactionService.createToast('Wrong Password !','error',false);
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !','danger',false);
+          this.interactionService.createToast('Something Went Wrong !','error',false);
         }
       })
   }

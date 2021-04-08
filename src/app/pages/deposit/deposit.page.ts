@@ -38,12 +38,12 @@ export class DepositPage implements OnInit {
               this.address = result;
             }
             else {
-              this.interactionService.createToast("Something Went Wrong !","danger",false);
+              this.interactionService.createToast("Something Went Wrong !","error",false);
               this.cancel();
             }
           })
           .catch(err => {
-            this.interactionService.createToast("Something Went Wrong !","danger",false);
+            this.interactionService.createToast("Something Went Wrong !","error",false);
             this.cancel();
           })
         }

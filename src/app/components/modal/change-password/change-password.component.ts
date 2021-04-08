@@ -62,13 +62,13 @@ export class ChangePasswordComponent implements OnInit {
           this.interactionService.createToast('Password Has been reseted !','success',false);
         }
         else {
-          this.interactionService.createToast('Something Went Wrong !','danger',false);
+          this.interactionService.createToast('Something Went Wrong !','error',false);
         }
       })
       .catch(err => {
         this.interactionService.closeToast();
         this.submitted = false;
-        this.interactionService.createToast('Something Went Wrong !','danger',false);
+        this.interactionService.createToast('Something Went Wrong !','error',false);
       })
   }
 

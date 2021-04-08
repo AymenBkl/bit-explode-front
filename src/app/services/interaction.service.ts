@@ -16,8 +16,9 @@ export class InteractionService {
     const Toast = Swal.mixin({
       toast: true,
       target: '#custom-target',
-      position: 'bottom-start',
+      position: 'bottom',
       showConfirmButton: false,
+      width: 600,
       className: "pos-toast-swt",
       background:this.handleToastBar(type),
       didOpen: (toast) => {

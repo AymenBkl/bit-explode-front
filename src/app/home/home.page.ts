@@ -263,12 +263,12 @@ export class HomePage implements OnInit {
               this.navigateHome(result.hashId);
             }
             else {
-              this.interactionService.createToast('Something Went Wrong Try Again !', 'danger',false);
+              this.interactionService.createToast('Something Went Wrong Try Again !', 'error',false);
             }
           })
           .catch(err => {
             this.interactionService.hide();
-            this.interactionService.createToast('Something Went Wrong Try Again !', 'danger',false);
+            this.interactionService.createToast('Something Went Wrong Try Again !', 'error',false);
           })
       })
   }

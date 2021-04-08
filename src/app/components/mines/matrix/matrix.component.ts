@@ -49,6 +49,7 @@ export class MatrixComponent implements OnInit,OnChanges {
         this.clickCel.emit(true);
           this.gameService.clickCol(this.storage.getCurrentHash()._id,this.game._id,this.storage.getAddressId(),rowIndex,colIndex,this.next)
           .then((result: any) => {
+            console.log('clickCel',result);
             col.submitted = false;
             this.clickedCol = false;
             this.interactionService.closeToast();
@@ -62,6 +63,9 @@ export class MatrixComponent implements OnInit,OnChanges {
             this.clickedCol = false;
             if (err && err.error == 'Unauthorized'){
               this.callLogin.emit(true);
+            }
+            else if (err && err.error.msg == 'you are blocked'){
+              this.interactionService.alertMsg('BLOCKED',"YOU ARE NOT ALLOWED",'error');
             }
           })
     };

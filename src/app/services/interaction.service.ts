@@ -68,9 +68,12 @@ export class InteractionService {
           text: text,
           icon: icon,
           showCancelButton: true,
+          showConfirmButton: true,
           confirmButtonText: confirmBtn,
           cancelButtonText: cancelBtn,
-          backdrop: false,
+          backdrop: true,
+          showLoaderOnConfirm: false
+
         }).then((result) => {
           console.log(result);
           if (result.value || result.isConfirmed) {

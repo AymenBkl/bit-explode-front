@@ -7,4 +7,5 @@ export interface Hash {
     games: Game[];
     passwordChange: boolean;
     address: Address;
+    status:string;
 }

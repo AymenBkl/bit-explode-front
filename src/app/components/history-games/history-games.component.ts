@@ -39,6 +39,9 @@ export class HistoryGamesComponent implements OnInit {
           this.historyGames = result.games;
         }
       })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
 }

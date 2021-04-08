@@ -41,11 +41,7 @@ export class LoginComponent implements OnInit {
       .then((result: any) => {
         this.submitted = false;
         this.interactionService.closeToast();
-        if (result && result != false && result.status && result.status == 'blocked'){
-          this.modalController.dismiss({loggedIn: false});
-          this.interactionService.alertMsg('BLOCKED',"YOU NOT ALLOWED TO ACCESS",'error');
-        }
-        else if (result && result != false){
+         if (result && result != false){
           this.modalController.dismiss({loggedIn: true});
           this.interactionService.createToast('WELCOM BACK !','success',false);
         }

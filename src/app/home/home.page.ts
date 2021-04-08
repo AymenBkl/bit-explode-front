@@ -68,7 +68,9 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     setInterval(() => {
-      this.checkRouter(false);
+      if (this.gameHash && this.gameHash.status && this.gameHash.status != 'blocked'){
+        this.checkRouter(false);
+      }
 
     }, 5000);
   }
@@ -93,11 +95,12 @@ export class HomePage implements OnInit {
             else if (result && result.status == false && result.type == 'addressId'){
               this.handleAlert();
             }
-          },5000)
+          },100)
           
         })
         .catch(err => {
           setTimeout(() => {
+            this.interactionService.closeToast();
             this.submmited = false;
             if (err && err.error == 'Unauthorized') {
               this.callLogin();
@@ -106,7 +109,11 @@ export class HomePage implements OnInit {
               this.interactionService.createToast('You don"t have enough balance', 'warning',false);
               this.handleAlert();
             }
-          },5000)
+            else if (err && err.error.msg == 'you are blocked'){
+              this.interactionService.alertMsg('BLOCKED',"YOU ARE NOT ALLOWED",'error');
+            }
+          },100)
+          
           
         });
     }
@@ -205,7 +212,8 @@ export class HomePage implements OnInit {
       if (gameHash != null) {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
-            if (result && result != false) {
+            console.log('home',result && result != false && result.status && result.status == 'blocked');
+             if (result && result != false) {
               this.gameHash = result;
               this.storage.saveActiveHash(this.gameHash);
               //this.callChangePassword()

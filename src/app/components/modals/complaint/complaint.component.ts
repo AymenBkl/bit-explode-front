@@ -22,10 +22,11 @@ export class ComplaintComponent implements OnInit {
   buildCompliantForm() {
     this.compliantForm = this.formBuilder.group({
       description : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      type: ['', [Validators.required, Validators.minLength(6)]],
+      type: ['nes', [Validators.required, Validators.minLength(6)]],
     });
     this.compliantForm.valueChanges
       .subscribe(user => {
+        console.log("user",user);
         //this.formErrors = onValueChanged(user, this.compliantForm);
       });
   }

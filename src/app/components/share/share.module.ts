@@ -11,6 +11,7 @@ import { LogComponent } from '../log/log.component';
 import { ChangePasswordComponent } from '../modal/change-password/change-password.component';
 import { LoginComponent } from '../modal/login/login.component';
 import { BalanceComponent } from '../balance/balance.component';
+import { ComplaintComponent } from '../modals/complaint/complaint.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BalanceComponent } from '../balance/balance.component';
     LogComponent,
     ChangePasswordComponent,
     LoginComponent,
-    BalanceComponent
+    BalanceComponent,
+    ComplaintComponent
   ],
   exports: [
     AppHeaderComponent,
@@ -31,7 +33,8 @@ import { BalanceComponent } from '../balance/balance.component';
     LogComponent,
     ChangePasswordComponent,
     LoginComponent,
-    BalanceComponent
+    BalanceComponent,
+    ComplaintComponent
   ],
   imports: [
     IonicModule,

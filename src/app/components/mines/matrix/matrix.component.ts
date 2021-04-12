@@ -65,7 +65,15 @@ export class MatrixComponent implements OnInit,OnChanges {
               this.callLogin.emit(true);
             }
             else if (err && err.error.msg == 'you are blocked'){
-              this.interactionService.alertMsg('BLOCKED',"YOU ARE NOT ALLOWED",'error');
+              this.interactionService.confirmBox("YOU ARE NOT ALLOWED",'BLOCKED', 'error','MAKE COMPLAINT','OK')
+              .then((result:any)=> {
+                if (result && result.status == true){
+                  console.log("complaint modal");
+                }
+                else {
+                  console.log("cancel");
+                }
+              });
             }
           })
     };

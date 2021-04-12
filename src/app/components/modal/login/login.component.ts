@@ -42,7 +42,15 @@ export class LoginComponent implements OnInit {
         this.submitted = false;
         this.interactionService.closeToast();
         if (result && result != false && result.status && result.status == 'blocked') {
-          this.interactionService.alertMsg('BLOCKED', "YOU ARE NOT ALLOWED", 'error');
+          this.interactionService.confirmBox("YOU ARE NOT ALLOWED",'BLOCKED', 'error','MAKE COMPLAINT','OK')
+            .then((result:any)=> {
+              if (result && result.status == true){
+                console.log("complaint modal");
+              }
+              else {
+                console.log("cancel");
+              }
+            });
         }
         else if (result && result != false) {
           this.modalController.dismiss({ loggedIn: true });

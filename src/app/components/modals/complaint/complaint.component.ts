@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-complaint',
@@ -7,8 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComplaintComponent implements OnInit {
 
-  constructor() { }
+  compliantForm: FormGroup;
+  formErrors: any;
+  submitted = false;
+  validationErrors: {errmsg , errcode};
+  constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.buildCompliantForm();
+  }
+
+
+  buildCompliantForm() {
+    this.compliantForm = this.formBuilder.group({
+      username : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      password : ['', [Validators.required, Validators.minLength(6)]],
+      remember : false
+    });
+    this.compliantForm.valueChanges
+      .subscribe(user => {
+        //this.formErrors = onValueChanged(user, this.compliantForm);
+      });
+  }
 
 }

@@ -16,6 +16,7 @@ import { LoginComponent } from '../components/modal/login/login.component';
 import { DepositPage } from '../pages/deposit/deposit.page';
 import { MatrixComponent } from '../components/mines/matrix/matrix.component';
 import { BalanceComponent } from '../components/balance/balance.component';
+import { ComplaintComponent } from '../components/modals/complaint/complaint.component';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +40,7 @@ export class HomePage implements OnInit {
   celClicked: string = 'click-cel';
   colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
   stakeWon: number = 0;
-  gameType:string = 'bitcoin';
+  gameType: string = 'bitcoin';
   @ViewChild('matrixComponent') matrixComponent: MatrixComponent;
   @ViewChild('appBalance') appBalance: BalanceComponent;
   constructor(private activatedRouter: ActivatedRoute,
@@ -68,11 +69,11 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     setInterval(() => {
-      if (this.gameHash && this.gameHash.status && this.gameHash.status != 'blocked'){
+      if (this.gameHash && this.gameHash.status && this.gameHash.status != 'blocked') {
         this.checkRouter(false);
       }
 
-    }, 5000);
+    }, 50000);
   }
 
 
@@ -80,7 +81,7 @@ export class HomePage implements OnInit {
     if (this.validRoute && this.valid && !this.game.playing) {
       this.submmited = true;
       this.colClick = [];
-      this.interactionService.createToast('Checking Game','info',true);
+      this.interactionService.createToast('Checking Game', 'info', true);
       this.gameService.createGame(this.storage.getCurrentHash()._id, this.game, this.storage.getAddressId())
         .then((result: any) => {
           console.log(result);
@@ -90,13 +91,13 @@ export class HomePage implements OnInit {
             if (result && result != false && result.status != false) {
               console.log(result);
               this.game = result;
-              this.interactionService.createToast('Game Created Succesfully','success',false);
+              this.interactionService.createToast('Game Created Succesfully', 'success', false);
             }
-            else if (result && result.status == false && result.type == 'addressId'){
+            else if (result && result.status == false && result.type == 'addressId') {
               this.handleAlert();
             }
-          },100)
-          
+          }, 100)
+
         })
         .catch(err => {
           setTimeout(() => {
@@ -106,32 +107,32 @@ export class HomePage implements OnInit {
               this.callLogin();
             }
             else if (err && err.error.err == 'You don"t have enough balance') {
-              this.interactionService.createToast('You don"t have enough balance', 'warning',false);
+              this.interactionService.createToast('You don"t have enough balance', 'warning', false);
               this.handleAlert();
             }
-            else if (err && err.error.msg == 'you are blocked'){
-              this.interactionService.alertMsg('BLOCKED',"YOU ARE NOT ALLOWED",'error');
+            else if (err && err.error.msg == 'you are blocked') {
+              this.complaintForm();
             }
-          },100)
-          
-          
+          }, 100)
+
+
         });
     }
   }
 
   handleAlert() {
-    this.interactionService.alertWithHandler("Do you want to play for free",'You don"t have enough balance','warning',"PLAY TEST","CANCEL")
-      .then((result:any) => {
+    this.interactionService.alertWithHandler("Do you want to play for free", 'You don"t have enough balance', 'warning', "PLAY TEST", "CANCEL")
+      .then((result: any) => {
         console.log(result);
-        if (result && result.status != false){
+        if (result && result.status != false) {
           this.game.type = 'test';
           this.createGame();
         }
       })
   }
 
-  playAgain(event){
-    if (event && event == true){
+  playAgain(event) {
+    if (event && event == true) {
       this.play();
     }
   }
@@ -148,7 +149,7 @@ export class HomePage implements OnInit {
         matrix: null,
         data: null,
         status: '',
-        type:this.gameType,
+        type: this.gameType,
       }
       this.valid = true;
       delete this.game.data;
@@ -167,7 +168,7 @@ export class HomePage implements OnInit {
       matrix: this.game.matrix,
       data: this.game.data,
       status: this.game.status,
-      type:this.gameType
+      type: this.gameType
     }
   }
 
@@ -208,17 +209,17 @@ export class HomePage implements OnInit {
   checkRouter(executeJWT: boolean) {
     this.activatedRouter.queryParams.subscribe(params => {
       const gameHash = params["url"];
-      console.log('gameHash',gameHash);
+      console.log('gameHash', gameHash);
       if (gameHash != null) {
         this.hashService.checkHash(gameHash)
           .then((result: any) => {
-            console.log('home',result && result != false && result.status && result.status == 'blocked');
+            console.log('home', result && result != false && result.status && result.status == 'blocked');
             if (result && result != false && result.status && result.status == 'blocked') {
               this.validRoute = false;
               this.gameHash = result;
-              this.interactionService.alertMsg('BLOCKED',"YOU ARE NOT ALLOWED",'error');
+              this.complaintForm();
             }
-             else if (result && result != false) {
+            else if (result && result != false) {
               this.gameHash = result;
               this.storage.saveActiveHash(this.gameHash);
               //this.callChangePassword()
@@ -237,6 +238,29 @@ export class HomePage implements OnInit {
     })
   }
 
+
+  async complaintForm() {
+    this.interactionService.confirmBox("YOU ARE NOT ALLOWED", 'BLOCKED', 'error', 'MAKE COMPLAINT', 'OK')
+      .then(async (result: any) => {
+        if (result && result.status == true) {
+          this.validRoute = false;
+          this.valid = false;
+          const modal = await this.modalCntrl.create({
+            component: ComplaintComponent,
+            backdropDismiss: false,
+          });
+          modal.onDidDismiss()
+            .then(data => {
+              console.log(data);
+            });
+          return await modal.present();
+        }
+        else {
+          console.log("cancel");
+        }
+      });
+
+  }
 
   checkJWT() {
     this.authService.checkJWT(this.gameHash._id)
@@ -280,29 +304,29 @@ export class HomePage implements OnInit {
   async generateHash() {
 
     this.interactionService.createLoading('Genrating Your hash Please Wait !!')
-        this.hashService.createHash()
-          .then((result: any | Hash) => {
-            this.interactionService.closeToast();
-            if (result && result != false) {
-              this.interactionService.createToast('Your hash Created : ' + result.hashId, 'success',false);
-              delete result.games;
-              this.storage.saveActiveHash(result);
-              this.navigateHome(result.hashId);
-            }
-            else {
-              this.interactionService.createToast('Something Went Wrong Try Again !', 'error',false);
-            }
-          })
-          .catch(err => {
-            this.interactionService.closeToast();
-            this.interactionService.createToast('Something Went Wrong Try Again !', 'error',false);
-          })
+    this.hashService.createHash()
+      .then((result: any | Hash) => {
+        this.interactionService.closeToast();
+        if (result && result != false) {
+          this.interactionService.createToast('Your hash Created : ' + result.hashId, 'success', false);
+          delete result.games;
+          this.storage.saveActiveHash(result);
+          this.navigateHome(result.hashId);
+        }
+        else {
+          this.interactionService.createToast('Something Went Wrong Try Again !', 'error', false);
+        }
+      })
+      .catch(err => {
+        this.interactionService.closeToast();
+        this.interactionService.createToast('Something Went Wrong Try Again !', 'error', false);
+      })
   }
 
 
 
   cashOut() {
-    if (this.game.type == 'bitcoin'){
+    if (this.game.type == 'bitcoin') {
       if (this.validRoute && this.valid && this.game && this.game.status == 'active') {
         this.submmitedCashout = true;
         this.gameService.cashOut(this.storage.getCurrentHash()._id, this.storage.getAddressId())
@@ -318,7 +342,7 @@ export class HomePage implements OnInit {
           })
       }
     }
-    
+
   }
 
   navigateHome(hashId: string) {
@@ -352,7 +376,7 @@ export class HomePage implements OnInit {
       return await modal.present();
     }
     else {
-      this.interactionService.createToast('You have already changed the password', 'warning',false);
+      this.interactionService.createToast('You have already changed the password', 'warning', false);
     }
 
   }

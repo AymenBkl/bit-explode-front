@@ -1,3 +1,21 @@
-<p>
-  complaint works!
-</p>
+<form novalidate [formGroup]="compliantForm" class="form" >
+  <ion-item lines="none" class="ion-input">
+    <ion-icon name="people-circle"></ion-icon>
+    <ion-input placeHolder="Username" formControlName="username"></ion-input>
+  </ion-item>
+  <ion-label class="label-error" *ngIf="formErrors && formErrors.username">{{formErrors.username}}</ion-label>
+  <ion-item lines="none" class="ion-input">
+    <ion-icon name="lock-closed"></ion-icon>
+    <ion-input placeHolder="Password" formControlName="password"></ion-input>
+  </ion-item>
+  <ion-label class="label-error" *ngIf="formErrors && formErrors.password">{{formErrors.password}}</ion-label>
+  <ion-item lines="none" class="ion-input">
+    <ion-checkbox class="ion-checkbox" formControlName="remember"></ion-checkbox>
+    <div class="icon-holder">
+      <ion-icon name="ellipse" [ngClass]="compliantForm.value.remember == true ? 'icon-checked' : 'icon'"></ion-icon>
+    </div>
+    <ion-label class="label checkbox-label">Remember Me </ion-label>
+  </ion-item>
+  <ion-label class="label-error" *ngIf="validationErrors && validationErrors.errcode == 2">
+    {{validationErrors.errmsg}}</ion-label> 
+</form>

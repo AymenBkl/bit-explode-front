@@ -1,18 +1,32 @@
-<form [formGroup]="compliantForm" (ngSubmit)="compliantForm">
-  <div class="password">
-    <ion-select formControlName="type" placeHolder="type" interface="popover">
-      <ion-select-option value="nes">NES</ion-select-option>
-      <ion-select-option value="n64">Nintendo64</ion-select-option>
-      <ion-select-option value="ps">PlayStation</ion-select-option>
-      <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-      <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-      <ion-select-option value="snes">SNES</ion-select-option>
-    </ion-select>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
-  </div>
-  <div class="password">
-    <ion-input formControlName="description" placeHolder="description"></ion-input>
-    <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{formErrors.confirmPassword}}
-    </ion-label>
-  </div>
-</form>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-title class="title text-primary">Complaint</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-md="10" size-lg='8' offset-md='1' offset-lg='2'>
+        <form [formGroup]="compliantForm" (ngSubmit)="compliantForm" class="form">
+          <div class="password">
+            <ion-select formControlName="type" placeHolder="type" interface="popover">
+              <ion-select-option value="nes">NES</ion-select-option>
+              <ion-select-option value="n64">Nintendo64</ion-select-option>
+              <ion-select-option value="ps">PlayStation</ion-select-option>
+              <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+              <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+              <ion-select-option value="snes">SNES</ion-select-option>
+            </ion-select>
+            <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
+          </div>
+          <div class="password">
+            <ion-textarea formControlName="description" placeHolder="description" rows="10" cols="20"></ion-textarea>
+            <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{formErrors.confirmPassword}}
+            </ion-label>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

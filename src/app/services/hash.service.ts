@@ -49,20 +49,18 @@ export class HashService {
 
   makeComplaint(complaint: Complaint) {
     return new Promise((resolve,reject) => {
-      console.log(complaint)
-      /**this.httpClient.post<HashResponse>(environment.url + 'hash/createcomplaint',{})
+      this.httpClient.post<HashResponse>(environment.url + 'hash/createcomplaint',{complaint:complaint})
       .subscribe(hashResponse => {
         console.log(hashResponse);
         if (hashResponse.status == 200 && hashResponse.success){
-          this.authService.saveToken(hashResponse.msg);
-          resolve(hashResponse.hash);
+          resolve(true);
         }
-        else if (hashResponse.status == 404 && !hashResponse.success){
+        else if (hashResponse.status != 200 && !hashResponse.success){
           resolve(false);
         }
       },err => {
         reject(err);
-      })**/
+      })
     })
   }
 

@@ -250,7 +250,7 @@ export class HomePage implements OnInit {
             backdropDismiss: true,
             componentProps: {
               type: 'access',
-              hashId:this.gameHash.hashId
+              hashId:this.gameHash._id
             }
           });
           modal.onDidDismiss()

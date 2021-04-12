@@ -21,9 +21,8 @@ export class ComplaintComponent implements OnInit {
 
   buildCompliantForm() {
     this.compliantForm = this.formBuilder.group({
-      username : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      password : ['', [Validators.required, Validators.minLength(6)]],
-      remember : false
+      description : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      type: ['', [Validators.required, Validators.minLength(6)]],
     });
     this.compliantForm.valueChanges
       .subscribe(user => {

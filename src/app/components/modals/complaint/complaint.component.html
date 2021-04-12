@@ -1,21 +1,18 @@
-<form novalidate [formGroup]="compliantForm" class="form" >
-  <ion-item lines="none" class="ion-input">
-    <ion-icon name="people-circle"></ion-icon>
-    <ion-input placeHolder="Username" formControlName="username"></ion-input>
-  </ion-item>
-  <ion-label class="label-error" *ngIf="formErrors && formErrors.username">{{formErrors.username}}</ion-label>
-  <ion-item lines="none" class="ion-input">
-    <ion-icon name="lock-closed"></ion-icon>
-    <ion-input placeHolder="Password" formControlName="password"></ion-input>
-  </ion-item>
-  <ion-label class="label-error" *ngIf="formErrors && formErrors.password">{{formErrors.password}}</ion-label>
-  <ion-item lines="none" class="ion-input">
-    <ion-checkbox class="ion-checkbox" formControlName="remember"></ion-checkbox>
-    <div class="icon-holder">
-      <ion-icon name="ellipse" [ngClass]="compliantForm.value.remember == true ? 'icon-checked' : 'icon'"></ion-icon>
-    </div>
-    <ion-label class="label checkbox-label">Remember Me </ion-label>
-  </ion-item>
-  <ion-label class="label-error" *ngIf="validationErrors && validationErrors.errcode == 2">
-    {{validationErrors.errmsg}}</ion-label> 
+<form [formGroup]="compliantForm" (ngSubmit)="compliantForm">
+  <div class="password">
+    <ion-select formControlName="type" placeHolder="type" interface="popover">
+      <ion-select-option value="nes">NES</ion-select-option>
+      <ion-select-option value="n64">Nintendo64</ion-select-option>
+      <ion-select-option value="ps">PlayStation</ion-select-option>
+      <ion-select-option value="genesis">Sega Genesis</ion-select-option>
+      <ion-select-option value="saturn">Sega Saturn</ion-select-option>
+      <ion-select-option value="snes">SNES</ion-select-option>
+    </ion-select>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
+  </div>
+  <div class="password">
+    <ion-input formControlName="description" placeHolder="description"></ion-input>
+    <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{formErrors.confirmPassword}}
+    </ion-label>
+  </div>
 </form>

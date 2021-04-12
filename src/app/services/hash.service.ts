@@ -4,6 +4,7 @@ import { Hash } from '../interfaces/hash';
 import { environment } from 'src/environments/environment';
 import { HashResponse } from '../interfaces/HashResponse';
 import { AuthServiceService } from './auth-service.service';
+import { Complaint } from '../interfaces/complaint';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,25 @@ export class HashService {
       },err => {
         reject(err);
       })
+    })
+  }
+
+  makeComplaint(complaint: Complaint) {
+    return new Promise((resolve,reject) => {
+      console.log(complaint)
+      /**this.httpClient.post<HashResponse>(environment.url + 'hash/createcomplaint',{})
+      .subscribe(hashResponse => {
+        console.log(hashResponse);
+        if (hashResponse.status == 200 && hashResponse.success){
+          this.authService.saveToken(hashResponse.msg);
+          resolve(hashResponse.hash);
+        }
+        else if (hashResponse.status == 404 && !hashResponse.success){
+          resolve(false);
+        }
+      },err => {
+        reject(err);
+      })**/
     })
   }
 

@@ -247,7 +247,11 @@ export class HomePage implements OnInit {
           this.valid = false;
           const modal = await this.modalCntrl.create({
             component: ComplaintComponent,
-            backdropDismiss: false,
+            backdropDismiss: true,
+            componentProps: {
+              type: 'access',
+              hashId:this.gameHash.hashId
+            }
           });
           modal.onDidDismiss()
             .then(data => {

@@ -9,7 +9,7 @@ ion-content {
     color: #0275d8;
     font-size: 42px;
     font-weight: bold;
-    height: 150px;
+    height: 120px;
 }
 
 .form {
@@ -37,7 +37,8 @@ ion-textarea {
     --border-radius: 15px;
     border-radius: 15px;
     padding: 10px;
-    
+    margin-bottom: 30px;
+
 
 }
 
@@ -51,4 +52,11 @@ ion-item {
     text-align: left;
     margin-bottom: 15px;
     margin-left: 5px;
+}
+
+.button {
+    --background:white;
+    color:#152620;
+    font-weight: bold;
+    
 }

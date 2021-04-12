@@ -7,22 +7,21 @@
     </ion-row>
     <ion-row>
       <ion-col size="12" size-md="10" size-lg='8' offset-md='1' offset-lg='2'>
-        <form [formGroup]="compliantForm" (ngSubmit)="compliantForm" class="form">
-          <div class="password">
+        <form [formGroup]="compliantForm" (ngSubmit)="makeComplaint()" class="form">
+          <div>
             <div class="label-form">
-              <ion-label >Type</ion-label>
+              <ion-label >Complaint Type</ion-label>
             </div>
-            <ion-select value="brown" formControlName="type" placeHolder="type" interface="popover" mode="ios" >
-              <ion-select-option value="nes">NES</ion-select-option>
-              <ion-select-option value="n64">Nintendo64</ion-select-option>
-              <ion-select-option value="ps">PlayStation</ion-select-option>
-              <ion-select-option value="genesis">Sega Genesis</ion-select-option>
-              <ion-select-option value="saturn">Sega Saturn</ion-select-option>
-              <ion-select-option value="snes">SNES</ion-select-option>
+            <ion-select formControlName="type" placeHolder="type" interface="popover" mode="ios" >
+              <ion-select-option value="withdraw">WITHDRAW</ion-select-option>
+              <ion-select-option value="access">ACCESS</ion-select-option>
+              <ion-select-option value="deposit">DEPOSIT</ion-select-option>
+              <ion-select-option value="game">GAME</ion-select-option>
+              <ion-select-option value="balance">BALANCE</ion-select-option>
             </ion-select>
             <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
           </div>
-          <div class="password">
+          <div >            
             <div class="label-form">
               <ion-label >What't your concern ? </ion-label>
             </div>
@@ -30,6 +29,10 @@
             <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{formErrors.confirmPassword}}
             </ion-label>
           </div>
+          <ion-button class="button" [disabled]="compliantForm.invalid || submitted " type="submit" shape="round" expand="block">
+            <ion-label *ngIf="!submitted">Make Complaint</ion-label>
+            <ion-spinner name="bubbles" *ngIf="submitted"></ion-spinner>
+          </ion-button>
         </form>
       </ion-col>
     </ion-row>

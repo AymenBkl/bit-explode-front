@@ -20,6 +20,7 @@ import { InterceptorService, UnauthorizedInterceptor } from './services/intercep
 import { AuthServiceService } from './services/auth-service.service';
 import { ScrollbarThemeModule } from './directives/scrollbar.directive';
 import { BitcoinService } from './services/bitcoin.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { BitcoinService } from './services/bitcoin.service';
     CustomFormsModule,
     ShareModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     StatusBar,

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HashResponse } from '../interfaces/HashResponse';
 import { AuthServiceService } from './auth-service.service';
 import { Complaint } from '../interfaces/complaint';
+import { ComplaintResponse } from '../interfaces/complaintResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,26 @@ export class HashService {
           resolve(true);
         }
         else if (hashResponse.status != 200 && !hashResponse.success){
+          resolve(false);
+        }
+      },err => {
+        reject(err);
+      })
+    })
+  }
+
+
+  complaints(hashId:string) {
+    return new Promise((resolve,reject) => {
+      this.httpClient.get<ComplaintResponse>(environment.url + 'hash/complaints?hashId=' + hashId)
+      .subscribe(complaintResponse => {
+        if (complaintResponse.status == 200 && complaintResponse.success){
+          resolve(complaintResponse.complaints);
+        }
+        else if (complaintResponse.status == 404 && !complaintResponse.success){
+          resolve({status:'NOT FOUND'});
+        }
+        else {
           resolve(false);
         }
       },err => {

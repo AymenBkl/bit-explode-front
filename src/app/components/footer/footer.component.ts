@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { Hash } from 'src/app/interfaces/hash';
+import { StorageServiceService } from 'src/app/services/storage-service.service';
+import { ComplaintComponent } from '../modals/complaint/complaint.component';
 
 @Component({
   selector: 'app-footer',
@@ -6,9 +11,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  test : Date = new Date();
+  gameHash: Hash;
+  constructor(private router: Router,
+              private storageService: StorageServiceService,
+              private modalCntrl: ModalController) { }
 
-  constructor() { }
+  ngOnInit() {
+    this.getHash();
+  }
 
-  ngOnInit() {}
+  getHash() {
+    this.gameHash = this.storageService.getCurrentHash();
+  }
+
+  goTo(router: string){
+    this.router.navigate(['/home']);
+  }
+
+  async makeComplaint() {
+    const modal = await this.modalCntrl.create({
+      component: ComplaintComponent,
+      backdropDismiss: true,
+      componentProps: {
+        type: '',
+        hashId:this.gameHash._id
+      }
+    });
+    modal.onDidDismiss()
+      .then(data => {
+        console.log(data);
+      });
+    return await modal.present();
+  }
 
 }

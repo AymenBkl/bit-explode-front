@@ -20,7 +20,7 @@ export class InteractionService {
       background: this.handleToastBar(type),
       timer:loading ? 60000 : 4000,
       didOpen: (toast) => {
-        if (loading) Swal.showLoading();
+        if (loading == true) Swal.showLoading();
 
       }
     })

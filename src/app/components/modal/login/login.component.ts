@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { InteractionService } from 'src/app/services/interaction.service';
+import { ComplaintComponent } from '../../modals/complaint/complaint.component';
 
 @Component({
   selector: 'app-login',
@@ -42,15 +43,7 @@ export class LoginComponent implements OnInit {
         this.submitted = false;
         this.interactionService.closeToast();
         if (result && result != false && result.status && result.status == 'blocked') {
-          this.interactionService.confirmBox("YOU ARE NOT ALLOWED",'BLOCKED', 'error','MAKE COMPLAINT','OK')
-            .then((result:any)=> {
-              if (result && result.status == true){
-                console.log("complaint modal");
-              }
-              else {
-                console.log("cancel");
-              }
-            });
+          this.complaintForm();
         }
         else if (result && result != false) {
           this.modalController.dismiss({ loggedIn: true });
@@ -72,5 +65,30 @@ export class LoginComponent implements OnInit {
           this.interactionService.createToast('Something Went Wrong !', 'error', false);
         }
       })
+  }
+
+  async complaintForm() {
+    this.interactionService.confirmBox("YOU ARE NOT ALLOWED", 'BLOCKED', 'error', 'MAKE COMPLAINT', 'OK')
+      .then(async (result: any) => {
+        if (result && result.status == true) {
+          const modal = await this.modalController.create({
+            component: ComplaintComponent,
+            backdropDismiss: true,
+            componentProps: {
+              type: 'access',
+              hashId:this.hashId
+            }
+          });
+          modal.onDidDismiss()
+            .then(data => {
+              console.log(data);
+            });
+          return await modal.present();
+        }
+        else {
+          console.log("cancel");
+        }
+      });
+
   }
 }

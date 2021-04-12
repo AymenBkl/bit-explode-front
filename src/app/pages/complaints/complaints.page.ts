@@ -63,6 +63,7 @@ export class ComplaintsPage implements OnInit {
         
       })
       .catch(err => {
+        this.loaded = true;
         this.interactionService.createToast('Something Went Wrong !', 'error', false);
       })
   }
@@ -79,20 +80,19 @@ export class ComplaintsPage implements OnInit {
             if (result && result != false) {
               this.validRoute = true;
               this.gameHash = result;
-              this.getComplaints();
               if (executeJWT) {
                 this.checkJWT();
               }
             }
             else {
               this.validRoute = false;
-              //this.router.navigate(['/home']);
+              this.router.navigate(['/home']);
             }
           })
       }
       else {
         this.validRoute = false;
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       }
   }
 

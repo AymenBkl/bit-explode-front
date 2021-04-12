@@ -26,7 +26,7 @@ export class FooterComponent implements OnInit {
   }
 
   goTo(router: string){
-    this.router.navigate(['/home']);
+    this.router.navigate([router]);
   }
 
   async makeComplaint() {

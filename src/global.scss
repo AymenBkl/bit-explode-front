@@ -100,4 +100,15 @@
     text-align: center;
     font-size: 40px;
   }
+
+  .select-interface-option {
+    border-bottom: none;
+    --border-width: 0;
+    --inner-border-width: 0;
+    --background-hover: #152620;
+    --background-hover-opacity: 1;
+    --color-hover	:white;
+    --background-focused:#152620;
+    --background-focused-opacity:1;
+  }
   

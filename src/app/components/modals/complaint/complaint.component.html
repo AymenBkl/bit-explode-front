@@ -9,7 +9,10 @@
       <ion-col size="12" size-md="10" size-lg='8' offset-md='1' offset-lg='2'>
         <form [formGroup]="compliantForm" (ngSubmit)="compliantForm" class="form">
           <div class="password">
-            <ion-select formControlName="type" placeHolder="type" interface="popover">
+            <div class="label-form">
+              <ion-label >Type</ion-label>
+            </div>
+            <ion-select formControlName="type" placeHolder="type" interface="popover" mode="ios">
               <ion-select-option value="nes">NES</ion-select-option>
               <ion-select-option value="n64">Nintendo64</ion-select-option>
               <ion-select-option value="ps">PlayStation</ion-select-option>
@@ -20,7 +23,10 @@
             <ion-label class="label-error" *ngIf="formErrors && formErrors.password">*{{formErrors.password}}</ion-label>
           </div>
           <div class="password">
-            <ion-textarea formControlName="description" placeHolder="description" rows="10" cols="20"></ion-textarea>
+            <div class="label-form">
+              <ion-label >What't your concern ? </ion-label>
+            </div>
+            <ion-textarea formControlName="description" placeHolder="Complaint" rows="10" cols="20"></ion-textarea>
             <ion-label class="label-error" *ngIf="formErrors && formErrors.confirmPassword">*{{formErrors.confirmPassword}}
             </ion-label>
           </div>

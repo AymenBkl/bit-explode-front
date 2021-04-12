@@ -24,6 +24,13 @@ ion-select {
     margin-bottom: 30px;
 }
 
+ion-select-popover {
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
 ion-textarea {
     --background: white;
     color: black;
@@ -32,4 +39,16 @@ ion-textarea {
     padding: 10px;
     
 
+}
+
+ion-item {
+    border-bottom: none;
+}
+
+.label-form {
+    color: white;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+    margin-left: 5px;
 }

@@ -44,6 +44,7 @@ export class ComplaintsPage implements OnInit {
     this.interactionService.createToast('Getting Your Complaints', 'info', true);
     this.hashService.complaints(this.gameHash._id)
       .then((result: any) => {
+        console.log(result);
         this.loaded = true;
         this.interactionService.closeToast();
         if (result && !result.status && result != false){

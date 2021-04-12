@@ -22,3 +22,44 @@ ion-header {
       font-size: 31px;
       font-weight: bold;
   }
+  table {
+    background-color: #283136;
+    width: 100% !important;
+    table-layout: fixed !important;
+  
+  
+  }
+  
+  th, td {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    background-color: #283136;
+    color: white;
+  }
+  
+  tr.detail-row {
+    background-color: #283136;
+    height: 0;
+  }
+
+  #filter {
+      margin-bottom: 15px;
+  }
+
+  ::ng-deep .mat-paginator {
+    background-color: #283136 !important;
+    color:white !important;
+  }
+  
+  ::ng-deep .mat-icon-button {
+    color:white !important;
+  }
+  
+  ::ng-deep .mat-select-value-text {
+    color:white !important;
+  }
+  ::ng-deep .mat-select-arrow {
+    color:white !important;
+  
+  }

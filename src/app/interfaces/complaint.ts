@@ -3,4 +3,5 @@ export interface Complaint {
     createdAt:string;
     type:string;
     description:string;
+    status:string;
 }

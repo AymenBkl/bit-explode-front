@@ -19,7 +19,10 @@
 
           <div class="card-body">
             <div class="table-responsive">
-              
+              <ion-item *ngIf="loaded && gameHash"  id="filter" lines="none">
+                <mat-label><i class="nc-icon nc-zoom-split"></i></mat-label>
+                <ion-input (keyup)="applyFilter($event)" placeholder="Ex. Hello Admin" #input></ion-input>
+              </ion-item>
               <ngx-skeleton-loader count="20" *ngIf="!loaded"></ngx-skeleton-loader>
               <table class="table" mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
                 class="mat-elevation-z8"
@@ -57,7 +60,7 @@
               <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons
                 *ngIf="loaded && complaints">
               </mat-paginator>
-              <div class="n-complaint">
+              <div class="n-complaint" *ngIf="!complaints || (complaints && complaints.length == 0)">
                 <mat-label>No Complaints</mat-label>
               </div>
             </div>

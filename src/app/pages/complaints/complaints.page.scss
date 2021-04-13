@@ -65,11 +65,29 @@ ion-header {
   }
 
   .response {
-
+    width: 100%;
+    min-height: 70px;
   }
 
   .response-content {
+    width: 100%;
+    display: block;
+    font-size: 20px;
+  }
 
+  .response-note {
+      margin-top: 15px;
+      text-align: left;
+      width: 100%;
+      display: block;
+      margin-bottom: 15px;
+  }
+
+  .response-status{
+    text-align: left;
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
   }
 
   .no-response {

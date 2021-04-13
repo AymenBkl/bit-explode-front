@@ -1,60 +1,65 @@
 <ion-footer class="footer">
-  <div class="container-fluid">
-          <ul>
+      <ion-col size="12" size-md="6" size-lg="3" >
+        <ul>
 
-              <li>
-                  <a (click)="goTo('home')">
-                      Bit Explode
-                  </a>
-              </li>
-              <li>
-                  <a >
-                     Blog
-                  </a>
-              </li>
-              <li>
-                  <a >
-                      Licenses
-                  </a>
-              </li>
-            </ul>
-            
-            <ul *ngIf="gameHash">
-              <li>
-                  <a (click)="goTo('complaints')">
-                      Complaints
-                  </a>
-              </li>
-              <li>
-                  <a >
-                     Withdraws
-                  </a>
-              </li>
-              <li>
-                  <a >
-                      Deposits
-                  </a>
-              </li>
-              <li>
-                <a >
-                    Feedback
+            <li>
+                <a (click)="goTo('home')">
+                    Bit Explode
                 </a>
             </li>
-            </ul>
+            <li>
+                <a >
+                   Blog
+                </a>
+            </li>
+            <li>
+                <a >
+                    Licenses
+                </a>
+            </li>
+          </ul>
+          </ion-col>
+          <ion-col size="12" size-md="6" size-lg="3" offset-lg='2'>
             <ul *ngIf="gameHash">
-              <li>
-                  <a (click)="makeComplaint()">
-                      Make a Complaint
-                  </a>
-              </li>
-              <li>
+                <li>
+                    <a (click)="goTo('complaints')">
+                        Complaints
+                    </a>
+                </li>
+                <li>
+                    <a >
+                       Withdraws
+                    </a>
+                </li>
+                <li>
+                    <a >
+                        Deposits
+                    </a>
+                </li>
+                <li>
                   <a >
-                     Give Us Feedback
+                      Feedback
                   </a>
               </li>
-            </ul>
+              </ul>
+          </ion-col>
+          
+      <ion-col size="12" size-md="12" size-lg="3" offset-lg='2'>
+        <ul *ngIf="gameHash">
+            <li>
+                <a (click)="makeComplaint()">
+                    Make a Complaint
+                </a>
+            </li>
+            <li>
+                <a >
+                   Give Us Feedback
+                </a>
+            </li>
+          </ul>
+      </ion-col>
+            
       <div class="pull-right">
           &copy; {{test | date: 'yyyy'}}, made with <i class="fa fa-heart heart"></i> by <a>Bit Explode</a>
       </div>
-  </div>
 </ion-footer>

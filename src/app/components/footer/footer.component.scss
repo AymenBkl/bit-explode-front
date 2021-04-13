@@ -5,12 +5,13 @@ a {
 li {
     color:white  !important;
     display: inline-block;
-    margin-left: 42px;
+    margin-left: 15px;
 }
 
 ul {
     color:white  !important;
     display: inline-block;
+    padding: 3px;
 }
 
 .pull-right {
@@ -18,4 +19,8 @@ ul {
     width: 100%;
     text-align: center;
     color:gray;
+}
+
+li:first-child {
+    margin-left: 0px;
 }

@@ -4,25 +4,28 @@ import { LoginComponent } from "../components/modal/login/login.component";
 import { Address } from "../interfaces/address";
 import { DepositPage } from "../pages/deposit/deposit.page";
 
-export async function changePassword(modalCntrl: ModalController,gameHashPasswordCahnged: boolean,gameHashId: string) {
-    const modal = await modalCntrl.create({
-        component: ChangePasswordComponent,
-        backdropDismiss: false,
-        cssClass: 'changePassword',
-        componentProps: {
-          passwordchanged: gameHashPasswordCahnged,
-          hashId: gameHashId
-        }
-      });
-      modal.onDidDismiss()
-        .then(data => {
-          this.gameHash.passwordChange = true;
-        });
-      return await modal.present();
+export  function changePassword(modalCntrl: ModalController,gameHashPasswordCahnged: boolean,gameHashId: string) {
+    return new Promise(async (resolve,reject) => {
+        const modal = await modalCntrl.create({
+            component: ChangePasswordComponent,
+            backdropDismiss: false,
+            cssClass: 'changePassword',
+            componentProps: {
+              passwordchanged: gameHashPasswordCahnged,
+              hashId: gameHashId
+            }
+          });
+          modal.onDidDismiss()
+            .then(data => {
+              resolve(true)
+            });
+          await modal.present();
+    })
+    
 } 
 
 
-export async function loginModal(modalCntrl: ModalController,gameHashPasswordCahnged: boolean,gameHashId: string) {
+export  function loginModal(modalCntrl: ModalController,gameHashPasswordCahnged: boolean,gameHashId: string) {
     return new Promise(async (resolve,reject) => {
         const modal = await modalCntrl.create({
             component: LoginComponent,
@@ -49,7 +52,7 @@ export async function loginModal(modalCntrl: ModalController,gameHashPasswordCah
 }
 
 
-export async function depositModal(modalCntrl: ModalController,gameHashAddress: Address,gameHashId: string) {
+export  function depositModal(modalCntrl: ModalController,gameHashAddress: Address,gameHashId: string) {
     return new Promise(async (resolve,reject) => {
         const modal = await modalCntrl.create({
             component: DepositPage,

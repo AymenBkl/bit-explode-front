@@ -83,6 +83,7 @@ export class HomePage implements OnInit {
     if (!this.game.playing && this.game.status != 'active'){
       this.game.type = this.gameType;
     }
+    console.log(this.game.type)
   }
 
 
@@ -374,6 +375,11 @@ export class HomePage implements OnInit {
   async callChangePassword() {
     if (!this.gameHash.passwordChange) {
       changePassword(this.modalCntrl,this.gameHash.passwordChange,this.gameHash.hashId)
+        .then((result:any) => {
+          if (result && result == true) {
+            this.gameHash.passwordChange = true;
+          }
+        })
     }
     else {
       this.interactionService.createToast('You have already changed the password', 'warning', false);

@@ -57,6 +57,7 @@ export class InteractionService {
 
   alertWithHandler(msg: string, text: string, icon: string, confirmBtn: string, cancelBtn: string) {
       return new Promise((resolve, reject) => {
+        setTimeout(() => {
         Swal.fire({
           title: msg,
           text: text,
@@ -66,7 +67,7 @@ export class InteractionService {
           confirmButtonText: confirmBtn,
           cancelButtonText: cancelBtn,
           backdrop: false,
-
+          showLoaderOnConfirm:false,
         }).then((result) => {
           console.log(result);
           if (result.value || result.isConfirmed) {
@@ -75,7 +76,9 @@ export class InteractionService {
             resolve({ status: false });
           }
         })
+      },500);
       })
+      
   }
 
 
@@ -88,6 +91,7 @@ export class InteractionService {
         showCancelButton: true,
         confirmButtonText: confirmBtn,
         cancelButtonText: cancelBtn,
+        showLoaderOnConfirm:false,
 
       }).then((result) => {
         console.log(result);

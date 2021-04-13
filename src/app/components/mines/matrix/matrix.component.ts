@@ -133,7 +133,6 @@ export class MatrixComponent implements OnInit,OnChanges {
   handleAlert(msg: string, text: string, icon: string, confirmBtn: string, cancelBtn: string){
     this.interactionService.alertWithHandler(msg,text,icon,confirmBtn,cancelBtn)
       .then((result: any) => {
-
         if (result && result.status == true){
           this.playAgain.emit(true);
         }

@@ -59,13 +59,13 @@
                 <app-matrix  [game]="game" [validRoute]='validRoute' (nextValue)='nextValue($event)'
                   (isValid)="isValid($event)" (newGame)="newGame($event)" (colClick)="colClicked($event)" (clickCel)="celClick($event)" (callLogin)="callLogin()" (playAgain)='playAgain($event)' #matrixComponent></app-matrix>
                 <ion-row>
-                  <ion-col size="6" >
+                  <ion-col size="6" class="col" >
                     <ion-button class="button-play" expand="full" [disabled]="(game && (game.playing || submmited)) && valid" (click)="play()" >
                       <ion-text *ngIf="!submmited">Play</ion-text>
                       <ion-spinner name="bubbles" *ngIf="submmited"></ion-spinner>
                     </ion-button>
                   </ion-col>
-                  <ion-col size="6">
+                  <ion-col size="6" class="col-1">
                     <ion-button class="button-play cashout" expand="full" (click)='cashOut()' [disabled]="game.status != 'active' || submmitedCashout || game.type == 'test'" >
                       <ion-text *ngIf="!submmitedCashout">Cashout</ion-text>
                       <ion-spinner name="bubbles" *ngIf="submmitedCashout"></ion-spinner>

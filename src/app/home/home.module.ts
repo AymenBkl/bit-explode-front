@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { ShareModule } from '../components/share/share.module';
 import { ScrollbarThemeModule } from '../directives/scrollbar.directive';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -18,6 +19,8 @@ import { ScrollbarThemeModule } from '../directives/scrollbar.directive';
     ShareModule,
     ReactiveFormsModule,
     ScrollbarThemeModule,
+    MatFormFieldModule,
+
   ],
   declarations: [HomePage]
 })

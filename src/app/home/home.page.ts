@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
   celClicked: string = 'click-cel';
   colClick: { col: Col, indexRow: number, indexCol: number, data: EncryptedData, mines: string }[] = [];
   stakeWon: number = 0;
-  gameType: string = 'bitcoin';
+  gameType: string = 'test';
   @ViewChild('matrixComponent') matrixComponent: MatrixComponent;
   @ViewChild('appBalance') appBalance: BalanceComponent;
   constructor(private activatedRouter: ActivatedRoute,
@@ -74,6 +74,15 @@ export class HomePage implements OnInit {
       }
 
     }, 50000);
+  }
+
+  toggled() {
+    if (this.gameType== 'bitcoin') {
+      this.gameType = 'test';
+    }
+    else {
+      this.gameType = 'bitcoin';
+    }
   }
 
 

@@ -4,7 +4,12 @@
       <ion-title slot="start">
         BitExplode Home
       </ion-title>
-      <ion-buttons slot="end">
+      <ion-buttons slot="end" >
+        <div class="toggle">
+          <mat-label [ngStyle]="{'color' : gameType == 'test' ? '#4D4D4D' : '#F7931A'}">{{gameType == 'test' ? 'Points' : 'CryptoCurrency'}}</mat-label>
+          <ion-toggle [checked]='gameType == "bitcoin" ? true : false ' (ionChange)='toggled()'></ion-toggle>
+        </div>
+
         <ion-button  id="button-header-play" size="large">
           Play   
         </ion-button>

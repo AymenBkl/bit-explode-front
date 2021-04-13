@@ -17,6 +17,24 @@
   padding-right: 0px;
 }
 
+.toggle {
+  vertical-align: middle;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  margin-top: 30px;
+}
+
+ion-toggle {
+  --background-checked:#F7931A;
+  --background:#4D4D4D;
+  --handle-background:#F7931A;
+  --handle-background-checked:#4D4D4D;
+}
+
+
 
 
 .lose-game {

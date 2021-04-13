@@ -4,4 +4,8 @@ export interface Complaint {
     type:string;
     description:string;
     status:string;
+    response: {
+        note:string;
+        status:string;
+    }
 }

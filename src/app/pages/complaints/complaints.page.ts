@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -16,6 +17,13 @@ import { StorageServiceService } from 'src/app/services/storage-service.service'
   selector: 'app-complaints',
   templateUrl: './complaints.page.html',
   styleUrls: ['./complaints.page.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ComplaintsPage implements OnInit {
 
@@ -26,6 +34,7 @@ export class ComplaintsPage implements OnInit {
   complaints: Complaint[];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  expandedElement: any;
   loaded: boolean = false;
   constructor(
     private hashService: HashService,

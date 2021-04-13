@@ -64,6 +64,41 @@ ion-header {
   
   }
 
+  tr.detail-row {
+    height: 0;
+  }
+  
+  tr.element-row:not(.expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+  }
+  
+  .element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .element-detail {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      text-align: center !important;
+      justify-content: center;
+      height: 83px;
+      align-items: center;
+  }
+  
+  .element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+
   .response {
     width: 100%;
     min-height: 70px;

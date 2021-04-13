@@ -16,6 +16,7 @@ export class MatrixComponent implements OnInit,OnChanges {
 
   @Input('validRoute') validRoute:boolean;
   @Input('game') game: Game;
+  @Input('gameType') gameType: string;
   @Output() nextValue: EventEmitter<number> = new EventEmitter<number>();
   @Output() isValid: EventEmitter<Game> = new EventEmitter<Game>();
   @Output() newGame: EventEmitter<Game> = new EventEmitter<Game>();
@@ -122,7 +123,7 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.game.completed = true;
     this.game.playing = false;
     this.game.status = 'lose';
-    this.game.type = 'bitcoin';
+    this.game.type = this.gameType;
     this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};
@@ -220,7 +221,7 @@ export class MatrixComponent implements OnInit,OnChanges {
     this.game.completed = true;
     this.game.playing = false;
     this.game.status = 'win';
-    this.game.type = 'bitcoin';
+    this.game.type = this.gameType;
     this.isValid.emit(this.game);
     indexMines.map(col => {
       this.map[col.indexRow][col.indexCol] = {color: 'red',value:0,clicked: true,submitted:false};

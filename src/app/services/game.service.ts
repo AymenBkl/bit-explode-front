@@ -17,7 +17,6 @@ export class GameService {
   createGame(gameHash: string, game: Game,addressId: string) {
       return new Promise((resolve,reject) => {
         if (addressId != null && addressId != '' || game.type == 'test'){
-          
           this.httpClient.post<GameResponse>(environment.url + 'game/creategame', {gameHash: gameHash,game: game,addressId: addressId})
           .subscribe(gameResponse => {
             console.log(gameResponse);

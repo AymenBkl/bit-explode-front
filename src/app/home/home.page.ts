@@ -83,6 +83,9 @@ export class HomePage implements OnInit {
     else {
       this.gameType = 'bitcoin';
     }
+    if (!this.game.playing && this.game.status != 'active'){
+      this.game.type = this.gameType;
+    }
   }
 
 
@@ -91,6 +94,7 @@ export class HomePage implements OnInit {
       this.submmited = true;
       this.colClick = [];
       this.interactionService.createToast('Checking Game', 'info', true);
+      console.log(this.game);
       this.gameService.createGame(this.storage.getCurrentHash()._id, this.game, this.storage.getAddressId())
         .then((result: any) => {
           console.log(result);

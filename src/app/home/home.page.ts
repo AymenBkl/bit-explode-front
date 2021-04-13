@@ -7,16 +7,13 @@ import { GameService } from '../services/game.service';
 import { HashService } from '../services/hash.service';
 import { Hash } from '../interfaces/hash';
 import { EncryptedData } from '../interfaces/encryptedData';
-import { ClickCel } from '../interfaces/clickCel';
 import { AuthServiceService } from '../services/auth-service.service';
 import { ModalController } from '@ionic/angular';
-import { ChangePasswordComponent } from '../components/modal/change-password/change-password.component';
 import { InteractionService } from '../services/interaction.service';
-import { LoginComponent } from '../components/modal/login/login.component';
-import { DepositPage } from '../pages/deposit/deposit.page';
 import { MatrixComponent } from '../components/mines/matrix/matrix.component';
 import { BalanceComponent } from '../components/balance/balance.component';
 import { ComplaintComponent } from '../components/modals/complaint/complaint.component';
+import { changePassword, loginModal,depositModal } from '../functions/modals';
 
 @Component({
   selector: 'app-home',
@@ -376,21 +373,7 @@ export class HomePage implements OnInit {
 
   async callChangePassword() {
     if (!this.gameHash.passwordChange) {
-      const modal = await this.modalCntrl.create({
-        component: ChangePasswordComponent,
-        backdropDismiss: false,
-        cssClass: 'changePassword',
-        componentProps: {
-          passwordchanged: this.gameHash.passwordChange,
-          hashId: this.gameHash.hashId
-        }
-      });
-      modal.onDidDismiss()
-        .then(data => {
-          console.log(data);
-          this.gameHash.passwordChange = true;
-        });
-      return await modal.present();
+      changePassword(this.modalCntrl,this.gameHash.passwordChange,this.gameHash.hashId)
     }
     else {
       this.interactionService.createToast('You have already changed the password', 'warning', false);
@@ -401,45 +384,24 @@ export class HomePage implements OnInit {
   async callLogin() {
     this.validRoute = false;
     this.valid = false;
-    const modal = await this.modalCntrl.create({
-      component: LoginComponent,
-      backdropDismiss: false,
-      cssClass: 'login',
-      componentProps: {
-        passwordchanged: this.gameHash.passwordChange,
-        hashId: this.gameHash.hashId
-      }
-    });
-    modal.onDidDismiss()
-      .then(data => {
-        console.log(data);
-        if (data.data && data.data.loggedIn) {
+    loginModal(this.modalCntrl,this.gameHash.passwordChange,this.gameHash.hashId)
+      .then((result) => {
+        if (result) {
           this.validRoute = true;
           this.initGame();
         }
-      });
-    return await modal.present();
+      })
 
   }
 
   async deposit() {
-    const modal = await this.modalCntrl.create({
-      component: DepositPage,
-      cssClass: 'deposit',
-      componentProps: {
-        hashId: this.gameHash.hashId,
-        address: this.gameHash.address
-      }
-    });
-    modal.onDidDismiss()
-      .then(data => {
-        console.log(data);
-        if (data.data && data.data.loggedIn) {
+    depositModal(this.modalCntrl,this.gameHash.address,this.gameHash.hashId)
+      .then((result) => {
+        if (result) {
           this.validRoute = true;
           this.initGame();
         }
-      });
-    return await modal.present();
+      })
   }
 
   display() {

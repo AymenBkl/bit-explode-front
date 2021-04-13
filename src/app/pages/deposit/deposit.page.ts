@@ -25,7 +25,7 @@ export class DepositPage implements OnInit {
   }
 
   getHash(){
-    this.interactionService.createLoading("Getting Your Address Please Wait")
+        this.interactionService.createLoading("Getting Your Address Please Wait")
         this.hashId = this.navParams.get('hashId');
         this.address = this.navParams.get('address');
         console.log(this.address == null && (this.address != null && this.address.address == null))
@@ -48,7 +48,7 @@ export class DepositPage implements OnInit {
           })
         }
         else {
-          this.interactionService.hide();
+          this.interactionService.closeToast();
         }
     
   }

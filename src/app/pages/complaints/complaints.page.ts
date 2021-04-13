@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoginComponent } from 'src/app/components/modal/login/login.component';
+import { loginModal } from 'src/app/functions/modals';
 import { Complaint } from 'src/app/interfaces/complaint';
 import { Hash } from 'src/app/interfaces/hash';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
@@ -56,20 +57,20 @@ export class ComplaintsPage implements OnInit {
         console.log(result);
         this.loaded = true;
         this.interactionService.closeToast();
-        if (result && !result.status && result != false){
+        if (result && !result.status && result != false) {
           this.interactionService.createToast('Complaints Loadded', 'success', false);
           this.complaints = result;
           this.dataSource = new MatTableDataSource(result);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
         }
-        else if (result &&  result.status && result.status == 'NOT FOUND'){
+        else if (result && result.status && result.status == 'NOT FOUND') {
           this.interactionService.createToast('You have no Complaints', 'warning', false);
         }
         else {
           this.interactionService.createToast('Something Went Wrong !', 'error', false);
         }
-        
+
       })
       .catch(err => {
         this.loaded = true;
@@ -79,30 +80,30 @@ export class ComplaintsPage implements OnInit {
 
 
   checkRouter(executeJWT: boolean) {
-      const gameHash = this.storageService.getCurrentHash();
-      console.log('gameHash', gameHash);
-      if (gameHash && gameHash.hashId) {
-        this.hashService.checkHash(gameHash.hashId)
-          .then((result: any) => {
-            console.log(result);
+    const gameHash = this.storageService.getCurrentHash();
+    console.log('gameHash', gameHash);
+    if (gameHash && gameHash.hashId) {
+      this.hashService.checkHash(gameHash.hashId)
+        .then((result: any) => {
+          console.log(result);
 
-            if (result && result != false) {
-              this.validRoute = true;
-              this.gameHash = result;
-              if (executeJWT) {
-                this.checkJWT();
-              }
+          if (result && result != false) {
+            this.validRoute = true;
+            this.gameHash = result;
+            if (executeJWT) {
+              this.checkJWT();
             }
-            else {
-              this.validRoute = false;
-              this.router.navigate(['/home']);
-            }
-          })
-      }
-      else {
-        this.validRoute = false;
-        this.router.navigate(['/home']);
-      }
+          }
+          else {
+            this.validRoute = false;
+            this.router.navigate(['/home']);
+          }
+        })
+    }
+    else {
+      this.validRoute = false;
+      this.router.navigate(['/home']);
+    }
   }
 
 
@@ -125,25 +126,13 @@ export class ComplaintsPage implements OnInit {
 
   async callLogin() {
     this.validRoute = false;
-    const modal = await this.modalCntrl.create({
-      component: LoginComponent,
-      backdropDismiss: false,
-      cssClass: 'login',
-      componentProps: {
-        passwordchanged: this.gameHash.passwordChange,
-        hashId: this.gameHash.hashId
-      }
-      
-    });
-    modal.onDidDismiss()
-    .then(data => {
-      console.log(data);
-      if (data.data && data.data.loggedIn) {
-        this.validRoute = true;
-        this.getComplaints();
-      }
-    });
-  return await modal.present();
+    loginModal(this.modalCntrl, this.gameHash.passwordChange, this.gameHash.hashId)
+      .then((result) => {
+        if (result) {
+          this.validRoute = true;
+          this.getComplaints();
+        }
+      })
   }
 
   applyFilter(event: Event) {
@@ -151,5 +140,5 @@ export class ComplaintsPage implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  
+
 }

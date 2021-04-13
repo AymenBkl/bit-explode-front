@@ -31,7 +31,8 @@ export class ComplaintComponent implements OnInit {
     this.compliantForm = this.formBuilder.group({
       description : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(1000)]],
       type: [selectedType, [Validators.required]],
-      hashId:[this.navParams.get('hashId'),Validators.required]
+      hashId:[this.navParams.get('hashId'),Validators.required],
+      status:['in progress']
     });
     
   }

@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoginComponent } from 'src/app/components/modal/login/login.component';
+import { complaintForm } from 'src/app/functions/handlers';
 import { loginModal } from 'src/app/functions/modals';
 import { Complaint } from 'src/app/interfaces/complaint';
 import { Deposit } from 'src/app/interfaces/deposits';
@@ -93,8 +94,12 @@ export class DepositsPage implements OnInit {
         this.hashService.checkHash(gameHash.hashId)
           .then((result: any) => {
             console.log(result);
-  
-            if (result && result != false) {
+            if (result && result != false && result.status && result.status == 'blocked') {
+              this.validRoute = false;
+              this.gameHash = result;
+              this.complaintForm();
+            }
+            else if (result && result != false) {
               this.validRoute = true;
               this.gameHash = result;
               if (executeJWT) {
@@ -145,6 +150,10 @@ export class DepositsPage implements OnInit {
     applyFilter(event: Event) {
       const filterValue = (event.target as HTMLInputElement).value;
       this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+
+    async complaintForm() {
+      complaintForm({hashId:this.gameHash._id,type:'access'},this.interactionService,this.modalCntrl);
     }
 
 }

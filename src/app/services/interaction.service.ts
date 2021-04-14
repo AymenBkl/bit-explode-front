@@ -17,6 +17,7 @@ export class InteractionService {
       position: 'bottom',
       showConfirmButton: false,
       width: 600,
+      
       background: this.handleToastBar(type),
       timer:loading ? 60000 : 4000,
       didOpen: (toast) => {

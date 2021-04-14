@@ -22,7 +22,7 @@
             <div class="table-responsive">
               <ion-item *ngIf="loaded && deposits" id="filter" lines="none">
                 <mat-label><i class="nc-icon nc-zoom-split"></i></mat-label>
-                <ion-input (keyup)="applyFilter($event)" placeholder="Ex. Hello Admin" #input></ion-input>
+                <ion-input (keyup)="applyFilter($event)" placeholder="Ex. Hello Txid" #input></ion-input>
               </ion-item>
               <table class="table" mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
                 class="mat-elevation-z8" [hidden]="!(deposits)">

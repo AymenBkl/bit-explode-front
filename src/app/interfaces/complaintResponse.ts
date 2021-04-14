@@ -5,5 +5,4 @@ export interface ComplaintResponse {
     msg: string;
     success: boolean;
     complaints: Complaint[];
-    token: string;
 }

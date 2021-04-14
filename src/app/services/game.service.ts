@@ -7,6 +7,7 @@ import { ColClickResponse } from '../interfaces/colClickResponse';
 import { ClickCel } from '../interfaces/clickCel';
 import { CheckGameResponse } from '../interfaces/checkGameResponse';
 import { Col } from '../interfaces/col';
+import { DepositResponse } from '../interfaces/depositsResponse';
 @Injectable({
   providedIn: 'root'
 })
@@ -80,6 +81,25 @@ export class GameService {
       else {
         resolve({status: false,type:'addressId'});
       }
+    })
+  }
+
+  getDeposits(addressId:string) {
+    return new Promise((resolve,reject) => {
+      this.httpClient.get<DepositResponse>(environment.url + 'game/deposits?addressId=' + addressId)
+      .subscribe(depositsResponse => {
+        if (depositsResponse.status == 200 && depositsResponse.success){
+          resolve(depositsResponse.deposits);
+        }
+        else if (depositsResponse.status == 404 && !depositsResponse.success){
+          resolve({status:'NOT FOUND'});
+        }
+        else {
+          resolve(false);
+        }
+      },err => {
+        reject(err);
+      })
     })
   }
 

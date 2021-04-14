@@ -1,0 +1,104 @@
+<ion-content>
+  <ion-header [translucent]="true" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title slot="start">
+        BitExplode Deposits
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button id="button-header-play" size="large" [routerLink]="['/home']">
+          Home
+        </ion-button>
+
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid *ngIf="validRoute">
+    <ion-row>
+      <ion-col size="12">
+        <ngx-skeleton-loader count="20" *ngIf="!loaded"></ngx-skeleton-loader>
+        <div class="card" [hidden]="!loaded || !deposits">
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <ion-item *ngIf="loaded && deposits" id="filter" lines="none">
+                <mat-label><i class="nc-icon nc-zoom-split"></i></mat-label>
+                <ion-input (keyup)="applyFilter($event)" placeholder="Ex. Hello Admin" #input></ion-input>
+              </ion-item>
+              <table class="table" mat-table [dataSource]="dataSource" matSort multiTemplateDataRows
+                class="mat-elevation-z8" [hidden]="!(deposits)">
+                <ng-container matColumnDef="_id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> ID </th>
+                  <td mat-cell *matCellDef="let element" matTooltip="{{element._id}}"> {{element._id}} </td>
+                </ng-container>
+                <ng-container matColumnDef="txid">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Txid </th>
+                  <td mat-cell *matCellDef="let element" matTooltip="{{element.txid}}"> {{element.txid}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="amount">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Amount </th>
+                  <td mat-cell *matCellDef="let element" matTooltip="{{element.amount}}">
+                    {{element.amount | uppercase}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="currentBalance">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Current Balance </th>
+                  <td mat-cell *matCellDef="let element" matTooltip="{{element.currentBalance}}">
+                    {{element.currentBalance | uppercase}}
+                </ng-container>
+                <ng-container matColumnDef="createdAt">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Deposit On</th>
+                  <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'short'}} </td>
+                </ng-container>
+                <ng-container matColumnDef="active">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary"> Status </th>
+                  <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+                </ng-container>
+                <ng-container matColumnDef="expandedDetail" *ngIf="deposits && deposits.length > 0">
+                  <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                    <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                      <div class="response-content" *ngIf="element && element.response">
+                        <div class="response-note">
+                          <mat-label>Note: <mat-label class="text-primary">{{element.response.note}}</mat-label>
+                          </mat-label>
+                        </div>
+                        <div class="response-status">
+                          <mat-label>Solved: <mat-label class="text-primary">{{element.response.status == 'true' ? 'Yes'
+                              : 'No' | uppercase}}</mat-label>
+                          </mat-label>
+                      </div>
+                      
+                    </div>
+                    <div class="no-response" *ngIf="!element || (element && !element.response)">
+                      <mat-label>No Deposits</mat-label>
+                    </div>
+            </div>
+            </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="element-row"
+              [class.expanded-row]="expandedElement === element"
+              (click)="expandedElement = expandedElement === element ? null : element"></tr>
+            <div *ngIf="deposits && deposits.length > 0">
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+            </div>
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons *ngIf="loaded && deposits">
+            </mat-paginator>
+
+          </div>
+
+        </div>
+        </div>
+        <div class="n-complaint" *ngIf="!deposits || (deposits && deposits.length == 0)">
+          <mat-label>No deposits</mat-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

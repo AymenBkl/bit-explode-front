@@ -58,20 +58,28 @@
                 <ng-container matColumnDef="expandedDetail" *ngIf="deposits && deposits.length > 0">
                   <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
                     <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                      <div class="response-content" *ngIf="element && element.response">
-                        <div class="response-note">
-                          <mat-label>Note: <mat-label class="text-primary">{{element.response.note}}</mat-label>
+                      <div class="response-content" *ngIf="element && element.realDeposit">
+                        <div class="response-status">
+                          <mat-label>txid: <mat-label class="text-primary">{{element.realDeposit.txid}}</mat-label>
                           </mat-label>
                         </div>
                         <div class="response-status">
-                          <mat-label>Solved: <mat-label class="text-primary">{{element.response.status == 'true' ? 'Yes'
-                              : 'No' | uppercase}}</mat-label>
+                          <mat-label>Confirmations: <mat-label class="text-primary">{{element.realDeposit.confirmations }}</mat-label>
                           </mat-label>
                       </div>
+
+                      <div class="response-status">
+                        <mat-label>Real Amount: <mat-label class="text-primary">{{element.realDeposit.amount }}</mat-label>
+                        </mat-label>
+                    </div>
+                    <div class="response-status">
+                      <mat-label>Vout: <mat-label class="text-primary">{{element.realDeposit.vout }}</mat-label>
+                      </mat-label>
+                  </div>
                       
                     </div>
-                    <div class="no-response" *ngIf="!element || (element && !element.response)">
-                      <mat-label>No Deposits</mat-label>
+                    <div class="no-response" *ngIf="!element || (element && !element.realDeposit)">
+                      <mat-label>No Data Available</mat-label>
                     </div>
             </div>
             </td>

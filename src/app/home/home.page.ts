@@ -14,6 +14,7 @@ import { MatrixComponent } from '../components/mines/matrix/matrix.component';
 import { BalanceComponent } from '../components/balance/balance.component';
 import { ComplaintComponent } from '../components/modals/complaint/complaint.component';
 import { changePassword, loginModal,depositModal } from '../functions/modals';
+import { complaintForm } from '../functions/handlers';
 
 @Component({
   selector: 'app-home',
@@ -252,30 +253,7 @@ export class HomePage implements OnInit {
 
 
   async complaintForm() {
-    this.interactionService.confirmBox("YOU ARE NOT ALLOWED", 'BLOCKED', 'error', 'MAKE COMPLAINT', 'OK')
-      .then(async (result: any) => {
-        if (result && result.status == true) {
-          this.validRoute = false;
-          this.valid = false;
-          const modal = await this.modalCntrl.create({
-            component: ComplaintComponent,
-            backdropDismiss: true,
-            componentProps: {
-              type: 'access',
-              hashId:this.gameHash._id
-            }
-          });
-          modal.onDidDismiss()
-            .then(data => {
-              console.log(data);
-            });
-          return await modal.present();
-        }
-        else {
-          console.log("cancel");
-        }
-      });
-
+    complaintForm({hashId:this.gameHash._id,type:'access'},this.interactionService,this.modalCntrl);
   }
 
   checkJWT() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { complaintForm, makeComplaintForm } from 'src/app/functions/handlers';
 import { Hash } from 'src/app/interfaces/hash';
 import { StorageServiceService } from 'src/app/services/storage-service.service';
 import { ComplaintComponent } from '../modals/complaint/complaint.component';
@@ -30,19 +31,7 @@ export class FooterComponent implements OnInit {
   }
 
   async makeComplaint() {
-    const modal = await this.modalCntrl.create({
-      component: ComplaintComponent,
-      backdropDismiss: true,
-      componentProps: {
-        type: '',
-        hashId:this.gameHash._id
-      }
-    });
-    modal.onDidDismiss()
-      .then(data => {
-        console.log(data);
-      });
-    return await modal.present();
+    makeComplaintForm({hashId:this.gameHash._id},this.modalCntrl);
   }
 
 }

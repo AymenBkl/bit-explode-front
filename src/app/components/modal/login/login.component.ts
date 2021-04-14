@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { complaintForm } from 'src/app/functions/handlers';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 import { ComplaintComponent } from '../../modals/complaint/complaint.component';
@@ -68,27 +69,8 @@ export class LoginComponent implements OnInit {
   }
 
   async complaintForm() {
-    this.interactionService.confirmBox("YOU ARE NOT ALLOWED", 'BLOCKED', 'error', 'MAKE COMPLAINT', 'OK')
-      .then(async (result: any) => {
-        if (result && result.status == true) {
-          const modal = await this.modalController.create({
-            component: ComplaintComponent,
-            backdropDismiss: true,
-            componentProps: {
-              type: 'access',
-              hashId:this.hashId
-            }
-          });
-          modal.onDidDismiss()
-            .then(data => {
-              console.log(data);
-            });
-          return await modal.present();
-        }
-        else {
-          console.log("cancel");
-        }
-      });
+    complaintForm({hashId:this.hashId,type:'access'},this.interactionService,this.modalController);
+
 
   }
 }

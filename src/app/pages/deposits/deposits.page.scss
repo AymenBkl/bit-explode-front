@@ -1,0 +1,137 @@
+ion-header {
+    height: 150px;
+    color:white;
+    --background: linear-gradient(90deg,#152620, #151A1E);
+  background: linear-gradient(90deg,#152620, #151A1E);
+  }
+  ion-toolbar {
+    color:white;
+    --background: linear-gradient(90deg,#152620, #151A1E);
+  background: linear-gradient(90deg,#152620, #151A1E);
+  }
+
+  ion-content {
+    --background: linear-gradient(90deg,#152620, #151A1E);
+    background: linear-gradient(90deg,#152620, #151A1E);
+  }
+
+  .n-complaint{
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 31px;
+      font-weight: bold;
+  }
+  table {
+    background-color: #283136;
+    width: 100% !important;
+    table-layout: fixed !important;
+  
+  
+  }
+  
+  th, td {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    background-color: #283136;
+    color: white;
+  }
+  
+  tr.detail-row {
+    background-color: #283136;
+    height: 0;
+  }
+
+  #filter {
+      margin-bottom: 15px;
+  }
+
+  ::ng-deep .mat-paginator {
+    background-color: #283136 !important;
+    color:white !important;
+  }
+  
+  ::ng-deep .mat-icon-button {
+    color:white !important;
+  }
+  
+  ::ng-deep .mat-select-value-text {
+    color:white !important;
+  }
+  ::ng-deep .mat-select-arrow {
+    color:white !important;
+  
+  }
+
+  tr.detail-row {
+    height: 0;
+  }
+  
+  tr.element-row:not(.expanded-row):hover {
+    background: whitesmoke;
+  }
+  
+  tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+  }
+  
+  .element-row td {
+    border-bottom-width: 0;
+  }
+  
+  .element-detail {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      text-align: center !important;
+      justify-content: center;
+      height: 83px;
+      align-items: center;
+  }
+  
+  .element-diagram {
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+  }
+
+  .response {
+    width: 100%;
+    min-height: 70px;
+  }
+
+  .response-content {
+    width: 100%;
+    display: block;
+    font-size: 20px;
+  }
+
+  .response-note {
+      margin-top: 15px;
+      text-align: left;
+      width: 100%;
+      display: block;
+      margin-bottom: 15px;
+  }
+
+  .response-status{
+    text-align: left;
+    width: 100%;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .no-response {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 25px;
+      font-weight: bold;
+  }

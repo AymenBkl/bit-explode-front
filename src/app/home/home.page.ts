@@ -83,6 +83,7 @@ export class HomePage implements OnInit {
     if (!this.game.playing && this.game.status != 'active'){
       this.game.type = this.gameType;
     }
+    this.interactionService.createToast('Change Mode To ' + this.gameType,'info', false);
     console.log(this.game.type)
   }
 

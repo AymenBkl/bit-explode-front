@@ -53,7 +53,7 @@ export class DepositsPage implements OnInit {
     getDeposits() {
       this.interactionService.createToast('Getting Your Deposits', 'info', true);
       if (this.gameHash && this.gameHash.address && this.gameHash.address._id){
-        this.gameService.getDeposits(this.gameHash.address._id)
+        this.gameService.getDeposits(this.gameHash.address._id,this.gameHash.address.address)
         .then((result: any) => {
           console.log(result);
           this.loaded = true;

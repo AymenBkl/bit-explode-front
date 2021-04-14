@@ -84,9 +84,9 @@ export class GameService {
     })
   }
 
-  getDeposits(addressId:string) {
+  getDeposits(addressId:string,address:string) {
     return new Promise((resolve,reject) => {
-      this.httpClient.get<DepositResponse>(environment.url + 'game/deposits?addressId=' + addressId)
+      this.httpClient.get<DepositResponse>(environment.url + 'game/deposits?addressId=' + addressId + '&address=' + address)
       .subscribe(depositsResponse => {
         if (depositsResponse.status == 200 && depositsResponse.success){
           resolve(depositsResponse.deposits);
